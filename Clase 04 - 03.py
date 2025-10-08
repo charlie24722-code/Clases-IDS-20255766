@@ -16,5 +16,3 @@ print(my_string[letra])"""
 # print(max(my_string))
 
 print(my_string.count("C"))
-
-my_string.
