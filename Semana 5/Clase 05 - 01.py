@@ -22,4 +22,4 @@ print(palabra1.lower())
 print(palabra2.upper())
 print(palabra2.capitalize())
 
-print(numero.up)
+print(numero)

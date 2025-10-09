@@ -1,0 +1,8 @@
+lenn = int(input())
+idn = int(input())
+lcj = int(input())
+isnd = int(input())
+tupla = (lenn, idn, lcj, isnd)
+nombres = ("LEN", "IDN", "LCJ", "ISND")
+print(nombres[tupla.index(max(tupla))])
+# print(max(tupla))
