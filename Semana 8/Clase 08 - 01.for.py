@@ -7,5 +7,11 @@ dias = ["Lunes", "Martes", "Miercoles",
 """for x in dias:
     print(x[:2])"""
     
-for i in range (0,10,2):
-    print(i)
+"""for i in range (0,10,2):
+    print(i)"""
+    
+    
+personas = ["Ana", "Luis", "Luisa"]
+for p in personas:
+    for l in p:
+        print(l)
