@@ -17,4 +17,4 @@ for llaves in birthdays.keys():
     print(llaves)
     
 for k, v in birthdays.items():
-    print(f"El cumpleaños de {persona} es el dia {date}.")
+    print(f"El cumpleaños de {k} es el dia {v}.")
