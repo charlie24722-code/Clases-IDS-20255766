@@ -1,1409 +1,1362 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Curso Completo de Inversión en Bolsa</title>
-  <style>
-    :root {
-      --bg-color: #0f172a;
-      --bg-soft: #111827;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.12);
-      --text-main: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border-soft: #1f2937;
-      --danger: #f97373;
-      --success: #4ade80;
-      --radius-lg: 14px;
-      --radius-md: 10px;
-      --radius-sm: 6px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.75);
-      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: var(--font-main);
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
-      color: var(--text-main);
-      min-height: 100vh;
-      padding: 32px 16px 40px;
-      display: flex;
-      justify-content: center;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 1100px;
-    }
-
-    /* CABECERA */
-
-    .header {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
-      border-radius: 24px;
-      padding: 22px 22px 18px;
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(24px);
-      margin-bottom: 22px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header::before {
-      content: "";
-      position: absolute;
-      inset: -60%;
-      background:
-        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.14), transparent 55%),
-        radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.16), transparent 55%);
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .header-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 9px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      font-size: 11px;
-      color: var(--text-muted);
-      max-width: fit-content;
-    }
-
-    .label-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: var(--accent);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
-    }
-
-    .title-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      justify-content: space-between;
-    }
-
-    .title-main {
-      font-size: 26px;
-      letter-spacing: 0.02em;
-      color: #f9fafb;
-    }
-
-    .title-main span {
-      background: linear-gradient(120deg, #38bdf8, #a855f7);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: var(--text-muted);
-      max-width: 640px;
-      line-height: 1.5;
-    }
-
-    .tag-row {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .pill {
-      font-size: 11px;
-      color: var(--text-muted);
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      background: rgba(15, 23, 42, 0.85);
-    }
-
-    .progress-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 6px;
-    }
-
-    .progress-bar {
-      flex: 1;
-      height: 7px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      overflow: hidden;
-      border: 1px solid rgba(31, 41, 55, 0.9);
-    }
-
-    .progress-fill {
-      height: 100%;
-      width: 0;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #38bdf8, #a855f7);
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.7);
-      transition: width 0.25s ease-out;
-    }
-
-    .progress-text {
-      font-size: 11px;
-      color: var(--text-muted);
-      min-width: 90px;
-      text-align: right;
-    }
-
-    /* LAYOUT PRINCIPAL */
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
-      gap: 18px;
-    }
-
-    @media (max-width: 880px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    /* COLUMNA IZQUIERDA: MÓDULOS */
-
-    .card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.96));
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(30, 64, 175, 0.7);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 10px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-      gap: 10px;
-    }
-
-    .card-title {
-      font-size: 14px;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      color: #9ca3af;
-    }
-
-    .card-subtitle {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .modules-list {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      margin-top: 8px;
-    }
-
-    .module {
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(31, 41, 55, 0.95);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96));
-      padding: 9px 10px;
-      position: relative;
-      cursor: pointer;
-      transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
-    }
-
-    .module:hover {
-      border-color: rgba(56, 189, 248, 0.55);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(8, 47, 73, 0.9));
-      transform: translateY(-1px);
-    }
-
-    .module.completed {
-      border-color: rgba(74, 222, 128, 0.7);
-      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
-    }
-
-    .module-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 4px;
-    }
-
-    .module-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #e5e7eb;
-    }
-
-    .module-title span {
-      font-size: 11px;
-      font-weight: 500;
-      color: #9ca3af;
-      margin-right: 4px;
-    }
-
-    .module-badges {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 999px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      color: var(--text-muted);
-      background: rgba(15, 23, 42, 0.92);
-    }
-
-    .badge.main {
-      border-color: rgba(56, 189, 248, 0.8);
-      color: #bae6fd;
-    }
-
-    .badge.exercise {
-      border-color: rgba(74, 222, 128, 0.9);
-      color: #bbf7d0;
-    }
-
-    .module-description {
-      font-size: 12px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 5px;
-    }
-
-    .module-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 4px;
-      gap: 8px;
-    }
-
-    .meta-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #4ade80;
-    }
-
-    .meta-right {
-      font-size: 11px;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* DETALLE DEL MÓDULO */
-
-    .detail-card {
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(30, 64, 175, 0.7);
-      box-shadow: var(--shadow-soft);
-      padding: 16px 16px 14px;
-    }
-
-    .detail-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .detail-title {
-      font-size: 16px;
-      color: #e5e7eb;
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .detail-title span {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-    }
-
-    .detail-tag {
-      font-size: 11px;
-      color: #bfdbfe;
-      border-radius: 999px;
-      padding: 3px 8px;
-      border: 1px solid rgba(59, 130, 246, 0.7);
-      background: rgba(15, 23, 42, 0.92);
-    }
-
-    .detail-body {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      font-size: 13px;
-      color: var(--text-main);
-    }
-
-    .detail-section-title {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
-
-    ul {
-      list-style: none;
-      margin-left: 0;
-    }
-
-    .detail-list li {
-      margin-bottom: 4px;
-      position: relative;
-      padding-left: 16px;
-      color: var(--text-main);
-    }
-
-    .detail-list li::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #38bdf8;
-      position: absolute;
-      left: 3px;
-      top: 7px;
-    }
-
-    .detail-content h3 {
-      margin-top: 8px;
-      margin-bottom: 4px;
-      font-size: 14px;
-      color: #e5e7eb;
-    }
-
-    .detail-content p {
-      margin-bottom: 6px;
-      font-size: 13px;
-      color: var(--text-main);
-    }
-
-    .detail-content ul li {
-      margin-bottom: 4px;
-      padding-left: 16px;
-      position: relative;
-    }
-
-    .detail-content ul li::before {
-      content: "•";
-      position: absolute;
-      left: 4px;
-      top: 0;
-      color: #38bdf8;
-    }
-
-    .exercise-box {
-      background: var(--accent-soft);
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(56, 189, 248, 0.8);
-      padding: 8px 10px;
-      font-size: 12px;
-      color: #e0f2fe;
-    }
-
-    .exercise-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #bae6fd;
-    }
-
-    /* COLUMNA DERECHA: PANEL LATERAL */
-
-    .side-card {
-      background: linear-gradient(140deg, rgba(15, 23, 42, 0.97), rgba(17, 24, 39, 0.98));
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(37, 99, 235, 0.85);
-      box-shadow: var(--shadow-soft);
-      padding: 14px 14px 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .side-title {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: #9ca3af;
-    }
-
-    .side-stats {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .stat {
-      flex: 1;
-      min-width: 90px;
-      background: radial-gradient(circle at top, #0b1220, #020617);
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(30, 64, 175, 0.8);
-      padding: 7px 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .stat-value {
-      font-size: 16px;
-      color: #e5e7eb;
-      margin-bottom: 2px;
-    }
-
-    .bubble {
-      font-size: 11px;
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      padding: 6px 9px;
-      color: var(--text-muted);
-      line-height: 1.4;
-    }
-
-    .bubble strong {
-      color: #e5e7eb;
-    }
-
-    .checklist {
-      font-size: 12px;
-      color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .check-box {
-      width: 14px;
-      height: 14px;
-      border-radius: 4px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: #4ade80;
-    }
-
-    .check-box.done {
-      border-color: rgba(74, 222, 128, 0.9);
-      background: rgba(22, 101, 52, 0.35);
-    }
-
-    .help-text {
-      font-size: 11px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(31, 41, 55, 0.9);
-      padding-top: 6px;
-      margin-top: 2px;
-    }
-
-    /* BOTONES */
-
-    .button-row {
-      display: flex;
-      gap: 8px;
-      margin-top: 4px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      border-radius: 999px;
-      padding: 6px 11px;
-      font-size: 11px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: rgba(15, 23, 42, 0.95);
-      color: var(--text-main);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.18s ease, border-color 0.18s ease, transform 0.1s ease;
-    }
-
-    .btn:hover {
-      background: rgba(15, 23, 42, 1);
-      border-color: rgba(148, 163, 184, 0.8);
-      transform: translateY(-0.5px);
-    }
-
-    .btn-primary {
-      border-color: rgba(56, 189, 248, 0.85);
-      background: linear-gradient(120deg, #0ea5e9, #6366f1);
-      color: #f9fafb;
-      box-shadow: 0 0 16px rgba(56, 189, 248, 0.55);
-    }
-
-    .btn-primary:hover {
-      border-color: rgba(56, 189, 248, 1);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
-    }
-
-    .btn-ghost {
-      border-style: dashed;
-    }
-
-    .btn-icon {
-      font-size: 13px;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 18px 10px 28px;
-      }
-      .header {
-        padding: 18px 16px 14px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo de Inversión en Bolsa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a3d62;
+            --secondary: #1e5f8b;
+            --accent: #f39c12;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --bg-light: #f8f9fa;
+            --bg-dark: #0d1b2a;
+            --text-dark: #1b2631;
+            --text-light: #f8f9fa;
+            --border: #e0e6ed;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b3a52 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-dark) 0%, var(--primary) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.1) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+            letter-spacing: -1px;
+        }
+
+        .header p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            color: rgba(248, 249, 250, 0.9);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            font-weight: 300;
+        }
+
+        .ticker {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.8rem;
+            margin-top: 2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .ticker-item.up { color: var(--success); }
+        .ticker-item.down { color: var(--danger); }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        /* Layout */
+        .layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        @media (max-width: 968px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 4rem);
+            overflow-y: auto;
+        }
+
+        .sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .module-list {
+            list-style: none;
+        }
+
+        .module-item {
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .module-item:hover {
+            background: var(--bg-light);
+            border-left-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .module-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border-left-color: var(--accent);
+            font-weight: 600;
+        }
+
+        .module-number {
+            background: var(--accent);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .module-item.active .module-number {
+            background: white;
+            color: var(--primary);
+        }
+
+        .module-item.completed {
+            opacity: 0.7;
+        }
+
+        .module-item.completed::after {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-left: auto;
+        }
+
+        /* Content Area */
+        .content {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            min-height: 600px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        .content h4 {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .content p {
+            margin-bottom: 1.2rem;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+            color: #4a5568;
+            position: relative;
+            padding-left: 0.5rem;
+        }
+
+        .content li::marker {
+            color: var(--accent);
+        }
+
+        .content strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, #e8f4fd 0%, #d4e9f7 100%);
+            border-left: 4px solid var(--secondary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, #fff4e6 0%, #ffe8cc 100%);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .success-box {
+            background: linear-gradient(135deg, #e8f8f0 0%, #d1f2e0 100%);
+            border-left: 4px solid var(--success);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border);
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10, 61, 98, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+        }
+
+        .quiz-question {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quiz-option {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: var(--success);
+            color: white;
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--danger);
+            color: white;
+            border-color: var(--danger);
+        }
+
+        /* Dark mode toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
-  <div class="page">
-    <!-- CABECERA -->
-    <header class="header">
-      <div class="header-inner">
-        <div class="label">
-          <div class="label-dot"></div>
-          Curso guiado • Inversión en bolsa desde cero
+    <div class="header">
+        <h1>Curso Completo de Inversión en Bolsa</h1>
+        <p>Aprende a invertir de forma inteligente y construye tu futuro financiero</p>
+        <div class="ticker">
+            <div class="ticker-item up">
+                <span>📈 S&P 500:</span>
+                <strong>+1.2%</strong>
+            </div>
+            <div class="ticker-item down">
+                <span>📉 NASDAQ:</span>
+                <strong>-0.3%</strong>
+            </div>
+            <div class="ticker-item up">
+                <span>💰 DOW:</span>
+                <strong>+0.8%</strong>
+            </div>
         </div>
-        <div class="title-row">
-          <div>
-            <h1 class="title-main">
-              Curso completo de <span>inversión en bolsa</span>
-            </h1>
-            <p class="subtitle">
-              Estudia cada módulo a tu ritmo, marca como completado lo que vayas dominando
-              y construye tu propio sistema de inversión paso a paso.
-            </p>
-          </div>
-        </div>
-        <div class="tag-row">
-          <span class="pill">Nivel: Principiante–Intermedio</span>
-          <span class="pill">Enfoque: largo plazo y gestión de riesgo</span>
-          <span class="pill">Formato: teoría + ejercicios prácticos</span>
-        </div>
-        <div class="progress-box">
-          <div class="progress-bar">
-            <div class="progress-fill" id="globalProgress"></div>
-          </div>
-          <div class="progress-text" id="progressText">0 % completado</div>
-        </div>
-      </div>
-    </header>
+    </div>
 
-    <!-- LAYOUT PRINCIPAL -->
-    <main class="layout">
-      <!-- LISTA DE MÓDULOS -->
-      <section class="card" aria-label="Lista de módulos">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Ruta de aprendizaje</div>
-            <div class="card-subtitle">Haz clic en un módulo para ver el detalle y el ejercicio propuesto.</div>
-          </div>
+    <div class="container">
+        <div class="progress-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <strong style="font-size: 1.1rem; color: var(--primary);">Tu Progreso</strong>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">Módulo <span id="current-module">1</span> de 14</p>
+                </div>
+                <div style="font-size: 2rem; color: var(--accent);">
+                    <span id="progress-percent">0</span>%
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
         </div>
 
-        <div class="modules-list" id="modulesList">
-          <!-- Los módulos se rellenan desde JavaScript -->
+        <div class="layout">
+            <aside class="sidebar">
+                <h2>Módulos del Curso</h2>
+                <ul class="module-list" id="module-list">
+                    <!-- Modules will be inserted here by JavaScript -->
+                </ul>
+            </aside>
+
+            <main class="content" id="content">
+                <!-- Content will be inserted here by JavaScript -->
+            </main>
         </div>
-      </section>
+    </div>
 
-      <!-- DETALLE DEL MÓDULO + PANEL LATERAL -->
-      <section class="detail-card" aria-label="Detalle del módulo y panel lateral">
-        <div id="moduleDetail">
-          <!-- El detalle del módulo seleccionado se inserta aquí -->
-        </div>
+    <button class="theme-toggle" id="theme-toggle" title="Cambiar tema">🌙</button>
 
-        <aside class="side-card" style="margin-top:10px;">
-          <div class="side-title">Panel de estudio</div>
-          <div class="side-stats">
-            <div class="stat">
-              <div class="stat-value" id="statModules">0/10</div>
-              <div>Módulos completados</div>
-            </div>
-            <div class="stat">
-              <div class="stat-value" id="statFocus">Mód. 1</div>
-              <div>Módulo actual</div>
-            </div>
-          </div>
-          <div class="bubble">
-            <strong>Consejo:</strong> estudia solo 1 módulo por sesión, haz el ejercicio práctico y escribe tus notas antes de avanzar. [web:46][web:49]
-          </div>
-          <div class="checklist">
-            <div class="check-item">
-              <div class="check-box" id="chkLeer">✓</div>
-              <span>Leer los puntos clave del módulo</span>
-            </div>
-            <div class="check-item">
-              <div class="check-box" id="chkEjercicio"></div>
-              <span>Completar el ejercicio práctico</span>
-            </div>
-            <div class="check-item">
-              <div class="check-box" id="chkNotas"></div>
-              <span>Escribir tus propias notas o resumen</span>
-            </div>
-          </div>
-          <p class="help-text">
-            Marca el módulo como completado cuando hayas leído, hecho el ejercicio
-            y anotado tus conclusiones. Puedes volver a desmarcarlo si quieres repasar.
-          </p>
-        </aside>
-      </section>
-    </main>
-  </div>
+    <script>
+        const modules = [
+            {
+                id: 1,
+                title: "Fundamentos y Conceptos Básicos",
+                content: `
+                    <h2>Módulo 1: Fundamentos y Conceptos Básicos</h2>
+                    
+                    <h3>1.1 ¿Qué es la bolsa de valores?</h3>
+                    <p>La bolsa de valores es un mercado organizado donde se compran y venden acciones de empresas públicas, bonos y otros instrumentos financieros. Funciona como un punto de encuentro entre empresas que necesitan financiamiento y personas o instituciones que buscan invertir su dinero.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Dato clave:</strong> La bolsa permite que cualquier persona pueda convertirse en copropietario de grandes empresas comprando acciones.
+                    </div>
+                    
+                    <h3>1.2 Conceptos fundamentales</h3>
+                    <ul>
+                        <li><strong>Acción:</strong> Representa una parte del capital de una empresa. Al comprar acciones te conviertes en copropietario.</li>
+                        <li><strong>Índice bursátil:</strong> Mide el rendimiento de un grupo de acciones (S&P 500, Nasdaq, Dow Jones).</li>
+                        <li><strong>Dividendos:</strong> Pagos periódicos que algunas empresas hacen a sus accionistas.</li>
+                        <li><strong>Capitalización de mercado:</strong> Valor total de una empresa en bolsa (precio de acción × número de acciones).</li>
+                        <li><strong>Bull Market:</strong> Mercado alcista, los precios suben.</li>
+                        <li><strong>Bear Market:</strong> Mercado bajista, los precios caen.</li>
+                        <li><strong>Volatilidad:</strong> Medida de cuánto fluctúa el precio de un activo.</li>
+                    </ul>
+                    
+                    <h3>1.3 Tipos de activos financieros</h3>
+                    <ul>
+                        <li><strong>Acciones:</strong> Renta variable, mayor riesgo y potencial de retorno.</li>
+                        <li><strong>Bonos:</strong> Renta fija, préstamos a empresas o gobiernos.</li>
+                        <li><strong>ETFs</strong> (Exchange Traded Funds): Fondos que replican índices y cotizan en bolsa.</li>
+                        <li><strong>Fondos mutuos:</strong> Carteras administradas profesionalmente.</li>
+                        <li><strong>REITs:</strong> Fondos de inversión en bienes raíces.</li>
+                    </ul>
+                    
+                    <h3>1.4 Cómo funcionan las órdenes</h3>
+                    <ul>
+                        <li><strong>Orden de mercado:</strong> Se ejecuta al precio actual inmediatamente.</li>
+                        <li><strong>Orden limitada:</strong> Se ejecuta solo al precio que especificas o mejor.</li>
+                        <li><strong>Stop loss:</strong> Orden automática para vender si el precio cae a cierto nivel.</li>
+                        <li><strong>Take profit:</strong> Orden para vender cuando se alcanza una ganancia objetivo.</li>
+                    </ul>
+                    
+                    <div class="success-box">
+                        <strong>✅ Resumen clave:</strong> Entender estos conceptos básicos es fundamental antes de realizar tu primera inversión. Tómate el tiempo necesario para familiarizarte con cada término.
+                    </div>
+                `
+            },
+            {
+                id: 2,
+                title: "Preparación para Invertir",
+                content: `
+                    <h2>Módulo 2: Preparación para Invertir</h2>
+                    
+                    <h3>2.1 Definir objetivos financieros</h3>
+                    <p>Antes de invertir, debes preguntarte: ¿Para qué estoy invirtiendo? ¿Cuándo necesitaré el dinero? ¿Cuánto riesgo puedo tolerar? Los objetivos comunes incluyen jubilación, compra de vivienda, educación de hijos o generar ingresos pasivos.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Importante:</strong> Nunca inviertas sin tener claros tus objetivos. Esto determinará tu estrategia de inversión.
+                    </div>
+                    
+                    <h3>2.2 Gestión del riesgo y perfil de inversor</h3>
+                    <ul>
+                        <li><strong>Conservador:</strong> Prioriza preservar el capital, acepta menor rentabilidad.</li>
+                        <li><strong>Moderado:</strong> Busca equilibrio entre riesgo y retorno.</li>
+                        <li><strong>Agresivo:</strong> Acepta alta volatilidad buscando mayores ganancias.</li>
+                    </ul>
+                    <p>Tu perfil depende de tu edad, situación financiera, conocimientos y tolerancia psicológica al riesgo.</p>
+                    
+                    <h3>2.3 Crear un fondo de emergencia</h3>
+                    <p>Antes de invertir en bolsa, asegúrate de tener ahorrado entre 3 y 6 meses de gastos en una cuenta líquida y segura. La bolsa no es lugar para dinero que podrías necesitar en el corto plazo.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Regla de oro:</strong> Primero el fondo de emergencia, luego las inversiones. Esta es tu red de seguridad financiera.
+                    </div>
+                    
+                    <h3>2.4 Elegir un broker</h3>
+                    <p>Investiga comisiones, plataformas disponibles, tipos de activos ofrecidos y regulaciones. Brokers populares incluyen Interactive Brokers, TD Ameritrade, Fidelity, Charles Schwab, entre otros. Considera también brokers locales regulados en tu país.</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Checklist de preparación:</strong><br>
+                        ☑ Objetivos definidos<br>
+                        ☑ Perfil de riesgo identificado<br>
+                        ☑ Fondo de emergencia establecido<br>
+                        ☑ Broker seleccionado y cuenta abierta
+                    </div>
+                `
+            },
+            {
+                id: 3,
+                title: "Estrategias de Inversión Básicas",
+                content: `
+                    <h2>Módulo 3: Estrategias de Inversión Básicas</h2>
+                    
+                    <h3>3.1 Inversión pasiva (Buy and Hold)</h3>
+                    <p>Consiste en comprar activos y mantenerlos a largo plazo, típicamente 5 años o más. Se basa en la premisa de que los mercados tienden a subir con el tiempo. Es ideal para principiantes porque requiere menos tiempo y conocimiento técnico.</p>
+                    
+                    <h3>3.2 Diversificación</h3>
+                    <p>No pongas todos tus huevos en una canasta. Distribuye tu capital entre diferentes sectores, geografías y tipos de activos. La diversificación reduce el riesgo sin necesariamente sacrificar retornos.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Ejemplo práctico:</strong> En lugar de invertir $10,000 en una sola empresa, distribúyelos entre 10-15 empresas de diferentes sectores.
+                    </div>
+                    
+                    <h3>3.3 Dollar Cost Averaging (DCA)</h3>
+                    <p>Invierte cantidades fijas de dinero en intervalos regulares sin importar el precio. Esta estrategia reduce el impacto de la volatilidad y elimina la necesidad de timing perfecto del mercado.</p>
+                    
+                    <h4>Ventajas del DCA:</h4>
+                    <ul>
+                        <li>Elimina la emoción de decidir "cuándo comprar"</li>
+                        <li>Promedias el precio de entrada</li>
+                        <li>Puedes empezar con poco capital</li>
+                        <li>Construye disciplina de ahorro</li>
+                    </ul>
+                    
+                    <h3>3.4 Inversión en índices</h3>
+                    <p>Los ETFs que replican índices como el S&P 500 ofrecen diversificación instantánea y bajas comisiones. Históricamente han superado a la mayoría de gestores activos en el largo plazo.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Consejo de Warren Buffett:</strong> "Para la mayoría de la gente, la mejor manera de invertir en acciones es a través de un fondo indexado de bajo costo."
+                    </div>
+                    
+                    <div class="success-box">
+                        <strong>✅ Estrategia recomendada para principiantes:</strong><br>
+                        Combina DCA + Inversión en índices + Diversificación = Fórmula sólida para empezar
+                    </div>
+                `
+            },
+            {
+                id: 4,
+                title: "Análisis Fundamental",
+                content: `
+                    <h2>Módulo 4: Análisis Fundamental</h2>
+                    
+                    <h3>4.1 Estados financieros básicos</h3>
+                    <ul>
+                        <li><strong>Balance general:</strong> Muestra activos, pasivos y patrimonio en un momento específico.</li>
+                        <li><strong>Estado de resultados:</strong> Ingresos, costos y ganancias durante un período.</li>
+                        <li><strong>Flujo de caja:</strong> Movimientos de efectivo, indica la salud financiera real.</li>
+                    </ul>
+                    
+                    <h3>4.2 Ratios financieros clave</h3>
+                    
+                    <h4>P/E Ratio (Precio/Ganancias)</h4>
+                    <p>Compara el precio de la acción con las ganancias por acción. Un P/E alto puede indicar que la acción está cara o que el mercado espera crecimiento futuro.</p>
+                    
+                    <h4>ROE (Return on Equity)</h4>
+                    <p>Mide la rentabilidad sobre el capital de los accionistas. Indica qué tan eficientemente la empresa usa el dinero de sus inversores.</p>
+                    
+                    <h4>Debt to Equity</h4>
+                    <p>Indica el nivel de endeudamiento relativo al patrimonio. Demasiada deuda puede ser riesgosa, especialmente en tiempos difíciles.</p>
+                    
+                    <h4>EPS (Earnings Per Share)</h4>
+                    <p>Ganancias divididas por número de acciones. Indica cuánto gana la empresa por cada acción.</p>
+                    
+                    <h4>Dividend Yield</h4>
+                    <p>Dividendo anual dividido por el precio de la acción. Muestra el retorno que recibes solo por dividendos.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Tip profesional:</strong> No uses un solo ratio de forma aislada. Compara múltiples métricas y analiza tendencias en el tiempo.
+                    </div>
+                    
+                    <h3>4.3 Análisis cualitativo</h3>
+                    <p>Evalúa factores no numéricos como la calidad del equipo directivo, ventajas competitivas (moats), posición en la industria, innovación, reputación de marca y tendencias del sector.</p>
+                    
+                    <h3>4.4 Valoración de empresas</h3>
+                    <p>Métodos como el DCF (Discounted Cash Flow) proyectan flujos de caja futuros y los descuentan al presente para determinar el valor intrínseco de una empresa. Si el precio de mercado está por debajo del valor intrínseco, puede ser una oportunidad de compra.</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Proceso de análisis fundamental:</strong><br>
+                        1. Revisa estados financieros<br>
+                        2. Calcula ratios clave<br>
+                        3. Evalúa factores cualitativos<br>
+                        4. Determina valor intrínseco<br>
+                        5. Compara con precio de mercado
+                    </div>
+                `
+            },
+            {
+                id: 5,
+                title: "Análisis Técnico",
+                content: `
+                    <h2>Módulo 5: Análisis Técnico</h2>
+                    
+                    <h3>5.1 Lectura de gráficos</h3>
+                    
+                    <h4>Gráfico de velas (candlesticks)</h4>
+                    <p>Muestra apertura, cierre, máximo y mínimo en cada período. Cada vela cuenta una historia sobre la batalla entre compradores y vendedores.</p>
+                    
+                    <h4>Líneas de tendencia</h4>
+                    <p>Conectan mínimos (tendencia alcista) o máximos (tendencia bajista). Ayudan a identificar la dirección general del mercado.</p>
+                    
+                    <h4>Soportes y resistencias</h4>
+                    <p>Niveles de precio donde históricamente el activo ha tenido dificultad para bajar o subir. Son zonas psicológicas importantes.</p>
+                    
+                    <h3>5.2 Indicadores técnicos</h3>
+                    
+                    <h4>Medias móviles</h4>
+                    <p>Suavizan el precio mostrando tendencias (MA 50, MA 200). El cruce de medias puede señalar cambios de tendencia.</p>
+                    
+                    <h4>RSI (Relative Strength Index)</h4>
+                    <p>Indica condiciones de sobrecompra (>70) o sobreventa (<30). Valores extremos pueden señalar reversión.</p>
+                    
+                    <h4>MACD</h4>
+                    <p>Muestra cambios en momentum y posibles puntos de entrada/salida. El cruce de líneas genera señales de compra/venta.</p>
+                    
+                    <h4>Bandas de Bollinger</h4>
+                    <p>Miden volatilidad y extremos de precio. Cuando el precio toca las bandas, puede indicar condición de sobrecompra/sobreventa.</p>
+                    
+                    <h4>Volumen</h4>
+                    <p>Confirma la fuerza de movimientos de precio. Un movimiento con alto volumen es más significativo que uno con bajo volumen.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Concepto clave:</strong> Los indicadores técnicos son herramientas de probabilidad, no certeza. Ningún indicador funciona el 100% del tiempo.
+                    </div>
+                    
+                    <h3>5.3 Patrones gráficos</h3>
+                    <ul>
+                        <li><strong>Hombro-cabeza-hombro:</strong> Patrón de reversión bajista.</li>
+                        <li><strong>Doble techo/suelo:</strong> Señales de cambio de tendencia.</li>
+                        <li><strong>Triángulos:</strong> Consolidación antes de ruptura.</li>
+                        <li><strong>Banderas y banderines:</strong> Continuación de tendencia.</li>
+                    </ul>
+                    
+                    <h3>5.4 Limitaciones del análisis técnico</h3>
+                    <p>El análisis técnico asume que toda la información está en el precio y que la historia se repite. Sin embargo, no considera fundamentos de la empresa y puede generar señales falsas. Es mejor usarlo complementando el análisis fundamental.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Advertencia importante:</strong> El análisis técnico no predice el futuro. Solo ayuda a identificar probabilidades basadas en patrones históricos.
+                    </div>
+                `
+            },
+            {
+                id: 6,
+                title: "Psicología del Inversor",
+                content: `
+                    <h2>Módulo 6: Psicología del Inversor</h2>
+                    
+                    <h3>6.1 Sesgos cognitivos comunes</h3>
+                    
+                    <h4>Aversión a las pérdidas</h4>
+                    <p>Sentir más el dolor de perder que la alegría de ganar. Esto lleva a vender ganadores temprano y mantener perdedores demasiado tiempo.</p>
+                    
+                    <h4>Efecto manada</h4>
+                    <p>Seguir lo que hace la mayoría sin análisis propio. "Si todos compran, debe ser bueno" es una trampa peligrosa.</p>
+                    
+                    <h4>Sesgo de confirmación</h4>
+                    <p>Buscar solo información que confirme nuestras creencias. Ignoramos señales de advertencia cuando ya hemos decidido invertir.</p>
+                    
+                    <h4>Anclaje</h4>
+                    <p>Fijar mentalmente un precio de referencia irracional. "Compré a $100, solo venderé cuando vuelva a $100" ignora los fundamentos actuales.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Reflexión importante:</strong> El mercado está diseñado para transferir dinero de los emocionales a los racionales. ¿De qué lado quieres estar?
+                    </div>
+                    
+                    <h3>6.2 Control emocional</h3>
+                    <p>El miedo y la codicia son los peores enemigos del inversor. Desarrolla disciplina siguiendo tu plan de inversión sin dejarte llevar por las emociones del momento. Las mejores decisiones se toman con racionalidad, no con euforia o pánico.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Estrategia práctica:</strong> Antes de comprar o vender, hazte estas preguntas:<br>
+                        • ¿Estoy actuando por emoción o análisis?<br>
+                        • ¿Qué haría un observador objetivo?<br>
+                        • ¿Esto encaja con mi plan de inversión?
+                    </div>
+                    
+                    <h3>6.3 Aprender de los errores</h3>
+                    <p>Todos los inversores cometen errores. Lo importante es analizarlos objetivamente, extraer lecciones y ajustar tu estrategia. Lleva un diario de inversiones documentando tus decisiones y razonamientos.</p>
+                    
+                    <h3>6.4 Paciencia y disciplina</h3>
+                    <p>La riqueza en bolsa se construye con el tiempo, no de la noche a la mañana. Resiste la tentación de hacer trading excesivo o perseguir ganancias rápidas. Warren Buffett dice que el mercado es un mecanismo para transferir dinero del impaciente al paciente.</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Mantras del inversor exitoso:</strong><br>
+                        • "Sigo mi plan, no mis emociones"<br>
+                        • "El mercado siempre me dará otra oportunidad"<br>
+                        • "Pienso en años, no en días"<br>
+                        • "Aprendo de cada error"
+                    </div>
+                `
+            },
+            {
+                id: 7,
+                title: "Estrategias Intermedias",
+                content: `
+                    <h2>Módulo 7: Estrategias Intermedias</h2>
+                    
+                    <h3>7.1 Value Investing</h3>
+                    <p>Popularizado por Benjamin Graham y Warren Buffett, busca empresas infravaloradas por el mercado. Se enfoca en fundamentales sólidos, ventajas competitivas duraderas y comprar con margen de seguridad.</p>
+                    
+                    <h4>Principios clave del Value Investing:</h4>
+                    <ul>
+                        <li>Comprar empresas por debajo de su valor intrínseco</li>
+                        <li>Buscar margen de seguridad del 30-50%</li>
+                        <li>Enfoque en empresas con "moats" (fosos económicos)</li>
+                        <li>Paciencia para esperar el precio correcto</li>
+                    </ul>
+                    
+                    <h3>7.2 Growth Investing</h3>
+                    <p>Se centra en empresas con alto potencial de crecimiento, aunque coticen a múltiplos elevados. Prioriza el crecimiento de ingresos y participación de mercado sobre las ganancias actuales.</p>
+                    
+                    <h3>7.3 Dividend Investing</h3>
+                    <p>Construye una cartera de empresas que pagan dividendos consistentes y crecientes. Genera flujo de ingresos pasivos y las empresas que pagan dividendos tienden a ser más estables.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Poder del interés compuesto:</strong> Reinvirtiendo dividendos, una inversión de $10,000 con 7% de rendimiento anual puede convertirse en más de $76,000 en 30 años.
+                    </div>
+                    
+                    <h3>7.4 Inversión sectorial</h3>
+                    <p>Especializarse en sectores específicos como tecnología, salud, energía o consumo permite desarrollar expertise profunda. Sin embargo, reduce diversificación y requiere seguimiento constante de la industria.</p>
+                    
+                    <h3>7.5 Rebalanceo de cartera</h3>
+                    <p>Periódicamente ajusta tu cartera a las proporciones objetivo. Si las acciones han subido mucho, vende parte y compra bonos para mantener tu perfil de riesgo deseado.</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Comparación de estrategias:</strong><br>
+                        <strong>Value:</strong> Compra barato, espera reconocimiento<br>
+                        <strong>Growth:</strong> Paga precio justo por crecimiento futuro<br>
+                        <strong>Dividend:</strong> Prioriza flujo de ingresos pasivos<br>
+                        <strong>Sectorial:</strong> Especialización profunda en industrias
+                    </div>
+                `
+            },
+            {
+                id: 8,
+                title: "Estrategias Avanzadas",
+                content: `
+                    <h2>Módulo 8: Estrategias Avanzadas</h2>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ ADVERTENCIA:</strong> Este módulo contiene estrategias complejas solo para inversores experimentados. No uses estas técnicas sin entenderlas completamente.
+                    </div>
+                    
+                    <h3>8.1 Opciones financieras</h3>
+                    <p>Las opciones dan el derecho (no la obligación) de comprar (call) o vender (put) un activo a un precio determinado. Permiten estrategias como cobertura, generación de ingresos o especulación con apalancamiento.</p>
+                    
+                    <h4>Estrategias básicas:</h4>
+                    <ul>
+                        <li><strong>Covered call:</strong> Vender calls sobre acciones que posees para generar ingreso.</li>
+                        <li><strong>Protective put:</strong> Comprar puts como seguro contra caídas.</li>
+                        <li><strong>Spreads:</strong> Combinar compra y venta de opciones para limitar riesgo y costo.</li>
+                    </ul>
+                    
+                    <h3>8.2 Futuros y derivados</h3>
+                    <p>Contratos para comprar/vender activos a fecha futura. Altamente apalancados y complejos, requieren conocimiento profundo y gestión de riesgo estricta. No recomendados para inversores sin experiencia.</p>
+                    
+                    <h3>8.3 Margin y apalancamiento</h3>
+                    <p>Permite invertir con dinero prestado del broker para amplificar retornos. También amplifica pérdidas y puede resultar en margin calls donde debes depositar más capital o liquidar posiciones. Usar con extrema precaución.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Peligro del apalancamiento:</strong> Una caída del 50% con apalancamiento 2:1 resulta en pérdida del 100%. Puedes perder más de lo que invertiste.
+                    </div>
+                    
+                    <h3>8.4 Ventas en corto (short selling)</h3>
+                    <p>Apostar a que un activo bajará de precio tomando prestadas acciones para venderlas y recomprarlas más baratas. Riesgo teóricamente ilimitado porque el precio puede subir indefinidamente. Solo para traders muy experimentados.</p>
+                    
+                    <h3>8.5 Estrategias cuantitativas</h3>
+                    <p>Uso de algoritmos y modelos matemáticos para identificar oportunidades. Requiere programación, estadística avanzada y acceso a datos de calidad. El trading algorítmico es dominado por instituciones con recursos sofisticados.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Regla de oro:</strong> Si no entiendes completamente una estrategia avanzada, no la uses. La complejidad no es necesaria para el éxito en inversiones.
+                    </div>
+                `
+            },
+            {
+                id: 9,
+                title: "Construcción de Cartera",
+                content: `
+                    <h2>Módulo 9: Construcción de Cartera</h2>
+                    
+                    <h3>9.1 Asignación de activos</h3>
+                    <p>Determina qué porcentaje destinar a acciones, bonos, efectivo y otros activos según tu edad, objetivos y tolerancia al riesgo. Una regla simple es "110 menos tu edad = % en acciones", pero ajústala a tu situación.</p>
+                    
+                    <h4>Ejemplo de asignación por edad:</h4>
+                    <ul>
+                        <li><strong>25 años:</strong> 85% acciones, 15% bonos</li>
+                        <li><strong>40 años:</strong> 70% acciones, 30% bonos</li>
+                        <li><strong>55 años:</strong> 55% acciones, 45% bonos</li>
+                        <li><strong>70 años:</strong> 40% acciones, 60% bonos</li>
+                    </ul>
+                    
+                    <h3>9.2 Cartera Core-Satellite</h3>
+                    <p>El núcleo (core) consiste en inversiones pasivas de bajo costo en índices amplios (70-80%). Los satélites son inversiones activas en sectores específicos o acciones individuales que crees que superarán al mercado (20-30%).</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Ventaja del Core-Satellite:</strong> Combina la estabilidad de la inversión pasiva con el potencial de superar al mercado mediante selección activa.
+                    </div>
+                    
+                    <h3>9.3 Estrategia 60/40</h3>
+                    <p>Clásica asignación de 60% acciones y 40% bonos. Ofrece crecimiento con menor volatilidad que 100% acciones. Rebalancea anualmente para mantener las proporciones.</p>
+                    
+                    <h3>9.4 Carteras Lazy (Perezosas)</h3>
+                    <p>Combinaciones simples de 2-4 ETFs que cubren mercados globales y requieren mínimo mantenimiento. Ejemplos incluyen carteras Bogleheads, All Weather de Ray Dalio o Three Fund Portfolio.</p>
+                    
+                    <h4>Ejemplo Three Fund Portfolio:</h4>
+                    <ul>
+                        <li>60% S&P 500 ETF (VTI)</li>
+                        <li>30% International Stocks ETF (VXUS)</li>
+                        <li>10% Bond ETF (BND)</li>
+                    </ul>
+                    
+                    <h3>9.5 Diversificación geográfica</h3>
+                    <p>No te limites a tu país. Incluye exposición a mercados desarrollados (Europa, Asia) y emergentes (Latinoamérica, Asia emergente) para capturar oportunidades globales y reducir riesgo específico de país.</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Principios de construcción de cartera:</strong><br>
+                        1. Define tu asignación de activos<br>
+                        2. Diversifica geográficamente<br>
+                        3. Usa productos de bajo costo<br>
+                        4. Rebalancea periódicamente<br>
+                        5. Mantén simplicidad
+                    </div>
+                `
+            },
+            {
+                id: 10,
+                title: "Aspectos Fiscales y Legales",
+                content: `
+                    <h2>Módulo 10: Aspectos Fiscales y Legales</h2>
+                    
+                    <h3>10.1 Impuestos sobre inversiones</h3>
+                    <p>Las ganancias de capital generalmente tributan diferente según el plazo de tenencia (corto vs largo plazo). Los dividendos pueden tener tratamiento fiscal especial. Infórmate sobre las leyes fiscales de tu país.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Importante:</strong> Este módulo proporciona información general. Consulta con un asesor fiscal profesional para tu situación específica.
+                    </div>
+                    
+                    <h3>10.2 Cuentas con ventajas fiscales</h3>
+                    <p>Dependiendo de tu país, pueden existir cuentas como IRA, 401k, Roth IRA (EE.UU.), ISA (Reino Unido), TFSA (Canadá) que ofrecen beneficios fiscales. Maximiza estas oportunidades.</p>
+                    
+                    <h4>Tipos de cuentas fiscalmente eficientes:</h4>
+                    <ul>
+                        <li><strong>Diferimiento fiscal:</strong> Pagas impuestos al retirar (401k tradicional)</li>
+                        <li><strong>Libre de impuestos:</strong> Contribuyes con dinero post-impuestos, retiras libre de impuestos (Roth IRA)</li>
+                        <li><strong>Deducción inmediata:</strong> Reduces tu ingreso imponible actual</li>
+                    </ul>
+                    
+                    <h3>10.3 Reportes y documentación</h3>
+                    <p>Mantén registros detallados de todas tus transacciones: fechas, precios, comisiones y dividendos. Necesitarás esta información para declaraciones fiscales y análisis de rendimiento.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Tip organizacional:</strong> Usa hojas de cálculo o software especializado para rastrear todas tus inversiones. Esto simplificará enormemente la temporada de impuestos.
+                    </div>
+                    
+                    <h3>10.4 Regulaciones y protecciones</h3>
+                    <p>Conoce los organismos reguladores de tu país (SEC en EE.UU., CNMV en España, etc.) y las protecciones que ofrecen. Verifica que tu broker esté debidamente regulado y que tus activos estén protegidos en caso de quiebra del broker.</p>
+                    
+                    <h4>Señales de un broker regulado:</h4>
+                    <ul>
+                        <li>Licencia de organismo regulador nacional</li>
+                        <li>Seguro de protección de inversores</li>
+                        <li>Transparencia en comisiones y términos</li>
+                        <li>Auditorías regulares</li>
+                        <li>Segregación de fondos de clientes</li>
+                    </ul>
+                    
+                    <div class="success-box">
+                        <strong>✅ Checklist legal y fiscal:</strong><br>
+                        ☑ Entiendo las implicaciones fiscales de mis inversiones<br>
+                        ☑ Aprovecho cuentas con ventajas fiscales<br>
+                        ☑ Mantengo registros detallados<br>
+                        ☑ Mi broker está regulado<br>
+                        ☑ Consulto con profesionales cuando es necesario
+                    </div>
+                `
+            },
+            {
+                id: 11,
+                title: "Herramientas y Recursos",
+                content: `
+                    <h2>Módulo 11: Herramientas y Recursos</h2>
+                    
+                    <h3>11.1 Plataformas de información</h3>
+                    <ul>
+                        <li><strong>Yahoo Finance, Google Finance:</strong> Cotizaciones y noticias gratuitas.</li>
+                        <li><strong>Bloomberg, Reuters:</strong> Información profesional más profunda.</li>
+                        <li><strong>TradingView:</strong> Gráficos avanzados y comunidad de traders.</li>
+                        <li><strong>Seeking Alpha, Morningstar:</strong> Análisis y reportes de empresas.</li>
+                    </ul>
+                    
+                    <h3>11.2 Screeners de acciones</h3>
+                    <p>Herramientas que filtran miles de acciones según criterios específicos como P/E, dividend yield, capitalización, sector, crecimiento, etc. Finviz, Yahoo Finance y TradingView ofrecen screeners gratuitos.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Ejemplo de filtro básico:</strong><br>
+                        • Capitalización > $10 billones<br>
+                        • P/E < 20<br>
+                        • Dividend Yield > 3%<br>
+                        • ROE > 15%<br>
+                        • Deuda/Patrimonio < 0.5
+                    </div>
+                    
+                    <h3>11.3 Simuladores y paper trading</h3>
+                    <p>Practica sin arriesgar dinero real. Muchos brokers ofrecen cuentas demo. Usa estas plataformas para probar estrategias y familiarizarte con la operativa antes de invertir capital real.</p>
+                    
+                    <h4>Beneficios del paper trading:</h4>
+                    <ul>
+                        <li>Prueba estrategias sin riesgo financiero</li>
+                        <li>Familiarízate con la plataforma del broker</li>
+                        <li>Aprende de errores sin consecuencias</li>
+                        <li>Desarrolla disciplina emocional</li>
+                        <li>Verifica si tu estrategia realmente funciona</li>
+                    </ul>
+                    
+                    <h3>11.4 Educación continua</h3>
+                    
+                    <h4>Libros imprescindibles:</h4>
+                    <ul>
+                        <li><strong>"El inversor inteligente"</strong> de Benjamin Graham</li>
+                        <li><strong>"Un paseo aleatorio por Wall Street"</strong> de Burton Malkiel</li>
+                        <li><strong>"Acciones ordinarias, beneficios extraordinarios"</strong> de Philip Fisher</li>
+                        <li><strong>"El pequeño libro que bate al mercado"</strong> de Joel Greenblatt</li>
+                        <li><strong>"Padre Rico Padre Pobre"</strong> de Robert Kiyosaki</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Cuidado con:</strong><br>
+                        • "Gurus" que prometen hacerte rico rápido<br>
+                        • Cursos excesivamente caros sin valor demostrable<br>
+                        • Señales de trading de pago<br>
+                        • Información de fuentes no verificadas
+                    </div>
+                    
+                    <div class="success-box">
+                        <strong>✅ Tu kit de herramientas básico:</strong><br>
+                        1. Plataforma de cotizaciones (Yahoo Finance)<br>
+                        2. Screener de acciones (Finviz)<br>
+                        3. Gráficos (TradingView)<br>
+                        4. Cuenta demo para practicar<br>
+                        5. Al menos 2-3 libros fundamentales
+                    </div>
+                `
+            },
+            {
+                id: 12,
+                title: "Errores Comunes a Evitar",
+                content: `
+                    <h2>Módulo 12: Errores Comunes a Evitar</h2>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Aprende de los errores de otros:</strong> Estos son los errores más comunes que cuestan caro a los inversores. Evítalos y estarás por delante del 90% de la gente.
+                    </div>
+                    
+                    <h3>12.1 No tener un plan</h3>
+                    <p>Invertir sin estrategia clara es apostar, no invertir. Define tus objetivos, horizonte temporal, tolerancia al riesgo y criterios de entrada/salida antes de comprar tu primera acción.</p>
+                    
+                    <h3>12.2 Intentar timing del mercado</h3>
+                    <p>Nadie puede predecir consistentemente los movimientos de corto plazo del mercado. Intentar comprar en mínimos y vender en máximos generalmente resulta en peor rendimiento que una estrategia constante de largo plazo.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Dato revelador:</strong> Perder solo los 10 mejores días del mercado en 20 años reduce tu retorno a la mitad. Es imposible predecir cuándo serán esos días.
+                    </div>
+                    
+                    <h3>12.3 Perseguir rendimientos pasados</h3>
+                    <p>Que una acción o fondo haya subido mucho el año pasado no garantiza que siga haciéndolo. Muchos inversores compran caro después de grandes subidas y venden barato tras caídas, exactamente lo opuesto a lo que deberían hacer.</p>
+                    
+                    <h3>12.4 Trading excesivo</h3>
+                    <p>Cada transacción tiene costos (comisiones, spreads, impuestos). El trading frecuente erosiona retornos y está impulsado típicamente por emociones, no por análisis racional. Los mejores retornos suelen venir de comprar y mantener.</p>
+                    
+                    <h4>Costos ocultos del trading excesivo:</h4>
+                    <ul>
+                        <li>Comisiones de compra/venta</li>
+                        <li>Spreads bid-ask</li>
+                        <li>Impuestos sobre ganancias de corto plazo</li>
+                        <li>Tiempo y estrés emocional</li>
+                        <li>Pérdida del interés compuesto</li>
+                    </ul>
+                    
+                    <h3>12.5 No diversificar</h3>
+                    <p>Concentrar todo tu capital en pocas acciones o un solo sector aumenta dramáticamente el riesgo. Una empresa puede quebrar, un sector puede colapsar, pero un mercado diversificado tiende a recuperarse.</p>
+                    
+                    <h3>12.6 Usar dinero que necesitas pronto</h3>
+                    <p>La bolsa es volátil en el corto plazo. Nunca inviertas dinero que vayas a necesitar en menos de 3-5 años. Podrías verte obligado a vender con pérdidas si necesitas el efectivo durante una caída.</p>
+                    
+                    <h3>12.7 No controlar emociones</h3>
+                    <p>Vender en pánico durante caídas y comprar eufóricamente durante burbujas destruye riqueza. Warren Buffett aconseja ser "temeroso cuando otros son codiciosos, y codicioso cuando otros son temerosos".</p>
+                    
+                    <div class="success-box">
+                        <strong>✅ Mantra anti-errores:</strong><br>
+                        • Tengo un plan y lo sigo<br>
+                        • No intento predecir el mercado<br>
+                        • Compro y mantengo a largo plazo<br>
+                        • Diversifico siempre<br>
+                        • Solo invierto dinero que no necesito<br>
+                        • Controlo mis emociones<br>
+                        • Aprendo constantemente
+                    </div>
+                `
+            },
+            {
+                id: 13,
+                title: "Casos de Estudio y Análisis",
+                content: `
+                    <h2>Módulo 13: Casos de Estudio y Análisis</h2>
+                    
+                    <h3>13.1 Burbujas históricas</h3>
+                    <p>Estudiar eventos como la burbuja de tulipanes (1637), el crash de 1929, la burbuja puntocom (2000) y la crisis financiera (2008) enseña lecciones sobre psicología de masas, valoraciones irracionales y gestión de riesgo.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Patrón común en burbujas:</strong><br>
+                        1. Nueva tecnología o activo genera entusiasmo<br>
+                        2. Precios suben rápidamente<br>
+                        3. "Esta vez es diferente"<br>
+                        4. Euforia generalizada<br>
+                        5. Colapso inevitable
+                    </div>
+                    
+                    <h3>13.2 Grandes inversores</h3>
+                    
+                    <h4>Warren Buffett (Value Investing)</h4>
+                    <p>Compra empresas excelentes a precios razonables. Enfoque en ventajas competitivas duraderas, equipos directivos de calidad y visión de muy largo plazo.</p>
+                    
+                    <h4>Peter Lynch (Growth at Reasonable Price)</h4>
+                    <p>Invierte en lo que conoces. Busca empresas con crecimiento sólido a precios razonables. Famoso por descubrir "ten-baggers" (acciones que multiplican por 10).</p>
+                    
+                    <h4>Ray Dalio (Diversificación y All Weather)</h4>
+                    <p>Creador de la estrategia "All Weather Portfolio" que busca rendimientos consistentes en cualquier entorno económico mediante diversificación extrema.</p>
+                    
+                    <h4>John Bogle (Indexación Pasiva)</h4>
+                    <p>Fundador de Vanguard y padre de los fondos indexados. Demostró que la mayoría de gestores activos no superan al mercado después de comisiones.</p>
+                    
+                    <h3>13.3 Empresas exitosas</h3>
+                    <p>Estudia casos como Apple, Microsoft, Amazon, Google, que transformaron industrias y generaron retornos extraordinarios. Identifica qué factores contribuyeron a su éxito y cómo detectar características similares.</p>
+                    
+                    <h4>Características comunes:</h4>
+                    <ul>
+                        <li>Ventaja competitiva sostenible</li>
+                        <li>Enfoque obsesivo en el cliente</li>
+                        <li>Cultura de innovación</li>
+                        <li>Liderazgo visionario</li>
+                        <li>Capacidad de reinventarse</li>
+                    </ul>
+                    
+                    <h3>13.4 Fracasos empresariales</h3>
+                    <p>Aprende de Enron, Lehman Brothers, Kodak, Blockbuster y otras empresas que colapsaron o se volvieron irrelevantes. Entiende señales de advertencia como fraude contable, falta de adaptación o exceso de deuda.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Señales de alerta:</strong><br>
+                        • Contabilidad poco transparente<br>
+                        • Deuda excesiva<br>
+                        • Resistencia al cambio tecnológico<br>
+                        • Pérdida de ventaja competitiva<br>
+                        • Equipos directivos deshonestos
+                    </div>
+                    
+                    <div class="success-box">
+                        <strong>✅ Lecciones de la historia:</strong><br>
+                        • Las burbujas siempre explotan<br>
+                        • La diversificación protege<br>
+                        • El largo plazo favorece al paciente<br>
+                        • La innovación es poderosa pero arriesgada<br>
+                        • Nada dura para siempre
+                    </div>
+                `
+            },
+            {
+                id: 14,
+                title: "Plan de Acción Personal",
+                content: `
+                    <h2>Módulo 14: Plan de Acción Personal</h2>
+                    
+                    <h3>14.1 Autoevaluación</h3>
+                    <p>Evalúa honestamente tu situación financiera actual, conocimientos, tiempo disponible y objetivos específicos. Esto determina tu estrategia óptima.</p>
+                    
+                    <h4>Preguntas clave para autoevaluación:</h4>
+                    <ul>
+                        <li>¿Cuál es mi situación financiera actual?</li>
+                        <li>¿Tengo fondo de emergencia?</li>
+                        <li>¿Cuánto puedo invertir mensualmente?</li>
+                        <li>¿Cuándo necesitaré este dinero?</li>
+                        <li>¿Cuánto tiempo puedo dedicar a estudiar?</li>
+                        <li>¿Qué nivel de riesgo tolero psicológicamente?</li>
+                    </ul>
+                    
+                    <h3>14.2 Definir estrategia</h3>
+                    <p>Basado en tu perfil, elige entre inversión pasiva en índices, value investing, dividend growth u otra estrategia que se alinee con tus recursos y temperamento.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Recomendación para principiantes:</strong><br>
+                        Comienza con inversión pasiva en índices mientras aprendes. Es simple, efectiva y te da tiempo para educarte sin cometer errores costosos.
+                    </div>
+                    
+                    <h3>14.3 Establecer reglas de inversión</h3>
+                    <p>Documenta por escrito:</p>
+                    <ul>
+                        <li>Criterios de selección de inversiones</li>
+                        <li>Límites de posición por activo (ej: máximo 5% en una acción)</li>
+                        <li>Condiciones de venta (cuándo venderás)</li>
+                        <li>Frecuencia de rebalanceo (ej: anual)</li>
+                        <li>Límites de pérdida aceptables (ej: stop loss del 20%)</li>
+                    </ul>
+                    
+                    <h3>14.4 Implementación gradual</h3>
+                    <p>Comienza con pequeñas cantidades mientras desarrollas experiencia. Aumenta tu exposición progresivamente a medida que ganas confianza y conocimiento. Usa Dollar Cost Averaging para entrar al mercado sistemáticamente.</p>
+                    
+                    <h4>Plan de implementación sugerido:</h4>
+                    <ul>
+                        <li><strong>Mes 1-3:</strong> Abre cuenta, estudia, practica con simulador</li>
+                        <li><strong>Mes 4-6:</strong> Primera inversión pequeña (ej: $500-1000)</li>
+                        <li><strong>Mes 7-12:</strong> DCA mensual, aumenta gradualmente</li>
+                        <li><strong>Año 2+:</strong> Estrategia completa con capital objetivo</li>
+                    </ul>
+                    
+                    <h3>14.5 Monitoreo y ajuste</h3>
+                    <p>Revisa tu cartera trimestralmente (no diariamente). Evalúa si sigue alineada con tus objetivos y si necesitas rebalancear. Ajusta tu estrategia solo ante cambios fundamentales en tu vida o aprendizajes significativos.</p>
+                    
+                    <div class="warning-box">
+                        <strong>⚠️ Evita:</strong><br>
+                        • Revisar tu cartera varias veces al día<br>
+                        • Cambiar de estrategia cada mes<br>
+                        • Tomar decisiones emocionales<br>
+                        • Compararte constantemente con otros
+                    </div>
+                    
+                    <div class="success-box">
+                        <strong>✅ Tu plan de acción final:</strong><br>
+                        1. He completado mi autoevaluación<br>
+                        2. He elegido mi estrategia inicial<br>
+                        3. He documentado mis reglas de inversión<br>
+                        4. Tengo un cronograma de implementación<br>
+                        5. He establecido mi proceso de monitoreo<br>
+                        <br>
+                        <strong>🎯 ¡Estás listo para comenzar tu viaje como inversor!</strong>
+                    </div>
+                    
+                    <h2>Conclusión del Curso</h2>
+                    
+                    <p>Invertir en bolsa exitosamente requiere educación continua, disciplina emocional y perspectiva de largo plazo. No existe una fórmula mágica para hacerse rico rápidamente, pero con paciencia, diversificación y consistencia, la bolsa ha demostrado ser uno de los mejores vehículos para construir riqueza a lo largo del tiempo.</p>
+                    
+                    <p>Comienza con lo básico, practica con simuladores, invierte solo lo que puedes permitirte perder y nunca dejes de aprender. El camino del inversor es un maratón, no un sprint. Con el tiempo y la experiencia, desarrollarás el criterio para tomar decisiones cada vez mejores y construir un futuro financiero más sólido.</p>
+                    
+                    <div class="info-box">
+                        <strong>💡 Recuerda las palabras de Warren Buffett:</strong><br>
+                        "El mercado de valores es un dispositivo para transferir dinero del impaciente al paciente."
+                    </div>
+                    
+                    <p style="text-align: center; margin-top: 3rem; font-size: 1.3rem; font-weight: 600; color: var(--primary);">
+                        ¡Felicitaciones por completar el curso! 🎉<br>
+                        Tu viaje como inversor apenas comienza.
+                    </p>
+                `
+            }
+        ];
 
-  <script>
-    const modules = [
-      {
-        id: 1,
-        title: "Fundamentos y mentalidad",
-        duration: "1–2 h",
-        type: "Fundamentos",
-        description:
-          "Qué es la bolsa, tipos de activos, por qué invertir y cómo desarrollar la mentalidad adecuada evitando el \"hazte rico rápido\".",
-        bullets: [
-          "Qué es la bolsa y cómo funciona el mercado primario y secundario.",
-          "Tipos de activos: acciones, ETFs, bonos, fondos, REITs.",
-          "Por qué invertir: inflación, interés compuesto, horizontes temporales.",
-          "Psicología del inversor: miedo, codicia y sesgos comunes."
-        ],
-        exercise:
-          "Escribe tu manifiesto de inversor: objetivos, horizonte temporal, tolerancia a pérdidas y reglas básicas que quieres seguir.",
-        content: `
-<h3>1.1 ¿Qué es la bolsa y para qué sirve?</h3>
-<p>
-La bolsa es un mercado organizado donde se compran y venden partes de empresas (acciones) y otros activos financieros. 
-Su función principal es conectar a empresas que necesitan financiación con inversores que buscan rentabilizar su dinero. [web:49]
-</p>
-<p>
-Cuando compras una acción, te conviertes en propietario de una pequeña parte de esa empresa. 
-Si la empresa gana dinero y crece, el valor de tus acciones puede subir y, a veces, recibes dividendos. [web:45][web:49]
-</p>
+        let currentModuleIndex = 0;
+        const completedModules = new Set();
 
-<h3>1.2 Mercado primario y mercado secundario</h3>
-<p>
-En el <strong>mercado primario</strong>, las empresas venden acciones por primera vez para conseguir dinero (por ejemplo, en una salida a bolsa). 
-En el <strong>mercado secundario</strong>, los inversores se compran y venden esas acciones entre ellos, que es lo que ves cada día en la bolsa. [web:42][web:45]
-</p>
+        function renderModuleList() {
+            const moduleList = document.getElementById('module-list');
+            moduleList.innerHTML = modules.map((module, index) => `
+                <li class="module-item ${index === currentModuleIndex ? 'active' : ''} ${completedModules.has(index) ? 'completed' : ''}" 
+                    onclick="loadModule(${index})">
+                    <span class="module-number">${module.id}</span>
+                    <span>${module.title}</span>
+                </li>
+            `).join('');
+        }
 
-<h3>1.3 Tipos de activos básicos</h3>
-<ul>
-  <li><strong>Acciones:</strong> partes de propiedad de una empresa, con más riesgo y mayor potencial de rentabilidad. [web:44][web:49]</li>
-  <li><strong>ETFs:</strong> fondos cotizados que agrupan muchas acciones o bonos y se negocian como una acción, facilitando la diversificación. [web:44][web:69]</li>
-  <li><strong>Bonos:</strong> préstamos a gobiernos o empresas, normalmente menos volátiles que las acciones. [web:43][web:45]</li>
-  <li><strong>Fondos de inversión:</strong> vehículos gestionados que invierten en carteras de activos para muchos partícipes. [web:43][web:49]</li>
-  <li><strong>REITs / SOCIMIs:</strong> vehículos que invierten en inmuebles y reparten gran parte de los beneficios. [web:45]</li>
-</ul>
+        function loadModule(index) {
+            if (index < 0 || index >= modules.length) return;
+            
+            currentModuleIndex = index;
+            const module = modules[index];
+            
+            document.getElementById('content').innerHTML = module.content + `
+                <div class="nav-buttons">
+                    <button class="btn btn-secondary" onclick="loadModule(${index - 1})" ${index === 0 ? 'disabled' : ''}>
+                        ← Anterior
+                    </button>
+                    <button class="btn btn-primary" onclick="completeModule()">
+                        ${index === modules.length - 1 ? '✓ Finalizar Curso' : 'Marcar como completado →'}
+                    </button>
+                </div>
+            `;
+            
+            renderModuleList();
+            updateProgress();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
-<h3>1.4 Por qué invertir: inflación e interés compuesto</h3>
-<p>
-La <strong>inflación</strong> hace que tu dinero pierda poder adquisitivo con el tiempo si no lo inviertes en algo que crezca. [web:42][web:49]
-</p>
-<p>
-Al invertir en activos productivos, buscas que tu dinero crezca más que la inflación. 
-El <strong>interés compuesto</strong> hace que las ganancias generen nuevas ganancias con el tiempo, lo que puede producir un crecimiento muy fuerte a largo plazo. [web:42][web:46][web:69]
-</p>
+        function completeModule() {
+            completedModules.add(currentModuleIndex);
+            
+            if (currentModuleIndex < modules.length - 1) {
+                loadModule(currentModuleIndex + 1);
+            } else {
+                alert('🎉 ¡Felicitaciones! Has completado el curso completo de inversión en bolsa. ¡Ahora es momento de poner en práctica lo aprendido!');
+            }
+            
+            updateProgress();
+        }
 
-<h3>1.5 Horizonte temporal y expectativas realistas</h3>
-<p>
-La bolsa tiene sentido sobre todo a medio y largo plazo (años), porque a corto plazo las oscilaciones son normales y pueden ser fuertes. [web:44][web:49]
-</p>
-<p>
-Pensar que vas a doblar tu dinero en semanas te hace vulnerable a fraudes y malas decisiones; una expectativa realista es crecer de forma moderada pero constante a lo largo de los años. [web:42][web:45]
-</p>
+        function updateProgress() {
+            const progress = Math.round((completedModules.size / modules.length) * 100);
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = progress;
+            document.getElementById('current-module').textContent = currentModuleIndex + 1;
+        }
 
-<h3>1.6 Psicología del inversor</h3>
-<p>
-Muchos errores vienen de las emociones: vender por pánico en caídas, comprar por “FOMO” o arriesgar demasiado para recuperar rápido. [web:47][web:50]
-</p>
-<p>
-Tu objetivo es tener reglas claras y respetarlas incluso cuando tus emociones empujen en la dirección contraria. [web:47][web:50]
-</p>
-
-<h3>1.7 Ejercicio del módulo</h3>
-<p>Redacta tu <strong>manifiesto de inversor</strong>:</p>
-<ul>
-  <li>Metas (jubilación, independencia financiera, comprar casa, etc.).</li>
-  <li>Horizonte temporal principal (en años).</li>
-  <li>Cuánto puedes invertir sin necesitarlo en al menos 5 años.</li>
-  <li>Caída máxima que podrías soportar sin perder el sueño (en %).</li>
-  <li>Errores que quieres evitar (seguir modas, endeudarte, operar por aburrimiento…).</li>
-</ul>
-`
-      },
-      {
-        id: 2,
-        title: "Infraestructura y brokers",
-        duration: "1–2 h",
-        type: "Práctico",
-        description:
-          "Conoce las cuentas y plataformas que usarás para invertir: brokers, comisiones, tipos de órdenes y aspectos básicos de fiscalidad.",
-        bullets: [
-          "Tipos de cuentas y brokers, comisiones, spreads y divisas.",
-          "Órdenes de mercado, limitadas, stop y stop-limit.",
-          "Nociones básicas de fiscalidad.",
-          "Uso básico de una plataforma de inversión."
-        ],
-        exercise:
-          "Abre una cuenta demo (o de papel) y simula varias órdenes: compra y venta de una acción o ETF con diferentes tipos de orden.",
-        content: `
-<h3>2.1 Qué es un bróker y qué tipos hay</h3>
-<p>
-Un <strong>bróker</strong> es el intermediario que ejecuta tus órdenes de compra y venta en la bolsa. 
-Sin un bróker no puedes acceder directamente al mercado. [web:42][web:49]
-</p>
-<ul>
-  <li><strong>Brokers tradicionales:</strong> suelen pertenecer a bancos, con comisiones algo más altas pero más soporte. [web:45]</li>
-  <li><strong>Brokers online:</strong> especializados, normalmente con menores comisiones y más herramientas para invertir. [web:44][web:46]</li>
-</ul>
-
-<h3>2.2 Comisiones y costes típicos</h3>
-<p>
-Cada operación puede tener una comisión fija por compra/venta, además de posibles costes de cambio de divisa si inviertes en mercados extranjeros. [web:44][web:69]
-</p>
-<p>
-A largo plazo, las comisiones altas reducen de forma importante tu rentabilidad, así que es clave comparar tarifas antes de elegir bróker. [web:44][web:69]
-</p>
-
-<h3>2.3 Tipos de órdenes</h3>
-<ul>
-  <li><strong>Orden de mercado:</strong> se ejecuta al mejor precio disponible en ese momento, prioriza la ejecución sobre el precio exacto. [web:49]</li>
-  <li><strong>Orden limitada:</strong> tú indicas el precio máximo al que compras o mínimo al que vendes; puede tardar más o no ejecutarse. [web:49]</li>
-  <li><strong>Stop y stop-limit:</strong> órdenes que se activan al llegar a cierto precio, útiles para limitar pérdidas o proteger beneficios. [web:49]</li>
-</ul>
-
-<h3>2.4 Divisas y mercados</h3>
-<p>
-Si compras acciones de Estados Unidos desde tu país, probablemente estarás usando dólares, por lo que el tipo de cambio puede afectar a tu rentabilidad. [web:46][web:49]
-</p>
-<p>
-Conviene saber en qué moneda inviertes y qué comisiones de cambio aplica tu bróker cuando compras o vendes activos en otras divisas. [web:44][web:46]
-</p>
-
-<h3>2.5 Fiscalidad básica (visión general)</h3>
-<p>
-En la mayoría de países, las ganancias que obtienes al vender acciones o ETFs con beneficio tributan como plusvalías, y los dividendos tributan como rendimientos de capital. [web:43][web:49]
-</p>
-<p>
-Es importante llevar un registro de tus operaciones y consultar las normas fiscales específicas de tu país o un asesor, sobre todo si tu cartera empieza a ser grande. [web:43][web:69]
-</p>
-
-<h3>2.6 Ejercicio del módulo</h3>
-<ul>
-  <li>Elige uno o dos brokers y compara: comisiones, mercados disponibles, divisas, facilidad de uso.</li>
-  <li>Abre una cuenta demo y practica: una orden de mercado y una orden limitada sobre la misma acción o ETF.</li>
-  <li>Anota qué diferencias ves en el precio de ejecución y cómo se muestra la operación en el historial.</li>
-</ul>
-`
-      },
-      {
-        id: 3,
-        title: "Análisis fundamental básico",
-        duration: "2–3 h",
-        type: "Análisis",
-        description:
-          "Aprende a leer estados financieros sencillos, entender ratios clave y formarte una idea del valor razonable de una empresa.",
-        bullets: [
-          "Lectura básica de estados financieros.",
-          "Ratios clave: PER, márgenes, ROE, deuda, flujo de caja.",
-          "Calidad de negocio y ventajas competitivas.",
-          "Valoración simple por múltiplos."
-        ],
-        exercise:
-          "Elige una empresa cotizada, descarga sus estados financieros y rellena una ficha de análisis sencilla con los ratios básicos.",
-        content: `
-<h3>3.1 Concepto de análisis fundamental</h3>
-<p>
-El <strong>análisis fundamental</strong> estudia el negocio detrás de la acción: cómo gana dinero, cuánta deuda tiene, si es rentable y si su precio en bolsa es razonable. [web:49][web:69]
-</p>
-
-<h3>3.2 Estados financieros básicos</h3>
-<ul>
-  <li><strong>Cuenta de resultados:</strong> muestra ingresos, costes y beneficios en un periodo (por ejemplo, un año). [web:49]</li>
-  <li><strong>Balance:</strong> refleja lo que la empresa posee (activos) y lo que debe (pasivos), además del patrimonio neto. [web:69]</li>
-  <li><strong>Flujo de caja:</strong> indica cuánto efectivo entra y sale, y si la empresa genera caja real más allá del beneficio contable. [web:69]</li>
-</ul>
-
-<h3>3.3 Ratios fundamentales clave</h3>
-<ul>
-  <li><strong>PER:</strong> precio/beneficio por acción; indica cuántos años de beneficio pagas al comprar la acción hoy. [web:69]</li>
-  <li><strong>Margen neto:</strong> beneficio neto / ventas; mide cuánto se queda la empresa de cada unidad vendida. [web:49]</li>
-  <li><strong>ROE:</strong> beneficio neto / patrimonio; mide la rentabilidad del capital de los accionistas. [web:69]</li>
-  <li><strong>Deuda neta/EBITDA:</strong> cuántos años de flujo operativo necesitaría para pagar la deuda; cuanto más bajo, mejor. [web:69]</li>
-  <li><strong>Flujo de caja libre:</strong> efectivo que queda después de las inversiones necesarias, disponible para pagar deuda o dividendos. [web:69]</li>
-</ul>
-
-<h3>3.4 Calidad del negocio y ventaja competitiva</h3>
-<p>
-Más allá de los números, interesa entender si la empresa tiene una posición defensible: marca fuerte, costes bajos, patentes, efectos de red, etc. [web:69]
-</p>
-<p>
-Negocios de calidad suelen tener márgenes estables, poca deuda y capacidad de seguir creciendo sin inversiones enormes. [web:69]
-</p>
-
-<h3>3.5 Valoración sencilla por múltiplos</h3>
-<p>
-Una forma simple de valorar una empresa es comparar su PER o sus múltiplos de flujo de caja con los de empresas similares o con su propia media histórica. [web:69]
-</p>
-<p>
-No se trata de buscar el número perfecto, sino de ver si el precio actual es razonable para la calidad y el crecimiento del negocio. [web:49][web:69]
-</p>
-
-<h3>3.6 Ejercicio del módulo</h3>
-<ul>
-  <li>Elige una empresa conocida que cotice en bolsa.</li>
-  <li>Busca su cuenta de resultados, balance y flujo de caja en la web del bróker o en la web de la propia empresa.</li>
-  <li>Calcula: PER aproximado, margen neto, ROE y deuda neta/EBITDA.</li>
-  <li>Escribe en una hoja tus conclusiones: ¿parece un negocio estable?, ¿tiene mucha deuda?, ¿sus beneficios crecen o se estancan?</li>
-</ul>
-`
-      },
-      {
-        id: 4,
-        title: "Inversión en ETFs y fondos indexados",
-        duration: "2 h",
-        type: "Cartera",
-        description:
-          "Descubre cómo usar ETFs e indexados para construir carteras sencillas, diversificadas y de bajo coste para el largo plazo.",
-        bullets: [
-          "Qué es un ETF y cómo replica un índice.",
-          "Diferencias con fondos tradicionales.",
-          "Tipos de ETFs: globales, sectoriales, de bonos, temáticos, factores.",
-          "Coste (TER), liquidez y tracking error."
-        ],
-        exercise:
-          "Diseña una cartera de 2–4 ETFs para tres perfiles distintos: conservador, equilibrado y agresivo.",
-        content: `
-<h3>4.1 Qué es un ETF</h3>
-<p>
-Un <strong>ETF</strong> (Exchange-Traded Fund) es un fondo que cotiza en bolsa como si fuera una acción, pero que por dentro tiene una cesta de activos (acciones, bonos, etc.). [web:44][web:69]
-</p>
-
-<h3>4.2 Ventajas de los ETFs e indexados</h3>
-<ul>
-  <li><strong>Diversificación:</strong> con un solo ETF puedes tener exposición a cientos de empresas.</li>
-  <li><strong>Bajos costes:</strong> los ETFs indexados suelen tener comisiones anuales (TER) muy reducidas. [web:44][web:69]</li>
-  <li><strong>Transparencia:</strong> normalmente sabes qué índice replica y qué contiene. [web:69]</li>
-</ul>
-
-<h3>4.3 Tipos de ETFs</h3>
-<ul>
-  <li><strong>Globales:</strong> siguen índices amplios (por ejemplo, renta variable mundial).</li>
-  <li><strong>Regionales:</strong> Europa, Estados Unidos, emergentes, etc.</li>
-  <li><strong>Sectoriales o temáticos:</strong> tecnología, salud, energías renovables, etc. [web:64]</li>
-  <li><strong>De bonos:</strong> deuda pública, corporativa, de corto o largo plazo. [web:64]</li>
-</ul>
-
-<h3>4.4 Costes y tracking error</h3>
-<p>
-El <strong>TER</strong> (Total Expense Ratio) es la comisión anual del ETF; cuanto más baja, mejor para ti a largo plazo. [web:44][web:69]
-</p>
-<p>
-El <strong>tracking error</strong> mide qué tan bien replica el ETF al índice que pretende seguir; en general, se prefiere que sea pequeño. [web:69]
-</p>
-
-<h3>4.5 Ejercicio del módulo</h3>
-<ul>
-  <li>Para un perfil conservador, diseña una cartera con más peso en bonos y menos en renta variable.</li>
-  <li>Para un perfil equilibrado, combina renta variable global y bonos intermedios.</li>
-  <li>Para un perfil agresivo, da más peso a renta variable global y emergentes.</li>
-  <li>Anota los TER de cada ETF y por qué los has elegido.</li>
-</ul>
-`
-      },
-      {
-        id: 5,
-        title: "Análisis técnico y timing",
-        duration: "2 h",
-        type: "Técnico",
-        description:
-          "Usa el análisis técnico de forma simple para mejorar tus puntos de entrada y salida, sin convertir la bolsa en un casino.",
-        bullets: [
-          "Tendencias, soportes y resistencias.",
-          "Uso básico de indicadores (MAs, RSI, MACD).",
-          "Combinar contexto fundamental y técnico.",
-          "Patrones sencillos de entrada/salida."
-        ],
-        exercise:
-          "Define un patrón de entrada simple y busca varios ejemplos en gráficos históricos.",
-        content: `
-<h3>5.1 Qué es el análisis técnico</h3>
-<p>
-El <strong>análisis técnico</strong> estudia la evolución del precio y el volumen en los gráficos para detectar tendencias y posibles zonas de entrada o salida. [web:64]
-</p>
-
-<h3>5.2 Conceptos básicos</h3>
-<ul>
-  <li><strong>Tendencia:</strong> dirección principal del precio (alcista, bajista o lateral).</li>
-  <li><strong>Soportes:</strong> zonas donde el precio ha frenado caídas en el pasado.</li>
-  <li><strong>Resistencias:</strong> zonas donde el precio ha frenado subidas en el pasado.</li>
-</ul>
-
-<h3>5.3 Indicadores sencillos</h3>
-<ul>
-  <li><strong>Medias móviles:</strong> suavizan el precio para ver la tendencia media de los últimos X días. [web:64]</li>
-  <li><strong>RSI:</strong> indicador de fuerza relativa, ayuda a ver sobrecompra o sobreventa.</li>
-  <li><strong>MACD:</strong> compara medias de diferentes plazos para detectar cambios de tendencia.</li>
-</ul>
-
-<h3>5.4 Uso práctico y límites</h3>
-<p>
-El objetivo no es predecir el futuro, sino tener un marco visual para tomar decisiones con algo más de orden. [web:64]
-</p>
-<p>
-Es importante no saturar el gráfico con demasiados indicadores ni buscar señales milagrosas; mantén el análisis simple. [web:64]
-</p>
-
-<h3>5.5 Ejercicio del módulo</h3>
-<ul>
-  <li>Define un patrón de entrada básico (ejemplo: precio por encima de media de 50 días y ruptura de resistencia reciente).</li>
-  <li>Elige 5–10 gráficos históricos y marca manualmente dónde habrías entrado y salido siguiendo ese criterio.</li>
-  <li>Anota qué te habría funcionado bien y qué no.</li>
-</ul>
-`
-      },
-      {
-        id: 6,
-        title: "Gestión del riesgo y tamaño de posición",
-        duration: "2–3 h",
-        type: "Riesgo",
-        description:
-          "Aprende a decidir cuánto invertir en cada operación y cómo proteger tu capital frente a malas rachas y caídas del mercado.",
-        bullets: [
-          "Riesgo por operación y relación riesgo/beneficio.",
-          "Diversificación y correlación.",
-          "Stops y gestión de salidas.",
-          "Cálculo de tamaño de posición."
-        ],
-        exercise:
-          "Crea una hoja de cálculo que calcule tamaño de posición y riesgo total según un % de riesgo máximo por operación.",
-        content: `
-<h3>6.1 Por qué la gestión de riesgo es clave</h3>
-<p>
-Puedes tener una buena estrategia de selección de activos, pero si arriesgas demasiado en cada operación, unas pocas pérdidas seguidas pueden dejar tu cuenta muy dañada. [web:49][web:69]
-</p>
-
-<h3>6.2 Riesgo por operación</h3>
-<p>
-Una regla habitual es arriesgar solo un pequeño porcentaje de tu capital por operación (por ejemplo, entre 0,5 % y 2 %). [web:69]
-</p>
-<p>
-Si tienes 1.000 unidades de capital y decides arriesgar un 1 % por operación, el riesgo máximo por trade son 10 unidades. [web:69]
-</p>
-
-<h3>6.3 Stops y relación riesgo/beneficio</h3>
-<ul>
-  <li><strong>Stop loss:</strong> precio al que cerrarás la posición si el mercado va en tu contra.</li>
-  <li><strong>Take profit:</strong> objetivo aproximado de beneficio donde considerarás vender parte o todo.</li>
-  <li>Se recomienda buscar operaciones con posible beneficio mayor que la pérdida potencial (por ejemplo, 1:2). [web:69]</li>
-</ul>
-
-<h3>6.4 Diversificación y correlación</h3>
-<p>
-No es buena idea concentrar todo tu capital en una sola acción o sector; diversificar reduce el riesgo específico de cada activo. [web:49][web:69]
-</p>
-<p>
-También conviene combinar activos que no se muevan siempre en la misma dirección (baja correlación), como renta variable de distintas regiones y bonos. [web:49][web:69]
-</p>
-
-<h3>6.5 Ejercicio del módulo</h3>
-<ul>
-  <li>Define el % máximo de tu capital que estás dispuesto a arriesgar por operación.</li>
-  <li>En una hoja de cálculo, crea columnas para: capital total, % riesgo, riesgo por operación, distancia al stop en % y tamaño de posición.</li>
-  <li>Introduce varios ejemplos y observa cómo cambia el tamaño de la posición según el stop y tu riesgo máximo.</li>
-</ul>
-`
-      },
-      {
-        id: 7,
-        title: "Construcción de cartera y estrategia",
-        duration: "3 h",
-        type: "Cartera",
-        description:
-          "Diseña tu asset allocation, elige tu enfoque (indexado, dividendos, value, etc.) y define tus reglas de rebalanceo.",
-        bullets: [
-          "Definir asset allocation según objetivos.",
-          "Estrategias: indexación, core-satellite, dividendos, value.",
-          "Rebalanceo periódico.",
-          "Ejemplos de carteras."
-        ],
-        exercise:
-          "Diseña tu cartera objetivo a 5–10 años, con porcentajes por activo, y define cada cuánto rebalancearás.",
-        content: `
-<h3>7.1 Asset allocation (distribución de activos)</h3>
-<p>
-El <strong>asset allocation</strong> es la decisión de qué porcentaje de tu cartera dedicar a renta variable, bonos, liquidez y otros activos. [web:49][web:69]
-</p>
-<p>
-Esta decisión suele tener más impacto en tu riesgo y rentabilidad a largo plazo que la elección específica de cada acción. [web:49][web:69]
-</p>
-
-<h3>7.2 Estrategias posibles</h3>
-<ul>
-  <li><strong>Indexación pura:</strong> usar principalmente ETFs globales de bajo coste y mantener a largo plazo. [web:69]</li>
-  <li><strong>Core-satellite:</strong> núcleo indexado y pequeñas posiciones activas en ideas concretas.</li>
-  <li><strong>Dividendos:</strong> enfoque en acciones/ETFs que repartan dividendos estables.</li>
-  <li><strong>Value:</strong> busca empresas infravaloradas frente a su valor estimado. [web:69]</li>
-</ul>
-
-<h3>7.3 Rebalanceo</h3>
-<p>
-El <strong>rebalanceo</strong> consiste en volver a llevar tu cartera a los porcentajes objetivo cada cierto tiempo (por ejemplo, cada 6 o 12 meses). [web:49][web:69]
-</p>
-<p>
-Esto implica vender parte de lo que más ha subido y comprar lo que ha quedado por debajo del peso objetivo, manteniendo tu nivel de riesgo. [web:49][web:69]
-</p>
-
-<h3>7.4 Ejercicio del módulo</h3>
-<ul>
-  <li>Define tu perfil: conservador, equilibrado o agresivo.</li>
-  <li>Elige una distribución (ejemplo conservador: 40 % renta variable global, 50 % bonos, 10 % liquidez).</li>
-  <li>Decide cada cuánto rebalancearás y en qué condiciones (por ejemplo, solo si algún activo se desvía más de 5 puntos porcentuales).</li>
-</ul>
-`
-      },
-      {
-        id: 8,
-        title: "Operativa práctica y diario de inversión",
-        duration: "2 h",
-        type: "Práctico",
-        description:
-          "Convierte tu estrategia en un conjunto de reglas operativas claras y usa un diario de inversión para mejorar con cada operación.",
-        bullets: [
-          "Definir reglas de compra y venta.",
-          "Qué registrar en un diario de operaciones.",
-          "Cómo revisar tu histórico.",
-          "Ajustar tu sistema con la experiencia."
-        ],
-        exercise:
-          "Crea una plantilla de diario y registra al menos 5 operaciones (reales o simuladas) con tus comentarios y aprendizajes.",
-        content: `
-<h3>8.1 De la teoría a las reglas concretas</h3>
-<p>
-Tu estrategia debe traducirse en reglas claras: cuándo compras, cuándo vendes, cuánto arriesgas y qué haces si el mercado se mueve en tu contra. [web:49][web:69]
-</p>
-
-<h3>8.2 Diario de operaciones</h3>
-<p>
-Un <strong>diario de inversión</strong> es donde anotas cada operación con la fecha, el activo, el tamaño, la tesis, el resultado y tus emociones. [web:47][web:50]
-</p>
-<p>
-Esto te permite ver patrones de errores (por ejemplo, salir siempre demasiado pronto por miedo) y corregirlos. [web:47][web:50]
-</p>
-
-<h3>8.3 Revisión periódica</h3>
-<ul>
-  <li>Cada cierto número de operaciones (por ejemplo, 20), revisa tu diario.</li>
-  <li>Identifica errores repetidos y aciertos que quieras reforzar.</li>
-  <li>Ajusta ligeramente tus reglas si ves que algo no funciona como esperabas.</li>
-</ul>
-
-<h3>8.4 Ejercicio del módulo</h3>
-<ul>
-  <li>Crea una plantilla (en papel o digital) con columnas: fecha, activo, tamaño, motivo de entrada, stop, objetivo, resultado, notas.</li>
-  <li>Registra 5 operaciones (sirven también simuladas).</li>
-  <li>Escribe una pequeña revisión: ¿qué harías diferente en las próximas 5?</li>
-</ul>
-`
-      },
-      {
-        id: 9,
-        title: "Uso de IA y herramientas digitales",
-        duration: "2 h",
-        type: "Herramientas",
-        description:
-          "Integra asistentes de IA y otras herramientas para ahorrar tiempo en análisis, siempre manteniendo el control de tus decisiones.",
-        bullets: [
-          "Usar IA para resumir informes y noticias.",
-          "Fichas rápidas de empresas y ETFs.",
-          "Buenas prácticas y límites.",
-          "Checklists y prompts plantilla."
-        ],
-        exercise:
-          "Diseña 3 prompts plantilla: uno para analizar una acción, otro para un ETF y otro para revisar tu cartera periódicamente.",
-        content: `
-<h3>9.1 IA como asistente, no como sustituto</h3>
-<p>
-Las herramientas de IA pueden ayudarte a resumir información, generar checklists y ordenar ideas, pero la responsabilidad de las decisiones siempre es tuya. [web:46]
-</p>
-
-<h3>9.2 Tareas donde la IA aporta valor</h3>
-<ul>
-  <li>Resumir noticias y resultados trimestrales de empresas. [web:46]</li>
-  <li>Generar listas de pros y contras de una inversión, según los datos que tú le pases.</li>
-  <li>Ayudarte a construir plantillas de análisis y diarios de operaciones.</li>
-</ul>
-
-<h3>9.3 Buenas prácticas</h3>
-<ul>
-  <li>Verifica la información importante con fuentes oficiales (informes de la empresa, webs regulatorias, etc.). [web:46]</li>
-  <li>No pidas “qué comprar ahora”; usa la IA para entender mejor lo que ya estás analizando.</li>
-  <li>Evita compartir datos personales sensibles o información de acceso a cuentas.</li>
-</ul>
-
-<h3>9.4 Ejercicio del módulo</h3>
-<ul>
-  <li>Crea un prompt plantilla para analizar una acción: pide al asistente que ordene los datos que tú le des (ratios, riesgos, tesis…).</li>
-  <li>Crea otro para ETFs (objetivo, TER, región, tipo de activos, etc.).</li>
-  <li>Crea un tercero para revisar tu cartera: que te ayude a repasar distribución, riesgos y coherencia con tu horizonte temporal.</li>
-</ul>
-`
-      },
-      {
-        id: 10,
-        title: "Errores típicos y plan a largo plazo",
-        duration: "2–3 h",
-        type: "Mentalidad",
-        description:
-          "Identifica los errores más frecuentes, prepara tu plan para las caídas fuertes y cierra el curso con tu sistema completo.",
-        bullets: [
-          "Errores habituales de los inversores.",
-          "Cómo gestionar grandes caídas de mercado.",
-          "Rutinas de revisión periódica.",
-          "Diseñar tu manual de inversión personal."
-        ],
-        exercise:
-          "Escribe tu manual de inversión personal (2–3 páginas) con tus reglas, procesos, límites de riesgo y plan ante caídas del mercado.",
-        content: `
-<h3>10.1 Errores frecuentes</h3>
-<ul>
-  <li>Invertir sin entender el producto (comprar “porque sube”). [web:49]</li>
-  <li>Operar demasiado (sobreoperar) y pagar muchas comisiones. [web:49]</li>
-  <li>No respetar los límites de riesgo definidos.</li>
-  <li>Abandonar la estrategia en la primera racha de caídas. [web:46][web:49]</li>
-</ul>
-
-<h3>10.2 Plan para caídas de mercado</h3>
-<p>
-Los mercados sufren correcciones y crisis de forma periódica; es normal que haya años malos. [web:49][web:69]
-</p>
-<p>
-Tener un plan por adelantado (por ejemplo, no vender toda la cartera en pánico, rebalancear, o seguir aportando pequeñas cantidades) te ayuda a evitar decisiones impulsivas. [web:46][web:49]
-</p>
-
-<h3>10.3 Rutinas de revisión</h3>
-<ul>
-  <li><strong>Semanal:</strong> repasar posiciones abiertas y noticias clave.</li>
-  <li><strong>Mensual:</strong> revisar aportaciones, rebalanceos menores, ajustar stops.</li>
-  <li><strong>Anual:</strong> evaluar si tu estrategia y tu asset allocation siguen encajando con tus objetivos vitales. [web:49][web:69]</li>
-</ul>
-
-<h3>10.4 Ejercicio final</h3>
-<ul>
-  <li>Escribe tu manual de inversión personal (2–3 páginas).</li>
-  <li>Incluye: objetivos, horizonte temporal, asset allocation objetivo, reglas de entrada y salida, gestión de riesgo y plan para crisis.</li>
-  <li>Vuelve a leerlo al menos una vez al año y actualízalo según tu experiencia.</li>
-</ul>
-`
-      }
-    ];
-
-    const STORAGE_KEY = "curso-bolsa-completados";
-    let completed = new Set(
-      JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
-    );
-    let currentModuleId = 1;
-
-    const modulesListEl = document.getElementById("modulesList");
-    const detailEl = document.getElementById("moduleDetail");
-    const progressBar = document.getElementById("globalProgress");
-    const progressText = document.getElementById("progressText");
-    const statModules = document.getElementById("statModules");
-    const statFocus = document.getElementById("statFocus");
-    const chkEjercicio = document.getElementById("chkEjercicio");
-    const chkNotas = document.getElementById("chkNotas");
-
-    function updateStorage() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
-    }
-
-    function renderModules() {
-      modulesListEl.innerHTML = "";
-      modules.forEach((m) => {
-        const isCompleted = completed.has(m.id);
-        const div = document.createElement("article");
-        div.className = "module" + (isCompleted ? " completed" : "");
-        div.dataset.id = m.id;
-
-        div.innerHTML = `
-          <div class="module-header">
-            <h2 class="module-title">
-              <span>Mód. ${m.id}</span>${m.title}
-            </h2>
-            <div class="module-badges">
-              <span class="badge main">${m.type}</span>
-              <span class="badge">${m.duration}</span>
-              <span class="badge exercise">Con ejercicio</span>
-            </div>
-          </div>
-          <p class="module-description">${m.description}</p>
-          <div class="module-meta">
-            <div class="meta-left">
-              <div class="dot"></div>
-              <span>${isCompleted ? "Marcado como completado" : "Pendiente de completar"}</span>
-            </div>
-            <div class="meta-right">
-              <span>${m.bullets.length} puntos clave</span>
-            </div>
-          </div>
-        `;
-
-        div.addEventListener("click", () => {
-          currentModuleId = m.id;
-          renderDetail(m.id);
-          statFocus.textContent = `Mód. ${m.id}`;
+        // Theme toggle
+        let isDark = true;
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            isDark = !isDark;
+            if (isDark) {
+                document.body.style.background = 'linear-gradient(135deg, #0d1b2a 0%, #1b3a52 100%)';
+                this.textContent = '🌙';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%)';
+                this.textContent = '☀️';
+            }
         });
 
-        modulesListEl.appendChild(div);
-      });
-    }
+        // Initialize
+        loadModule(0);
 
-    function renderDetail(id) {
-      const m = modules.find((x) => x.id === id);
-      if (!m) return;
-      const isCompleted = completed.has(m.id);
-
-      const bulletsHtml = m.bullets
-        .map((b) => `<li>${b}</li>`)
-        .join("");
-
-      detailEl.innerHTML = `
-        <header class="detail-header">
-          <div class="detail-title">
-            <span>Módulo ${m.id}</span>
-            ${m.title}
-          </div>
-          <div class="detail-tag">${m.type}</div>
-        </header>
-        <section class="detail-body">
-          <div>
-            <div class="detail-section-title">Puntos clave</div>
-            <ul class="detail-list">
-              ${bulletsHtml}
-            </ul>
-          </div>
-          ${
-            m.content
-              ? `<div>
-                   <div class="detail-section-title">Explicación del módulo</div>
-                   <div class="detail-content">${m.content}</div>
-                 </div>`
-              : ""
-          }
-          <div class="exercise-box">
-            <div class="exercise-title">Ejercicio práctico</div>
-            <p>${m.exercise}</p>
-          </div>
-          <div class="button-row">
-            <button class="btn btn-primary" id="btnToggleComplete">
-              <span class="btn-icon">${isCompleted ? "↺" : "✓"}</span>
-              ${isCompleted ? "Marcar como pendiente" : "Marcar módulo como completado"}
-            </button>
-            <button class="btn btn-ghost" id="btnNotas">
-              <span class="btn-icon">✎</span>
-              Abrir espacio para notas (añádelo tú en tu editor)
-            </button>
-          </div>
-        </section>
-      `;
-
-      document.getElementById("btnToggleComplete").onclick = () => {
-        if (completed.has(m.id)) {
-          completed.delete(m.id);
-        } else {
-          completed.add(m.id);
-        }
-        updateStorage();
-        renderModules();
-        renderDetail(m.id);
-        updateProgress();
-      };
-
-      document.getElementById("btnNotas").onclick = () => {
-        alert(
-          "Idea: abre tu app de notas (Notion, Word, Google Docs…) y escribe tu resumen del módulo con tus propias palabras."
-        );
-      };
-
-      chkEjercicio.textContent = "";
-      chkEjercicio.classList.remove("done");
-      chkNotas.textContent = "";
-      chkNotas.classList.remove("done");
-    }
-
-    function updateProgress() {
-      const total = modules.length;
-      const done = completed.size;
-      const percent = Math.round((done / total) * 100);
-      progressBar.style.width = percent + "%";
-      progressText.textContent = `${percent} % completado`;
-      statModules.textContent = `${done}/${total}`;
-
-      if (percent >= 10) {
-        chkEjercicio.textContent = "✓";
-        chkEjercicio.classList.add("done");
-      }
-      if (percent >= 20) {
-        chkNotas.textContent = "✓";
-        chkNotas.classList.add("done");
-      }
-    }
-
-    renderModules();
-    renderDetail(currentModuleId);
-    updateProgress();
-  </script>
+        // Animate ticker
+        setInterval(() => {
+            const items = document.querySelectorAll('.ticker-item');
+            items.forEach(item => {
+                const change = (Math.random() * 2 - 1).toFixed(1);
+                const value = item.querySelector('strong');
+                value.textContent = (change >= 0 ? '+' : '') + change + '%';
+                item.className = 'ticker-item ' + (change >= 0 ? 'up' : 'down');
+            });
+        }, 5000);
+    </script>
 </body>
 </html>
