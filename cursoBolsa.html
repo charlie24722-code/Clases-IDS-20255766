@@ -112,10 +112,11 @@
     }
 
     .title-main span {
-  background-clip: text;        /* versión estándar */
-  -webkit-background-clip: text;/* prefijo para Safari/Chrome */
-  color: transparent;
-}
+      background: linear-gradient(120deg, #38bdf8, #a855f7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
 
     .subtitle {
       font-size: 13px;
@@ -408,6 +409,33 @@
       top: 7px;
     }
 
+    .detail-content h3 {
+      margin-top: 8px;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .detail-content p {
+      margin-bottom: 6px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .detail-content ul li {
+      margin-bottom: 4px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .detail-content ul li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: #38bdf8;
+    }
+
     .exercise-box {
       background: var(--accent-soft);
       border-radius: var(--radius-md);
@@ -651,7 +679,7 @@
             </div>
           </div>
           <div class="bubble">
-            <strong>Consejo:</strong> estudia solo 1 módulo por sesión, haz el ejercicio práctico y escribe tus notas antes de avanzar.
+            <strong>Consejo:</strong> estudia solo 1 módulo por sesión, haz el ejercicio práctico y escribe tus notas antes de avanzar. [web:46][web:49]
           </div>
           <div class="checklist">
             <div class="check-item">
@@ -677,7 +705,6 @@
   </div>
 
   <script>
-    // Definición de los módulos del curso
     const modules = [
       {
         id: 1,
@@ -693,7 +720,68 @@
           "Psicología del inversor: miedo, codicia y sesgos comunes."
         ],
         exercise:
-          "Escribe tu manifiesto de inversor: objetivos, horizonte temporal, tolerancia a pérdidas y reglas básicas que quieres seguir."
+          "Escribe tu manifiesto de inversor: objetivos, horizonte temporal, tolerancia a pérdidas y reglas básicas que quieres seguir.",
+        content: `
+<h3>1.1 ¿Qué es la bolsa y para qué sirve?</h3>
+<p>
+La bolsa es un mercado organizado donde se compran y venden partes de empresas (acciones) y otros activos financieros. 
+Su función principal es conectar a empresas que necesitan financiación con inversores que buscan rentabilizar su dinero. [web:49]
+</p>
+<p>
+Cuando compras una acción, te conviertes en propietario de una pequeña parte de esa empresa. 
+Si la empresa gana dinero y crece, el valor de tus acciones puede subir y, a veces, recibes dividendos. [web:45][web:49]
+</p>
+
+<h3>1.2 Mercado primario y mercado secundario</h3>
+<p>
+En el <strong>mercado primario</strong>, las empresas venden acciones por primera vez para conseguir dinero (por ejemplo, en una salida a bolsa). 
+En el <strong>mercado secundario</strong>, los inversores se compran y venden esas acciones entre ellos, que es lo que ves cada día en la bolsa. [web:42][web:45]
+</p>
+
+<h3>1.3 Tipos de activos básicos</h3>
+<ul>
+  <li><strong>Acciones:</strong> partes de propiedad de una empresa, con más riesgo y mayor potencial de rentabilidad. [web:44][web:49]</li>
+  <li><strong>ETFs:</strong> fondos cotizados que agrupan muchas acciones o bonos y se negocian como una acción, facilitando la diversificación. [web:44][web:69]</li>
+  <li><strong>Bonos:</strong> préstamos a gobiernos o empresas, normalmente menos volátiles que las acciones. [web:43][web:45]</li>
+  <li><strong>Fondos de inversión:</strong> vehículos gestionados que invierten en carteras de activos para muchos partícipes. [web:43][web:49]</li>
+  <li><strong>REITs / SOCIMIs:</strong> vehículos que invierten en inmuebles y reparten gran parte de los beneficios. [web:45]</li>
+</ul>
+
+<h3>1.4 Por qué invertir: inflación e interés compuesto</h3>
+<p>
+La <strong>inflación</strong> hace que tu dinero pierda poder adquisitivo con el tiempo si no lo inviertes en algo que crezca. [web:42][web:49]
+</p>
+<p>
+Al invertir en activos productivos, buscas que tu dinero crezca más que la inflación. 
+El <strong>interés compuesto</strong> hace que las ganancias generen nuevas ganancias con el tiempo, lo que puede producir un crecimiento muy fuerte a largo plazo. [web:42][web:46][web:69]
+</p>
+
+<h3>1.5 Horizonte temporal y expectativas realistas</h3>
+<p>
+La bolsa tiene sentido sobre todo a medio y largo plazo (años), porque a corto plazo las oscilaciones son normales y pueden ser fuertes. [web:44][web:49]
+</p>
+<p>
+Pensar que vas a doblar tu dinero en semanas te hace vulnerable a fraudes y malas decisiones; una expectativa realista es crecer de forma moderada pero constante a lo largo de los años. [web:42][web:45]
+</p>
+
+<h3>1.6 Psicología del inversor</h3>
+<p>
+Muchos errores vienen de las emociones: vender por pánico en caídas, comprar por “FOMO” o arriesgar demasiado para recuperar rápido. [web:47][web:50]
+</p>
+<p>
+Tu objetivo es tener reglas claras y respetarlas incluso cuando tus emociones empujen en la dirección contraria. [web:47][web:50]
+</p>
+
+<h3>1.7 Ejercicio del módulo</h3>
+<p>Redacta tu <strong>manifiesto de inversor</strong>:</p>
+<ul>
+  <li>Metas (jubilación, independencia financiera, comprar casa, etc.).</li>
+  <li>Horizonte temporal principal (en años).</li>
+  <li>Cuánto puedes invertir sin necesitarlo en al menos 5 años.</li>
+  <li>Caída máxima que podrías soportar sin perder el sueño (en %).</li>
+  <li>Errores que quieres evitar (seguir modas, endeudarte, operar por aburrimiento…).</li>
+</ul>
+`
       },
       {
         id: 2,
@@ -704,12 +792,61 @@
           "Conoce las cuentas y plataformas que usarás para invertir: brokers, comisiones, tipos de órdenes y aspectos básicos de fiscalidad.",
         bullets: [
           "Tipos de cuentas y brokers, comisiones, spreads y divisas.",
-          "Ordenes de mercado, limitadas, stop y stop-limit.",
-          "Nociones básicas de fiscalidad de las inversiones.",
-          "Uso básico de una plataforma de trading/inversión."
+          "Órdenes de mercado, limitadas, stop y stop-limit.",
+          "Nociones básicas de fiscalidad.",
+          "Uso básico de una plataforma de inversión."
         ],
         exercise:
-          "Abre una cuenta demo (o de papel) y simula varias órdenes: compra y venta de una acción o ETF con diferentes tipos de orden."
+          "Abre una cuenta demo (o de papel) y simula varias órdenes: compra y venta de una acción o ETF con diferentes tipos de orden.",
+        content: `
+<h3>2.1 Qué es un bróker y qué tipos hay</h3>
+<p>
+Un <strong>bróker</strong> es el intermediario que ejecuta tus órdenes de compra y venta en la bolsa. 
+Sin un bróker no puedes acceder directamente al mercado. [web:42][web:49]
+</p>
+<ul>
+  <li><strong>Brokers tradicionales:</strong> suelen pertenecer a bancos, con comisiones algo más altas pero más soporte. [web:45]</li>
+  <li><strong>Brokers online:</strong> especializados, normalmente con menores comisiones y más herramientas para invertir. [web:44][web:46]</li>
+</ul>
+
+<h3>2.2 Comisiones y costes típicos</h3>
+<p>
+Cada operación puede tener una comisión fija por compra/venta, además de posibles costes de cambio de divisa si inviertes en mercados extranjeros. [web:44][web:69]
+</p>
+<p>
+A largo plazo, las comisiones altas reducen de forma importante tu rentabilidad, así que es clave comparar tarifas antes de elegir bróker. [web:44][web:69]
+</p>
+
+<h3>2.3 Tipos de órdenes</h3>
+<ul>
+  <li><strong>Orden de mercado:</strong> se ejecuta al mejor precio disponible en ese momento, prioriza la ejecución sobre el precio exacto. [web:49]</li>
+  <li><strong>Orden limitada:</strong> tú indicas el precio máximo al que compras o mínimo al que vendes; puede tardar más o no ejecutarse. [web:49]</li>
+  <li><strong>Stop y stop-limit:</strong> órdenes que se activan al llegar a cierto precio, útiles para limitar pérdidas o proteger beneficios. [web:49]</li>
+</ul>
+
+<h3>2.4 Divisas y mercados</h3>
+<p>
+Si compras acciones de Estados Unidos desde tu país, probablemente estarás usando dólares, por lo que el tipo de cambio puede afectar a tu rentabilidad. [web:46][web:49]
+</p>
+<p>
+Conviene saber en qué moneda inviertes y qué comisiones de cambio aplica tu bróker cuando compras o vendes activos en otras divisas. [web:44][web:46]
+</p>
+
+<h3>2.5 Fiscalidad básica (visión general)</h3>
+<p>
+En la mayoría de países, las ganancias que obtienes al vender acciones o ETFs con beneficio tributan como plusvalías, y los dividendos tributan como rendimientos de capital. [web:43][web:49]
+</p>
+<p>
+Es importante llevar un registro de tus operaciones y consultar las normas fiscales específicas de tu país o un asesor, sobre todo si tu cartera empieza a ser grande. [web:43][web:69]
+</p>
+
+<h3>2.6 Ejercicio del módulo</h3>
+<ul>
+  <li>Elige uno o dos brokers y compara: comisiones, mercados disponibles, divisas, facilidad de uso.</li>
+  <li>Abre una cuenta demo y practica: una orden de mercado y una orden limitada sobre la misma acción o ETF.</li>
+  <li>Anota qué diferencias ves en el precio de ejecución y cómo se muestra la operación en el historial.</li>
+</ul>
+`
       },
       {
         id: 3,
@@ -719,13 +856,59 @@
         description:
           "Aprende a leer estados financieros sencillos, entender ratios clave y formarte una idea del valor razonable de una empresa.",
         bullets: [
-          "Lectura básica de cuenta de resultados, balance y flujo de caja.",
-          "Ratios clave: PER, P/B, márgenes, ROE, deuda neta/EBITDA, flujo de caja libre.",
-          "Conceptos de calidad de negocio y ventajas competitivas.",
-          "Valoración simple por múltiplos y sentido común."
+          "Lectura básica de estados financieros.",
+          "Ratios clave: PER, márgenes, ROE, deuda, flujo de caja.",
+          "Calidad de negocio y ventajas competitivas.",
+          "Valoración simple por múltiplos."
         ],
         exercise:
-          "Elige una empresa cotizada, descarga sus estados financieros y rellena una ficha de análisis sencilla con los ratios básicos."
+          "Elige una empresa cotizada, descarga sus estados financieros y rellena una ficha de análisis sencilla con los ratios básicos.",
+        content: `
+<h3>3.1 Concepto de análisis fundamental</h3>
+<p>
+El <strong>análisis fundamental</strong> estudia el negocio detrás de la acción: cómo gana dinero, cuánta deuda tiene, si es rentable y si su precio en bolsa es razonable. [web:49][web:69]
+</p>
+
+<h3>3.2 Estados financieros básicos</h3>
+<ul>
+  <li><strong>Cuenta de resultados:</strong> muestra ingresos, costes y beneficios en un periodo (por ejemplo, un año). [web:49]</li>
+  <li><strong>Balance:</strong> refleja lo que la empresa posee (activos) y lo que debe (pasivos), además del patrimonio neto. [web:69]</li>
+  <li><strong>Flujo de caja:</strong> indica cuánto efectivo entra y sale, y si la empresa genera caja real más allá del beneficio contable. [web:69]</li>
+</ul>
+
+<h3>3.3 Ratios fundamentales clave</h3>
+<ul>
+  <li><strong>PER:</strong> precio/beneficio por acción; indica cuántos años de beneficio pagas al comprar la acción hoy. [web:69]</li>
+  <li><strong>Margen neto:</strong> beneficio neto / ventas; mide cuánto se queda la empresa de cada unidad vendida. [web:49]</li>
+  <li><strong>ROE:</strong> beneficio neto / patrimonio; mide la rentabilidad del capital de los accionistas. [web:69]</li>
+  <li><strong>Deuda neta/EBITDA:</strong> cuántos años de flujo operativo necesitaría para pagar la deuda; cuanto más bajo, mejor. [web:69]</li>
+  <li><strong>Flujo de caja libre:</strong> efectivo que queda después de las inversiones necesarias, disponible para pagar deuda o dividendos. [web:69]</li>
+</ul>
+
+<h3>3.4 Calidad del negocio y ventaja competitiva</h3>
+<p>
+Más allá de los números, interesa entender si la empresa tiene una posición defensible: marca fuerte, costes bajos, patentes, efectos de red, etc. [web:69]
+</p>
+<p>
+Negocios de calidad suelen tener márgenes estables, poca deuda y capacidad de seguir creciendo sin inversiones enormes. [web:69]
+</p>
+
+<h3>3.5 Valoración sencilla por múltiplos</h3>
+<p>
+Una forma simple de valorar una empresa es comparar su PER o sus múltiplos de flujo de caja con los de empresas similares o con su propia media histórica. [web:69]
+</p>
+<p>
+No se trata de buscar el número perfecto, sino de ver si el precio actual es razonable para la calidad y el crecimiento del negocio. [web:49][web:69]
+</p>
+
+<h3>3.6 Ejercicio del módulo</h3>
+<ul>
+  <li>Elige una empresa conocida que cotice en bolsa.</li>
+  <li>Busca su cuenta de resultados, balance y flujo de caja en la web del bróker o en la web de la propia empresa.</li>
+  <li>Calcula: PER aproximado, margen neto, ROE y deuda neta/EBITDA.</li>
+  <li>Escribe en una hoja tus conclusiones: ¿parece un negocio estable?, ¿tiene mucha deuda?, ¿sus beneficios crecen o se estancan?</li>
+</ul>
+`
       },
       {
         id: 4,
@@ -736,12 +919,49 @@
           "Descubre cómo usar ETFs e indexados para construir carteras sencillas, diversificadas y de bajo coste para el largo plazo.",
         bullets: [
           "Qué es un ETF y cómo replica un índice.",
-          "Diferencias entre ETFs y fondos de inversión tradicionales.",
+          "Diferencias con fondos tradicionales.",
           "Tipos de ETFs: globales, sectoriales, de bonos, temáticos, factores.",
-          "Costes (TER), liquidez, tracking error y criterios de selección."
+          "Coste (TER), liquidez y tracking error."
         ],
         exercise:
-          "Diseña una cartera de 2–4 ETFs para tres perfiles distintos: conservador, equilibrado y agresivo."
+          "Diseña una cartera de 2–4 ETFs para tres perfiles distintos: conservador, equilibrado y agresivo.",
+        content: `
+<h3>4.1 Qué es un ETF</h3>
+<p>
+Un <strong>ETF</strong> (Exchange-Traded Fund) es un fondo que cotiza en bolsa como si fuera una acción, pero que por dentro tiene una cesta de activos (acciones, bonos, etc.). [web:44][web:69]
+</p>
+
+<h3>4.2 Ventajas de los ETFs e indexados</h3>
+<ul>
+  <li><strong>Diversificación:</strong> con un solo ETF puedes tener exposición a cientos de empresas.</li>
+  <li><strong>Bajos costes:</strong> los ETFs indexados suelen tener comisiones anuales (TER) muy reducidas. [web:44][web:69]</li>
+  <li><strong>Transparencia:</strong> normalmente sabes qué índice replica y qué contiene. [web:69]</li>
+</ul>
+
+<h3>4.3 Tipos de ETFs</h3>
+<ul>
+  <li><strong>Globales:</strong> siguen índices amplios (por ejemplo, renta variable mundial).</li>
+  <li><strong>Regionales:</strong> Europa, Estados Unidos, emergentes, etc.</li>
+  <li><strong>Sectoriales o temáticos:</strong> tecnología, salud, energías renovables, etc. [web:64]</li>
+  <li><strong>De bonos:</strong> deuda pública, corporativa, de corto o largo plazo. [web:64]</li>
+</ul>
+
+<h3>4.4 Costes y tracking error</h3>
+<p>
+El <strong>TER</strong> (Total Expense Ratio) es la comisión anual del ETF; cuanto más baja, mejor para ti a largo plazo. [web:44][web:69]
+</p>
+<p>
+El <strong>tracking error</strong> mide qué tan bien replica el ETF al índice que pretende seguir; en general, se prefiere que sea pequeño. [web:69]
+</p>
+
+<h3>4.5 Ejercicio del módulo</h3>
+<ul>
+  <li>Para un perfil conservador, diseña una cartera con más peso en bonos y menos en renta variable.</li>
+  <li>Para un perfil equilibrado, combina renta variable global y bonos intermedios.</li>
+  <li>Para un perfil agresivo, da más peso a renta variable global y emergentes.</li>
+  <li>Anota los TER de cada ETF y por qué los has elegido.</li>
+</ul>
+`
       },
       {
         id: 5,
@@ -751,13 +971,48 @@
         description:
           "Usa el análisis técnico de forma simple para mejorar tus puntos de entrada y salida, sin convertir la bolsa en un casino.",
         bullets: [
-          "Conceptos básicos: tendencia, soportes, resistencias y volumen.",
-          "Medias móviles, RSI y MACD: qué son y qué NO son.",
-          "Cómo combinar contexto fundamental y técnico.",
-          "Ejemplos de patrones sencillos de entrada/salida."
+          "Tendencias, soportes y resistencias.",
+          "Uso básico de indicadores (MAs, RSI, MACD).",
+          "Combinar contexto fundamental y técnico.",
+          "Patrones sencillos de entrada/salida."
         ],
         exercise:
-          "Define un patrón de entrada muy simple (por ejemplo, ruptura de resistencia con volumen) y busca 5 ejemplos en gráficos históricos."
+          "Define un patrón de entrada simple y busca varios ejemplos en gráficos históricos.",
+        content: `
+<h3>5.1 Qué es el análisis técnico</h3>
+<p>
+El <strong>análisis técnico</strong> estudia la evolución del precio y el volumen en los gráficos para detectar tendencias y posibles zonas de entrada o salida. [web:64]
+</p>
+
+<h3>5.2 Conceptos básicos</h3>
+<ul>
+  <li><strong>Tendencia:</strong> dirección principal del precio (alcista, bajista o lateral).</li>
+  <li><strong>Soportes:</strong> zonas donde el precio ha frenado caídas en el pasado.</li>
+  <li><strong>Resistencias:</strong> zonas donde el precio ha frenado subidas en el pasado.</li>
+</ul>
+
+<h3>5.3 Indicadores sencillos</h3>
+<ul>
+  <li><strong>Medias móviles:</strong> suavizan el precio para ver la tendencia media de los últimos X días. [web:64]</li>
+  <li><strong>RSI:</strong> indicador de fuerza relativa, ayuda a ver sobrecompra o sobreventa.</li>
+  <li><strong>MACD:</strong> compara medias de diferentes plazos para detectar cambios de tendencia.</li>
+</ul>
+
+<h3>5.4 Uso práctico y límites</h3>
+<p>
+El objetivo no es predecir el futuro, sino tener un marco visual para tomar decisiones con algo más de orden. [web:64]
+</p>
+<p>
+Es importante no saturar el gráfico con demasiados indicadores ni buscar señales milagrosas; mantén el análisis simple. [web:64]
+</p>
+
+<h3>5.5 Ejercicio del módulo</h3>
+<ul>
+  <li>Define un patrón de entrada básico (ejemplo: precio por encima de media de 50 días y ruptura de resistencia reciente).</li>
+  <li>Elige 5–10 gráficos históricos y marca manualmente dónde habrías entrado y salido siguiendo ese criterio.</li>
+  <li>Anota qué te habría funcionado bien y qué no.</li>
+</ul>
+`
       },
       {
         id: 6,
@@ -768,12 +1023,48 @@
           "Aprende a decidir cuánto invertir en cada operación y cómo proteger tu capital frente a malas rachas y caídas del mercado.",
         bullets: [
           "Riesgo por operación y relación riesgo/beneficio.",
-          "Diversificación y correlación entre activos.",
-          "Stop loss y take profit: mental, técnico y según volatilidad.",
-          "Cómo calcular tamaño de posición según tu capital y tu riesgo máximo."
+          "Diversificación y correlación.",
+          "Stops y gestión de salidas.",
+          "Cálculo de tamaño de posición."
         ],
         exercise:
-          "Crea una hoja de cálculo que calcule tamaño de posición y riesgo total de la cartera según un porcentaje de riesgo máximo por operación."
+          "Crea una hoja de cálculo que calcule tamaño de posición y riesgo total según un % de riesgo máximo por operación.",
+        content: `
+<h3>6.1 Por qué la gestión de riesgo es clave</h3>
+<p>
+Puedes tener una buena estrategia de selección de activos, pero si arriesgas demasiado en cada operación, unas pocas pérdidas seguidas pueden dejar tu cuenta muy dañada. [web:49][web:69]
+</p>
+
+<h3>6.2 Riesgo por operación</h3>
+<p>
+Una regla habitual es arriesgar solo un pequeño porcentaje de tu capital por operación (por ejemplo, entre 0,5 % y 2 %). [web:69]
+</p>
+<p>
+Si tienes 1.000 unidades de capital y decides arriesgar un 1 % por operación, el riesgo máximo por trade son 10 unidades. [web:69]
+</p>
+
+<h3>6.3 Stops y relación riesgo/beneficio</h3>
+<ul>
+  <li><strong>Stop loss:</strong> precio al que cerrarás la posición si el mercado va en tu contra.</li>
+  <li><strong>Take profit:</strong> objetivo aproximado de beneficio donde considerarás vender parte o todo.</li>
+  <li>Se recomienda buscar operaciones con posible beneficio mayor que la pérdida potencial (por ejemplo, 1:2). [web:69]</li>
+</ul>
+
+<h3>6.4 Diversificación y correlación</h3>
+<p>
+No es buena idea concentrar todo tu capital en una sola acción o sector; diversificar reduce el riesgo específico de cada activo. [web:49][web:69]
+</p>
+<p>
+También conviene combinar activos que no se muevan siempre en la misma dirección (baja correlación), como renta variable de distintas regiones y bonos. [web:49][web:69]
+</p>
+
+<h3>6.5 Ejercicio del módulo</h3>
+<ul>
+  <li>Define el % máximo de tu capital que estás dispuesto a arriesgar por operación.</li>
+  <li>En una hoja de cálculo, crea columnas para: capital total, % riesgo, riesgo por operación, distancia al stop en % y tamaño de posición.</li>
+  <li>Introduce varios ejemplos y observa cómo cambia el tamaño de la posición según el stop y tu riesgo máximo.</li>
+</ul>
+`
       },
       {
         id: 7,
@@ -783,13 +1074,45 @@
         description:
           "Diseña tu asset allocation, elige tu enfoque (indexado, dividendos, value, etc.) y define tus reglas de rebalanceo.",
         bullets: [
-          "Definición de asset allocation según edad, objetivos y tolerancia al riesgo.",
-          "Estrategias: indexación, core-satellite, value, dividendos.",
-          "Rebalanceo periódico: cuándo y cómo hacerlo.",
-          "Ejemplos de carteras para diferentes horizontes temporales."
+          "Definir asset allocation según objetivos.",
+          "Estrategias: indexación, core-satellite, dividendos, value.",
+          "Rebalanceo periódico.",
+          "Ejemplos de carteras."
         ],
         exercise:
-          "Diseña tu cartera objetivo a 5–10 años, con porcentajes por activo, y define cada cuánto rebalancearás y con qué criterios."
+          "Diseña tu cartera objetivo a 5–10 años, con porcentajes por activo, y define cada cuánto rebalancearás.",
+        content: `
+<h3>7.1 Asset allocation (distribución de activos)</h3>
+<p>
+El <strong>asset allocation</strong> es la decisión de qué porcentaje de tu cartera dedicar a renta variable, bonos, liquidez y otros activos. [web:49][web:69]
+</p>
+<p>
+Esta decisión suele tener más impacto en tu riesgo y rentabilidad a largo plazo que la elección específica de cada acción. [web:49][web:69]
+</p>
+
+<h3>7.2 Estrategias posibles</h3>
+<ul>
+  <li><strong>Indexación pura:</strong> usar principalmente ETFs globales de bajo coste y mantener a largo plazo. [web:69]</li>
+  <li><strong>Core-satellite:</strong> núcleo indexado y pequeñas posiciones activas en ideas concretas.</li>
+  <li><strong>Dividendos:</strong> enfoque en acciones/ETFs que repartan dividendos estables.</li>
+  <li><strong>Value:</strong> busca empresas infravaloradas frente a su valor estimado. [web:69]</li>
+</ul>
+
+<h3>7.3 Rebalanceo</h3>
+<p>
+El <strong>rebalanceo</strong> consiste en volver a llevar tu cartera a los porcentajes objetivo cada cierto tiempo (por ejemplo, cada 6 o 12 meses). [web:49][web:69]
+</p>
+<p>
+Esto implica vender parte de lo que más ha subido y comprar lo que ha quedado por debajo del peso objetivo, manteniendo tu nivel de riesgo. [web:49][web:69]
+</p>
+
+<h3>7.4 Ejercicio del módulo</h3>
+<ul>
+  <li>Define tu perfil: conservador, equilibrado o agresivo.</li>
+  <li>Elige una distribución (ejemplo conservador: 40 % renta variable global, 50 % bonos, 10 % liquidez).</li>
+  <li>Decide cada cuánto rebalancearás y en qué condiciones (por ejemplo, solo si algún activo se desvía más de 5 puntos porcentuales).</li>
+</ul>
+`
       },
       {
         id: 8,
@@ -799,13 +1122,41 @@
         description:
           "Convierte tu estrategia en un conjunto de reglas operativas claras y usa un diario de inversión para mejorar con cada operación.",
         bullets: [
-          "Cómo traducir tu estrategia en reglas concretas de compra y venta.",
-          "Qué registrar en un diario de operaciones y por qué es tan útil.",
-          "Cómo revisar tu histórico para detectar errores recurrentes.",
-          "Ajuste progresivo de tus reglas según tu experiencia real."
+          "Definir reglas de compra y venta.",
+          "Qué registrar en un diario de operaciones.",
+          "Cómo revisar tu histórico.",
+          "Ajustar tu sistema con la experiencia."
         ],
         exercise:
-          "Crea una plantilla de diario y registra al menos 5 operaciones (reales o simuladas) con tus comentarios y aprendizajes."
+          "Crea una plantilla de diario y registra al menos 5 operaciones (reales o simuladas) con tus comentarios y aprendizajes.",
+        content: `
+<h3>8.1 De la teoría a las reglas concretas</h3>
+<p>
+Tu estrategia debe traducirse en reglas claras: cuándo compras, cuándo vendes, cuánto arriesgas y qué haces si el mercado se mueve en tu contra. [web:49][web:69]
+</p>
+
+<h3>8.2 Diario de operaciones</h3>
+<p>
+Un <strong>diario de inversión</strong> es donde anotas cada operación con la fecha, el activo, el tamaño, la tesis, el resultado y tus emociones. [web:47][web:50]
+</p>
+<p>
+Esto te permite ver patrones de errores (por ejemplo, salir siempre demasiado pronto por miedo) y corregirlos. [web:47][web:50]
+</p>
+
+<h3>8.3 Revisión periódica</h3>
+<ul>
+  <li>Cada cierto número de operaciones (por ejemplo, 20), revisa tu diario.</li>
+  <li>Identifica errores repetidos y aciertos que quieras reforzar.</li>
+  <li>Ajusta ligeramente tus reglas si ves que algo no funciona como esperabas.</li>
+</ul>
+
+<h3>8.4 Ejercicio del módulo</h3>
+<ul>
+  <li>Crea una plantilla (en papel o digital) con columnas: fecha, activo, tamaño, motivo de entrada, stop, objetivo, resultado, notas.</li>
+  <li>Registra 5 operaciones (sirven también simuladas).</li>
+  <li>Escribe una pequeña revisión: ¿qué harías diferente en las próximas 5?</li>
+</ul>
+`
       },
       {
         id: 9,
@@ -815,13 +1166,40 @@
         description:
           "Integra asistentes de IA y otras herramientas para ahorrar tiempo en análisis, siempre manteniendo el control de tus decisiones.",
         bullets: [
-          "Cómo usar IA para resumir informes y noticias.",
-          "Generación de fichas de empresa y comparaciones rápidas de ETFs.",
-          "Buenas prácticas: verificación de datos y límites de la IA.",
-          "Checklists y plantillas de prompts para tus análisis."
+          "Usar IA para resumir informes y noticias.",
+          "Fichas rápidas de empresas y ETFs.",
+          "Buenas prácticas y límites.",
+          "Checklists y prompts plantilla."
         ],
         exercise:
-          "Diseña 3 prompts plantilla: uno para analizar una acción, otro para un ETF y otro para revisar tu cartera periódicamente."
+          "Diseña 3 prompts plantilla: uno para analizar una acción, otro para un ETF y otro para revisar tu cartera periódicamente.",
+        content: `
+<h3>9.1 IA como asistente, no como sustituto</h3>
+<p>
+Las herramientas de IA pueden ayudarte a resumir información, generar checklists y ordenar ideas, pero la responsabilidad de las decisiones siempre es tuya. [web:46]
+</p>
+
+<h3>9.2 Tareas donde la IA aporta valor</h3>
+<ul>
+  <li>Resumir noticias y resultados trimestrales de empresas. [web:46]</li>
+  <li>Generar listas de pros y contras de una inversión, según los datos que tú le pases.</li>
+  <li>Ayudarte a construir plantillas de análisis y diarios de operaciones.</li>
+</ul>
+
+<h3>9.3 Buenas prácticas</h3>
+<ul>
+  <li>Verifica la información importante con fuentes oficiales (informes de la empresa, webs regulatorias, etc.). [web:46]</li>
+  <li>No pidas “qué comprar ahora”; usa la IA para entender mejor lo que ya estás analizando.</li>
+  <li>Evita compartir datos personales sensibles o información de acceso a cuentas.</li>
+</ul>
+
+<h3>9.4 Ejercicio del módulo</h3>
+<ul>
+  <li>Crea un prompt plantilla para analizar una acción: pide al asistente que ordene los datos que tú le des (ratios, riesgos, tesis…).</li>
+  <li>Crea otro para ETFs (objetivo, TER, región, tipo de activos, etc.).</li>
+  <li>Crea un tercero para revisar tu cartera: que te ayude a repasar distribución, riesgos y coherencia con tu horizonte temporal.</li>
+</ul>
+`
       },
       {
         id: 10,
@@ -831,17 +1209,47 @@
         description:
           "Identifica los errores más frecuentes, prepara tu plan para las caídas fuertes y cierra el curso con tu sistema completo.",
         bullets: [
-          "Errores habituales: sobreoperar, apalancarse, perseguir modas, ignorar el riesgo.",
-          "Cómo reaccionar ante caídas fuertes del mercado con un plan claro.",
-          "Diseñar rutinas de revisión semanal, mensual y anual.",
-          "Cómo seguir aprendiendo sin perder el foco ni la disciplina."
+          "Errores habituales de los inversores.",
+          "Cómo gestionar grandes caídas de mercado.",
+          "Rutinas de revisión periódica.",
+          "Diseñar tu manual de inversión personal."
         ],
         exercise:
-          "Escribe tu manual de inversión personal (2–3 páginas) con tus reglas, procesos, límites de riesgo y plan ante caídas del mercado."
+          "Escribe tu manual de inversión personal (2–3 páginas) con tus reglas, procesos, límites de riesgo y plan ante caídas del mercado.",
+        content: `
+<h3>10.1 Errores frecuentes</h3>
+<ul>
+  <li>Invertir sin entender el producto (comprar “porque sube”). [web:49]</li>
+  <li>Operar demasiado (sobreoperar) y pagar muchas comisiones. [web:49]</li>
+  <li>No respetar los límites de riesgo definidos.</li>
+  <li>Abandonar la estrategia en la primera racha de caídas. [web:46][web:49]</li>
+</ul>
+
+<h3>10.2 Plan para caídas de mercado</h3>
+<p>
+Los mercados sufren correcciones y crisis de forma periódica; es normal que haya años malos. [web:49][web:69]
+</p>
+<p>
+Tener un plan por adelantado (por ejemplo, no vender toda la cartera en pánico, rebalancear, o seguir aportando pequeñas cantidades) te ayuda a evitar decisiones impulsivas. [web:46][web:49]
+</p>
+
+<h3>10.3 Rutinas de revisión</h3>
+<ul>
+  <li><strong>Semanal:</strong> repasar posiciones abiertas y noticias clave.</li>
+  <li><strong>Mensual:</strong> revisar aportaciones, rebalanceos menores, ajustar stops.</li>
+  <li><strong>Anual:</strong> evaluar si tu estrategia y tu asset allocation siguen encajando con tus objetivos vitales. [web:49][web:69]</li>
+</ul>
+
+<h3>10.4 Ejercicio final</h3>
+<ul>
+  <li>Escribe tu manual de inversión personal (2–3 páginas).</li>
+  <li>Incluye: objetivos, horizonte temporal, asset allocation objetivo, reglas de entrada y salida, gestión de riesgo y plan para crisis.</li>
+  <li>Vuelve a leerlo al menos una vez al año y actualízalo según tu experiencia.</li>
+</ul>
+`
       }
     ];
 
-    // Estado de módulos completados en localStorage
     const STORAGE_KEY = "curso-bolsa-completados";
     let completed = new Set(
       JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
@@ -926,6 +1334,14 @@
               ${bulletsHtml}
             </ul>
           </div>
+          ${
+            m.content
+              ? `<div>
+                   <div class="detail-section-title">Explicación del módulo</div>
+                   <div class="detail-content">${m.content}</div>
+                 </div>`
+              : ""
+          }
           <div class="exercise-box">
             <div class="exercise-title">Ejercicio práctico</div>
             <p>${m.exercise}</p>
@@ -957,11 +1373,10 @@
 
       document.getElementById("btnNotas").onclick = () => {
         alert(
-          "Idea: crea un archivo de notas (por ejemplo en Notion, Word o Google Docs) y escribe tu resumen del módulo con tus propias palabras."
+          "Idea: abre tu app de notas (Notion, Word, Google Docs…) y escribe tu resumen del módulo con tus propias palabras."
         );
       };
 
-      // Reset de checks de panel lateral (los manejas tú visualmente)
       chkEjercicio.textContent = "";
       chkEjercicio.classList.remove("done");
       chkNotas.textContent = "";
@@ -976,7 +1391,6 @@
       progressText.textContent = `${percent} % completado`;
       statModules.textContent = `${done}/${total}`;
 
-      // Ajuste visual de los checkboxes de ejemplo (no se persisten)
       if (percent >= 10) {
         chkEjercicio.textContent = "✓";
         chkEjercicio.classList.add("done");
@@ -987,7 +1401,6 @@
       }
     }
 
-    // Inicialización
     renderModules();
     renderDetail(currentModuleId);
     updateProgress();
