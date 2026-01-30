@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Curso Completo de Inversión en Bolsa</title>
+  <style>
+    :root {
+      --bg-color: #0f172a;
+      --bg-soft: #111827;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.12);
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-soft: #1f2937;
+      --danger: #f97373;
+      --success: #4ade80;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.75);
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 32px 16px 40px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    /* CABECERA */
+
+    .header {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.7));
+      border-radius: 24px;
+      padding: 22px 22px 18px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(24px);
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      inset: -60%;
+      background:
+        radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.14), transparent 55%),
+        radial-gradient(circle at 100% 0, rgba(129, 140, 248, 0.16), transparent 55%);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .header-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      font-size: 11px;
+      color: var(--text-muted);
+      max-width: fit-content;
+    }
+
+    .label-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.9);
+    }
+
+    .title-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      justify-content: space-between;
+    }
+
+    .title-main {
+      font-size: 26px;
+      letter-spacing: 0.02em;
+      color: #f9fafb;
+    }
+
+    .title-main span {
+  background-clip: text;        /* versión estándar */
+  -webkit-background-clip: text;/* prefijo para Safari/Chrome */
+  color: transparent;
+}
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      max-width: 640px;
+      line-height: 1.5;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .progress-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .progress-bar {
+      flex: 1;
+      height: 7px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      overflow: hidden;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #38bdf8, #a855f7);
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.7);
+      transition: width 0.25s ease-out;
+    }
+
+    .progress-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 90px;
+      text-align: right;
+    }
+
+    /* LAYOUT PRINCIPAL */
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.2fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* COLUMNA IZQUIERDA: MÓDULOS */
+
+    .card {
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.96));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 10px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: #9ca3af;
+    }
+
+    .card-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .modules-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 8px;
+    }
+
+    .module {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(31, 41, 55, 0.95);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.96));
+      padding: 9px 10px;
+      position: relative;
+      cursor: pointer;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.12s ease;
+    }
+
+    .module:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(8, 47, 73, 0.9));
+      transform: translateY(-1px);
+    }
+
+    .module.completed {
+      border-color: rgba(74, 222, 128, 0.7);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.45);
+    }
+
+    .module-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .module-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    .module-title span {
+      font-size: 11px;
+      font-weight: 500;
+      color: #9ca3af;
+      margin-right: 4px;
+    }
+
+    .module-badges {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .badge.main {
+      border-color: rgba(56, 189, 248, 0.8);
+      color: #bae6fd;
+    }
+
+    .badge.exercise {
+      border-color: rgba(74, 222, 128, 0.9);
+      color: #bbf7d0;
+    }
+
+    .module-description {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 5px;
+    }
+
+    .module-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 4px;
+      gap: 8px;
+    }
+
+    .meta-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #4ade80;
+    }
+
+    .meta-right {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* DETALLE DEL MÓDULO */
+
+    .detail-card {
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 14px;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .detail-title {
+      font-size: 16px;
+      color: #e5e7eb;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .detail-title span {
+      font-size: 12px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .detail-tag {
+      font-size: 11px;
+      color: #bfdbfe;
+      border-radius: 999px;
+      padding: 3px 8px;
+      border: 1px solid rgba(59, 130, 246, 0.7);
+      background: rgba(15, 23, 42, 0.92);
+    }
+
+    .detail-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-main);
+    }
+
+    .detail-section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 0;
+    }
+
+    .detail-list li {
+      margin-bottom: 4px;
+      position: relative;
+      padding-left: 16px;
+      color: var(--text-main);
+    }
+
+    .detail-list li::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #38bdf8;
+      position: absolute;
+      left: 3px;
+      top: 7px;
+    }
+
+    .exercise-box {
+      background: var(--accent-soft);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(56, 189, 248, 0.8);
+      padding: 8px 10px;
+      font-size: 12px;
+      color: #e0f2fe;
+    }
+
+    .exercise-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #bae6fd;
+    }
+
+    /* COLUMNA DERECHA: PANEL LATERAL */
+
+    .side-card {
+      background: linear-gradient(140deg, rgba(15, 23, 42, 0.97), rgba(17, 24, 39, 0.98));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(37, 99, 235, 0.85);
+      box-shadow: var(--shadow-soft);
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .side-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: #9ca3af;
+    }
+
+    .side-stats {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      flex: 1;
+      min-width: 90px;
+      background: radial-gradient(circle at top, #0b1220, #020617);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(30, 64, 175, 0.8);
+      padding: 7px 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-size: 16px;
+      color: #e5e7eb;
+      margin-bottom: 2px;
+    }
+
+    .bubble {
+      font-size: 11px;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 6px 9px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .bubble strong {
+      color: #e5e7eb;
+    }
+
+    .checklist {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .check-box {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #4ade80;
+    }
+
+    .check-box.done {
+      border-color: rgba(74, 222, 128, 0.9);
+      background: rgba(22, 101, 52, 0.35);
+    }
+
+    .help-text {
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      padding-top: 6px;
+      margin-top: 2px;
+    }
+
+    /* BOTONES */
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 4px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 11px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      color: var(--text-main);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.1s ease;
+    }
+
+    .btn:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(148, 163, 184, 0.8);
+      transform: translateY(-0.5px);
+    }
+
+    .btn-primary {
+      border-color: rgba(56, 189, 248, 0.85);
+      background: linear-gradient(120deg, #0ea5e9, #6366f1);
+      color: #f9fafb;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.55);
+    }
+
+    .btn-primary:hover {
+      border-color: rgba(56, 189, 248, 1);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.8);
+    }
+
+    .btn-ghost {
+      border-style: dashed;
+    }
+
+    .btn-icon {
+      font-size: 13px;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 18px 10px 28px;
+      }
+      .header {
+        padding: 18px 16px 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- CABECERA -->
+    <header class="header">
+      <div class="header-inner">
+        <div class="label">
+          <div class="label-dot"></div>
+          Curso guiado • Inversión en bolsa desde cero
+        </div>
+        <div class="title-row">
+          <div>
+            <h1 class="title-main">
+              Curso completo de <span>inversión en bolsa</span>
+            </h1>
+            <p class="subtitle">
+              Estudia cada módulo a tu ritmo, marca como completado lo que vayas dominando
+              y construye tu propio sistema de inversión paso a paso.
+            </p>
+          </div>
+        </div>
+        <div class="tag-row">
+          <span class="pill">Nivel: Principiante–Intermedio</span>
+          <span class="pill">Enfoque: largo plazo y gestión de riesgo</span>
+          <span class="pill">Formato: teoría + ejercicios prácticos</span>
+        </div>
+        <div class="progress-box">
+          <div class="progress-bar">
+            <div class="progress-fill" id="globalProgress"></div>
+          </div>
+          <div class="progress-text" id="progressText">0 % completado</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- LAYOUT PRINCIPAL -->
+    <main class="layout">
+      <!-- LISTA DE MÓDULOS -->
+      <section class="card" aria-label="Lista de módulos">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Ruta de aprendizaje</div>
+            <div class="card-subtitle">Haz clic en un módulo para ver el detalle y el ejercicio propuesto.</div>
+          </div>
+        </div>
+
+        <div class="modules-list" id="modulesList">
+          <!-- Los módulos se rellenan desde JavaScript -->
+        </div>
+      </section>
+
+      <!-- DETALLE DEL MÓDULO + PANEL LATERAL -->
+      <section class="detail-card" aria-label="Detalle del módulo y panel lateral">
+        <div id="moduleDetail">
+          <!-- El detalle del módulo seleccionado se inserta aquí -->
+        </div>
+
+        <aside class="side-card" style="margin-top:10px;">
+          <div class="side-title">Panel de estudio</div>
+          <div class="side-stats">
+            <div class="stat">
+              <div class="stat-value" id="statModules">0/10</div>
+              <div>Módulos completados</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" id="statFocus">Mód. 1</div>
+              <div>Módulo actual</div>
+            </div>
+          </div>
+          <div class="bubble">
+            <strong>Consejo:</strong> estudia solo 1 módulo por sesión, haz el ejercicio práctico y escribe tus notas antes de avanzar.
+          </div>
+          <div class="checklist">
+            <div class="check-item">
+              <div class="check-box" id="chkLeer">✓</div>
+              <span>Leer los puntos clave del módulo</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box" id="chkEjercicio"></div>
+              <span>Completar el ejercicio práctico</span>
+            </div>
+            <div class="check-item">
+              <div class="check-box" id="chkNotas"></div>
+              <span>Escribir tus propias notas o resumen</span>
+            </div>
+          </div>
+          <p class="help-text">
+            Marca el módulo como completado cuando hayas leído, hecho el ejercicio
+            y anotado tus conclusiones. Puedes volver a desmarcarlo si quieres repasar.
+          </p>
+        </aside>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    // Definición de los módulos del curso
+    const modules = [
+      {
+        id: 1,
+        title: "Fundamentos y mentalidad",
+        duration: "1–2 h",
+        type: "Fundamentos",
+        description:
+          "Qué es la bolsa, tipos de activos, por qué invertir y cómo desarrollar la mentalidad adecuada evitando el \"hazte rico rápido\".",
+        bullets: [
+          "Qué es la bolsa y cómo funciona el mercado primario y secundario.",
+          "Tipos de activos: acciones, ETFs, bonos, fondos, REITs.",
+          "Por qué invertir: inflación, interés compuesto, horizontes temporales.",
+          "Psicología del inversor: miedo, codicia y sesgos comunes."
+        ],
+        exercise:
+          "Escribe tu manifiesto de inversor: objetivos, horizonte temporal, tolerancia a pérdidas y reglas básicas que quieres seguir."
+      },
+      {
+        id: 2,
+        title: "Infraestructura y brokers",
+        duration: "1–2 h",
+        type: "Práctico",
+        description:
+          "Conoce las cuentas y plataformas que usarás para invertir: brokers, comisiones, tipos de órdenes y aspectos básicos de fiscalidad.",
+        bullets: [
+          "Tipos de cuentas y brokers, comisiones, spreads y divisas.",
+          "Ordenes de mercado, limitadas, stop y stop-limit.",
+          "Nociones básicas de fiscalidad de las inversiones.",
+          "Uso básico de una plataforma de trading/inversión."
+        ],
+        exercise:
+          "Abre una cuenta demo (o de papel) y simula varias órdenes: compra y venta de una acción o ETF con diferentes tipos de orden."
+      },
+      {
+        id: 3,
+        title: "Análisis fundamental básico",
+        duration: "2–3 h",
+        type: "Análisis",
+        description:
+          "Aprende a leer estados financieros sencillos, entender ratios clave y formarte una idea del valor razonable de una empresa.",
+        bullets: [
+          "Lectura básica de cuenta de resultados, balance y flujo de caja.",
+          "Ratios clave: PER, P/B, márgenes, ROE, deuda neta/EBITDA, flujo de caja libre.",
+          "Conceptos de calidad de negocio y ventajas competitivas.",
+          "Valoración simple por múltiplos y sentido común."
+        ],
+        exercise:
+          "Elige una empresa cotizada, descarga sus estados financieros y rellena una ficha de análisis sencilla con los ratios básicos."
+      },
+      {
+        id: 4,
+        title: "Inversión en ETFs y fondos indexados",
+        duration: "2 h",
+        type: "Cartera",
+        description:
+          "Descubre cómo usar ETFs e indexados para construir carteras sencillas, diversificadas y de bajo coste para el largo plazo.",
+        bullets: [
+          "Qué es un ETF y cómo replica un índice.",
+          "Diferencias entre ETFs y fondos de inversión tradicionales.",
+          "Tipos de ETFs: globales, sectoriales, de bonos, temáticos, factores.",
+          "Costes (TER), liquidez, tracking error y criterios de selección."
+        ],
+        exercise:
+          "Diseña una cartera de 2–4 ETFs para tres perfiles distintos: conservador, equilibrado y agresivo."
+      },
+      {
+        id: 5,
+        title: "Análisis técnico y timing",
+        duration: "2 h",
+        type: "Técnico",
+        description:
+          "Usa el análisis técnico de forma simple para mejorar tus puntos de entrada y salida, sin convertir la bolsa en un casino.",
+        bullets: [
+          "Conceptos básicos: tendencia, soportes, resistencias y volumen.",
+          "Medias móviles, RSI y MACD: qué son y qué NO son.",
+          "Cómo combinar contexto fundamental y técnico.",
+          "Ejemplos de patrones sencillos de entrada/salida."
+        ],
+        exercise:
+          "Define un patrón de entrada muy simple (por ejemplo, ruptura de resistencia con volumen) y busca 5 ejemplos en gráficos históricos."
+      },
+      {
+        id: 6,
+        title: "Gestión del riesgo y tamaño de posición",
+        duration: "2–3 h",
+        type: "Riesgo",
+        description:
+          "Aprende a decidir cuánto invertir en cada operación y cómo proteger tu capital frente a malas rachas y caídas del mercado.",
+        bullets: [
+          "Riesgo por operación y relación riesgo/beneficio.",
+          "Diversificación y correlación entre activos.",
+          "Stop loss y take profit: mental, técnico y según volatilidad.",
+          "Cómo calcular tamaño de posición según tu capital y tu riesgo máximo."
+        ],
+        exercise:
+          "Crea una hoja de cálculo que calcule tamaño de posición y riesgo total de la cartera según un porcentaje de riesgo máximo por operación."
+      },
+      {
+        id: 7,
+        title: "Construcción de cartera y estrategia",
+        duration: "3 h",
+        type: "Cartera",
+        description:
+          "Diseña tu asset allocation, elige tu enfoque (indexado, dividendos, value, etc.) y define tus reglas de rebalanceo.",
+        bullets: [
+          "Definición de asset allocation según edad, objetivos y tolerancia al riesgo.",
+          "Estrategias: indexación, core-satellite, value, dividendos.",
+          "Rebalanceo periódico: cuándo y cómo hacerlo.",
+          "Ejemplos de carteras para diferentes horizontes temporales."
+        ],
+        exercise:
+          "Diseña tu cartera objetivo a 5–10 años, con porcentajes por activo, y define cada cuánto rebalancearás y con qué criterios."
+      },
+      {
+        id: 8,
+        title: "Operativa práctica y diario de inversión",
+        duration: "2 h",
+        type: "Práctico",
+        description:
+          "Convierte tu estrategia en un conjunto de reglas operativas claras y usa un diario de inversión para mejorar con cada operación.",
+        bullets: [
+          "Cómo traducir tu estrategia en reglas concretas de compra y venta.",
+          "Qué registrar en un diario de operaciones y por qué es tan útil.",
+          "Cómo revisar tu histórico para detectar errores recurrentes.",
+          "Ajuste progresivo de tus reglas según tu experiencia real."
+        ],
+        exercise:
+          "Crea una plantilla de diario y registra al menos 5 operaciones (reales o simuladas) con tus comentarios y aprendizajes."
+      },
+      {
+        id: 9,
+        title: "Uso de IA y herramientas digitales",
+        duration: "2 h",
+        type: "Herramientas",
+        description:
+          "Integra asistentes de IA y otras herramientas para ahorrar tiempo en análisis, siempre manteniendo el control de tus decisiones.",
+        bullets: [
+          "Cómo usar IA para resumir informes y noticias.",
+          "Generación de fichas de empresa y comparaciones rápidas de ETFs.",
+          "Buenas prácticas: verificación de datos y límites de la IA.",
+          "Checklists y plantillas de prompts para tus análisis."
+        ],
+        exercise:
+          "Diseña 3 prompts plantilla: uno para analizar una acción, otro para un ETF y otro para revisar tu cartera periódicamente."
+      },
+      {
+        id: 10,
+        title: "Errores típicos y plan a largo plazo",
+        duration: "2–3 h",
+        type: "Mentalidad",
+        description:
+          "Identifica los errores más frecuentes, prepara tu plan para las caídas fuertes y cierra el curso con tu sistema completo.",
+        bullets: [
+          "Errores habituales: sobreoperar, apalancarse, perseguir modas, ignorar el riesgo.",
+          "Cómo reaccionar ante caídas fuertes del mercado con un plan claro.",
+          "Diseñar rutinas de revisión semanal, mensual y anual.",
+          "Cómo seguir aprendiendo sin perder el foco ni la disciplina."
+        ],
+        exercise:
+          "Escribe tu manual de inversión personal (2–3 páginas) con tus reglas, procesos, límites de riesgo y plan ante caídas del mercado."
+      }
+    ];
+
+    // Estado de módulos completados en localStorage
+    const STORAGE_KEY = "curso-bolsa-completados";
+    let completed = new Set(
+      JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]")
+    );
+    let currentModuleId = 1;
+
+    const modulesListEl = document.getElementById("modulesList");
+    const detailEl = document.getElementById("moduleDetail");
+    const progressBar = document.getElementById("globalProgress");
+    const progressText = document.getElementById("progressText");
+    const statModules = document.getElementById("statModules");
+    const statFocus = document.getElementById("statFocus");
+    const chkEjercicio = document.getElementById("chkEjercicio");
+    const chkNotas = document.getElementById("chkNotas");
+
+    function updateStorage() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify([...completed]));
+    }
+
+    function renderModules() {
+      modulesListEl.innerHTML = "";
+      modules.forEach((m) => {
+        const isCompleted = completed.has(m.id);
+        const div = document.createElement("article");
+        div.className = "module" + (isCompleted ? " completed" : "");
+        div.dataset.id = m.id;
+
+        div.innerHTML = `
+          <div class="module-header">
+            <h2 class="module-title">
+              <span>Mód. ${m.id}</span>${m.title}
+            </h2>
+            <div class="module-badges">
+              <span class="badge main">${m.type}</span>
+              <span class="badge">${m.duration}</span>
+              <span class="badge exercise">Con ejercicio</span>
+            </div>
+          </div>
+          <p class="module-description">${m.description}</p>
+          <div class="module-meta">
+            <div class="meta-left">
+              <div class="dot"></div>
+              <span>${isCompleted ? "Marcado como completado" : "Pendiente de completar"}</span>
+            </div>
+            <div class="meta-right">
+              <span>${m.bullets.length} puntos clave</span>
+            </div>
+          </div>
+        `;
+
+        div.addEventListener("click", () => {
+          currentModuleId = m.id;
+          renderDetail(m.id);
+          statFocus.textContent = `Mód. ${m.id}`;
+        });
+
+        modulesListEl.appendChild(div);
+      });
+    }
+
+    function renderDetail(id) {
+      const m = modules.find((x) => x.id === id);
+      if (!m) return;
+      const isCompleted = completed.has(m.id);
+
+      const bulletsHtml = m.bullets
+        .map((b) => `<li>${b}</li>`)
+        .join("");
+
+      detailEl.innerHTML = `
+        <header class="detail-header">
+          <div class="detail-title">
+            <span>Módulo ${m.id}</span>
+            ${m.title}
+          </div>
+          <div class="detail-tag">${m.type}</div>
+        </header>
+        <section class="detail-body">
+          <div>
+            <div class="detail-section-title">Puntos clave</div>
+            <ul class="detail-list">
+              ${bulletsHtml}
+            </ul>
+          </div>
+          <div class="exercise-box">
+            <div class="exercise-title">Ejercicio práctico</div>
+            <p>${m.exercise}</p>
+          </div>
+          <div class="button-row">
+            <button class="btn btn-primary" id="btnToggleComplete">
+              <span class="btn-icon">${isCompleted ? "↺" : "✓"}</span>
+              ${isCompleted ? "Marcar como pendiente" : "Marcar módulo como completado"}
+            </button>
+            <button class="btn btn-ghost" id="btnNotas">
+              <span class="btn-icon">✎</span>
+              Abrir espacio para notas (añádelo tú en tu editor)
+            </button>
+          </div>
+        </section>
+      `;
+
+      document.getElementById("btnToggleComplete").onclick = () => {
+        if (completed.has(m.id)) {
+          completed.delete(m.id);
+        } else {
+          completed.add(m.id);
+        }
+        updateStorage();
+        renderModules();
+        renderDetail(m.id);
+        updateProgress();
+      };
+
+      document.getElementById("btnNotas").onclick = () => {
+        alert(
+          "Idea: crea un archivo de notas (por ejemplo en Notion, Word o Google Docs) y escribe tu resumen del módulo con tus propias palabras."
+        );
+      };
+
+      // Reset de checks de panel lateral (los manejas tú visualmente)
+      chkEjercicio.textContent = "";
+      chkEjercicio.classList.remove("done");
+      chkNotas.textContent = "";
+      chkNotas.classList.remove("done");
+    }
+
+    function updateProgress() {
+      const total = modules.length;
+      const done = completed.size;
+      const percent = Math.round((done / total) * 100);
+      progressBar.style.width = percent + "%";
+      progressText.textContent = `${percent} % completado`;
+      statModules.textContent = `${done}/${total}`;
+
+      // Ajuste visual de los checkboxes de ejemplo (no se persisten)
+      if (percent >= 10) {
+        chkEjercicio.textContent = "✓";
+        chkEjercicio.classList.add("done");
+      }
+      if (percent >= 20) {
+        chkNotas.textContent = "✓";
+        chkNotas.classList.add("done");
+      }
+    }
+
+    // Inicialización
+    renderModules();
+    renderDetail(currentModuleId);
+    updateProgress();
+  </script>
+</body>
+</html>
