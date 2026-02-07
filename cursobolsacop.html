@@ -1,99 +1,1519 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Curso de Bolsa de Valores</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f9;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #1a73e8;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    section {
-      padding: 20px;
-      margin: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    h2 {
-      color: #1a73e8;
-    }
-    footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 10px;
-      margin-top: 20px;
-    }
-    .modulo {
-      margin-bottom: 15px;
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 15px;
-      background: #1a73e8;
-      color: white;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-    .btn:hover {
-      background: #0c4fb3;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligencia Emocional en Adolescentes Adoptados - Guía Interactiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 30px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-btn .icon {
+            font-size: 3em;
+        }
+
+        .nav-btn .title {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .nav-btn .desc {
+            font-size: 0.9em;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .content-section {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timeline-marker {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            flex-shrink: 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .timeline-content {
+            margin-left: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .stat-value {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 30px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .improvement {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .decline {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .accordion-header:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .accordion-content.open {
+            max-height: 2000px;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(10px);
+        }
+
+        .quiz-option.correct {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .quiz-option.incorrect {
+            background: #f44336;
+            color: white;
+            border-color: #f44336;
+        }
+
+        .session-card {
+            background: white;
+            border-left: 5px solid #667eea;
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .session-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .emotion-card {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .emotion-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .emotion-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-around;
+            height: 300px;
+            border-bottom: 2px solid #333;
+            padding: 20px;
+        }
+
+        .bar {
+            flex: 1;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .bar-fill {
+            width: 100%;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px 5px 0 0;
+            transition: height 1s ease;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 10px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .bar-label {
+            margin-top: 10px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 5px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .model-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .model-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-top: 5px solid;
+        }
+
+        .model-card.habilidad {
+            border-color: #667eea;
+        }
+
+        .model-card.mixto {
+            border-color: #764ba2;
+        }
+
+        .model-card.clinico {
+            border-color: #f093fb;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .nav-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-content {
+                margin-left: 0;
+                margin-top: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Curso de Bolsa de Valores</h1>
-    <p>Aprende a invertir paso a paso</p>
-  </header>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎓 Inteligencia Emocional en Adolescentes Adoptados</h1>
+            <p>Guía Interactiva del Estudio de Caso</p>
+        </div>
 
-  <section>
-    <h2>Módulo 1: Introducción</h2>
-    <div class="modulo">
-      <p>✔ Qué es la bolsa y cómo funciona</p>
-      <p>✔ Actores principales: inversores, brokers, empresas</p>
-      <p>✔ Conceptos básicos: acciones, índices, bonos</p>
+        <!-- Menu Principal -->
+        <div id="menu" class="nav-buttons">
+            <button class="nav-btn" onclick="showSection('historia')">
+                <div class="icon">👧</div>
+                <div class="title">Historia del Caso</div>
+                <div class="desc">Conoce a la protagonista y su contexto</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('ie')">
+                <div class="icon">🧠</div>
+                <div class="title">¿Qué es la IE?</div>
+                <div class="desc">Conceptos y modelos teóricos</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('programa')">
+                <div class="icon">🎯</div>
+                <div class="title">El Programa</div>
+                <div class="desc">4 sesiones de intervención</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('resultados')">
+                <div class="icon">📊</div>
+                <div class="title">Resultados</div>
+                <div class="desc">Mejoras después de la intervención</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('test')">
+                <div class="icon">✍️</div>
+                <div class="title">Test de IE</div>
+                <div class="desc">Evalúa tu inteligencia emocional</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('aplicaciones')">
+                <div class="icon">💡</div>
+                <div class="title">Aplicaciones</div>
+                <div class="desc">Ejercicios y recomendaciones prácticas</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('quiz')">
+                <div class="icon">🏆</div>
+                <div class="title">Quiz Final</div>
+                <div class="desc">Pon a prueba tus conocimientos</div>
+            </button>
+
+            <button class="nav-btn" onclick="showSection('resumen')">
+                <div class="icon">📋</div>
+                <div class="title">Resumen Ejecutivo</div>
+                <div class="desc">Síntesis del estudio completo</div>
+            </button>
+        </div>
+
+        <!-- Sección: Historia del Caso -->
+        <div id="historia" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>👧 Historia de la Adolescente</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">🍼</div>
+                    <div class="timeline-content">
+                        <h3>0-8 años: India (Orfanato)</h3>
+                        <p>Vivió en un orfanato en India. Contexto de institucionalización temprana. Los niños mayores cuidaban a los pequeños, adoptando roles inadecuados para su edad.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">✈️</div>
+                    <div class="timeline-content">
+                        <h3>8 años: Adopción</h3>
+                        <p>Adoptada por una familia monoparental (madre soltera) en España. No hablaba español. Recibió un álbum de fotos de su nueva familia antes de conocerlas.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">📚</div>
+                    <div class="timeline-content">
+                        <h3>8-13 años: Adaptación</h3>
+                        <p>Escolarización con dificultades: barrera idiomática, repitió 4º de Primaria, adaptación curricular. Mejoró significativamente con apoyo individualizado.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker">🎯</div>
+                    <div class="timeline-content">
+                        <h3>13 años: Intervención en IE</h3>
+                        <p>Participación en programa de inteligencia emocional (4 sesiones). Objetivo: mejorar regulación emocional y desarrollo socioemocional.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>📝 Ficha del Caso</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Detalle</th>
+                </tr>
+                <tr>
+                    <td><strong>👤 Edad actual</strong></td>
+                    <td>13 años</td>
+                </tr>
+                <tr>
+                    <td><strong>🌏 País de origen</strong></td>
+                    <td>India</td>
+                </tr>
+                <tr>
+                    <td><strong>⏰ Tiempo institucionalizada</strong></td>
+                    <td>8 años</td>
+                </tr>
+                <tr>
+                    <td><strong>👨‍👩‍👧 Tipo de familia</strong></td>
+                    <td>Monoparental (madre soltera)</td>
+                </tr>
+                <tr>
+                    <td><strong>🗣️ Idioma al llegar</strong></td>
+                    <td>No hablaba español</td>
+                </tr>
+                <tr>
+                    <td><strong>📚 Situación académica</strong></td>
+                    <td>Adaptación curricular no significativa</td>
+                </tr>
+            </table>
+
+            <h3>🎭 Principales Desafíos</h3>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>📚 Ámbito Académico</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>❌ Perdió 1 año de escolarización durante trámites</li>
+                            <li>❌ Repitió 4º de Primaria</li>
+                            <li>❌ Necesitó adaptación curricular</li>
+                            <li>✅ Mejoró con apoyo de profesora particular</li>
+                            <li>⚠️ Problemas de comprensión en situaciones nuevas</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>💬 Ámbito Lingüístico</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>❌ No entendía español al llegar</li>
+                            <li>❌ No comprende ironía</li>
+                            <li>⏳ Proceso lento de aprendizaje</li>
+                            <li>✅ Ha mejorado significativamente con el tiempo</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>😊 Ámbito Emocional</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <ul>
+                            <li>⚠️ Adolescencia con cambios emocionales</li>
+                            <li>⚠️ Evita contacto físico (aunque obedece por educación)</li>
+                            <li>⚠️ Tendencia a la autocompasión</li>
+                            <li>⚠️ Percepción de victimización ("todo va contra ella")</li>
+                            <li>✅ Buena relación con la madre</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 Dato Importante</h4>
+                <p>En la India, la <strong>obediencia y autorregulación</strong> son pilares fundamentales de la educación. Esto explica por qué la adolescente, aunque evita el contacto físico, suele obedecer las normas establecidas.</p>
+            </div>
+        </div>
+
+        <!-- Sección: ¿Qué es la IE? -->
+        <div id="ie" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>🧠 ¿Qué es la Inteligencia Emocional?</h2>
+            
+            <div class="info-box">
+                <h3>Definición</h3>
+                <p><strong>Inteligencia Emocional (IE)</strong> es la capacidad de:</p>
+                <ul>
+                    <li>👁️ Reconocer nuestras emociones y las de los demás</li>
+                    <li>🎛️ Regular y manejar esas emociones</li>
+                    <li>💪 Utilizar las emociones para guiar nuestro pensamiento y acciones</li>
+                </ul>
+            </div>
+
+            <h3>📚 Evolución Histórica</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1920</div>
+                    <div class="timeline-content">
+                        <strong>Thorndike</strong> - Inteligencia Social
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">1983</div>
+                    <div class="timeline-content">
+                        <strong>Gardner</strong> - Inteligencias Múltiples (Interpersonal/Intrapersonal)
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">1990</div>
+                    <div class="timeline-content">
+                        <strong>Salovey y Mayer</strong> - ACUÑAN el término "Inteligencia Emocional"
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker">1995</div>
+                    <div class="timeline-content">
+                        <strong>Goleman</strong> - POPULARIZA el concepto mundialmente
+                    </div>
+                </div>
+            </div>
+
+            <h3>🏛️ Los 3 Modelos Principales</h3>
+            
+            <div class="model-comparison">
+                <div class="model-card habilidad">
+                    <h4>🎯 Modelo de Habilidad</h4>
+                    <p><strong>Salovey & Mayer (1990)</strong></p>
+                    <ol>
+                        <li><strong>Percibir</strong> emociones</li>
+                        <li><strong>Usar</strong> emociones para facilitar pensamiento</li>
+                        <li><strong>Comprender</strong> emociones</li>
+                        <li><strong>Regular</strong> emociones</li>
+                    </ol>
+                    <p class="info-box">Enfoque educativo y científico</p>
+                </div>
+
+                <div class="model-card mixto">
+                    <h4>🌟 Modelo Mixto</h4>
+                    <p><strong>Goleman (1995)</strong></p>
+                    <ol>
+                        <li>Autoconciencia</li>
+                        <li>Autorregulación</li>
+                        <li>Automotivación</li>
+                        <li>Empatía</li>
+                        <li>Habilidades sociales</li>
+                    </ol>
+                    <p class="info-box">Enfoque organizacional</p>
+                </div>
+
+                <div class="model-card clinico">
+                    <h4>🏥 Modelo Clínico</h4>
+                    <p><strong>Bar-On (1985)</strong></p>
+                    <p>Competencias emocionales y sociales que determinan la adaptación y el éxito personal.</p>
+                    <p class="info-box">Enfoque terapéutico</p>
+                </div>
+            </div>
+
+            <h3>🌈 Las Emociones Básicas</h3>
+            <div class="emotion-grid">
+                <div class="emotion-card">
+                    <div class="emotion-icon">😊</div>
+                    <strong>ALEGRÍA</strong>
+                    <p>Positiva</p>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon">😨</div>
+                    <strong>MIEDO</strong>
+                    <p>Negativa</p>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon">😡</div>
+                    <strong>IRA</strong>
+                    <p>Negativa</p>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon">😢</div>
+                    <strong>TRISTEZA</strong>
+                    <p>Negativa</p>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon">😲</div>
+                    <strong>SORPRESA</strong>
+                    <p>Ambigua</p>
+                </div>
+                <div class="emotion-card">
+                    <div class="emotion-icon">🤢</div>
+                    <strong>ASCO</strong>
+                    <p>Negativa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Programa -->
+        <div id="programa" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>🎯 El Programa de Intervención INTEMO</h2>
+            
+            <div class="stat-card">
+                <h3>📅 Estructura del Programa</h3>
+                <p>✓ 4 sesiones individuales</p>
+                <p>✓ Duración: ~1 mes</p>
+                <p>✓ Programa: INTEMO (Orientación Andújar, 2015)</p>
+            </div>
+
+            <h3>Las 4 Sesiones</h3>
+
+            <div class="session-card">
+                <h3>🎪 SESIÓN 1: Conciencia Emocional</h3>
+                <p><strong>Actividad:</strong> "Ahora Siento"</p>
+                <p><strong>Objetivos:</strong></p>
+                <ul>
+                    <li>Identificar emociones propias</li>
+                    <li>Clasificar emociones como positivas/negativas</li>
+                </ul>
+                <p><strong>Desarrollo:</strong></p>
+                <ol>
+                    <li>Lectura de lista con 30 emociones variadas</li>
+                    <li>Selección: ¿Cuáles has sentido alguna vez?</li>
+                    <li>Clasificación en positivas y negativas</li>
+                    <li>Profundización: Elegir 4 y recordar cuándo, qué pasó, dónde</li>
+                    <li>Reflexión: ¿Cómo te sientes AHORA?</li>
+                </ol>
+            </div>
+
+            <div class="session-card">
+                <h3>🌊 SESIÓN 2: Regulación Emocional</h3>
+                <p><strong>Actividad:</strong> "Del Monte al Mar"</p>
+                <p><strong>Objetivos:</strong></p>
+                <ul>
+                    <li>Controlar reacciones emocionales</li>
+                    <li>Encontrar momentos de calma</li>
+                </ul>
+                <p><strong>Desarrollo:</strong></p>
+                <ol>
+                    <li>Identificar una situación conflictiva (enfado, ira)</li>
+                    <li>Ejercicio de visualización guiada (monte → mar)</li>
+                    <li>Recontar la situación pero terminándola en positivo</li>
+                    <li>Reflexión sobre estrategias de control utilizadas</li>
+                </ol>
+                <div class="info-box">
+                    <strong>Técnica clave:</strong> Visualización con elementos naturales (verde del monte, azul del mar) para inducir calma y regulación emocional.
+                </div>
+            </div>
+
+            <div class="session-card">
+                <h3>🌟 SESIÓN 3: Autonomía Emocional I</h3>
+                <p><strong>Actividad:</strong> "¿La Botella Medio Llena o Medio Vacía?"</p>
+                <p><strong>Objetivos:</strong></p>
+                <ul>
+                    <li>Identificar actitudes positivas propias</li>
+                    <li>Desarrollar pensamiento positivo</li>
+                </ul>
+                <p><strong>Desarrollo:</strong></p>
+                <ol>
+                    <li>Revisar lista de aspectos positivos y marcar los propios</li>
+                    <li>Seleccionar TOP 5 cualidades personales</li>
+                    <li>Crear "Árbol de la Vida": foto en tronco, cualidades en ramas/raíces</li>
+                    <li>Reflexión: ¿Por qué elegiste estas 5?</li>
+                    <li>Colgar el árbol en habitación como recordatorio</li>
+                </ol>
+            </div>
+
+            <div class="session-card">
+                <h3>💪 SESIÓN 4: Autonomía Emocional II</h3>
+                <p><strong>Actividad:</strong> "¡No Me las Arreglo Nada Mal!"</p>
+                <p><strong>Objetivos:</strong></p>
+                <ul>
+                    <li>Reconocer capacidades propias</li>
+                    <li>Desarrollar automotivación</li>
+                </ul>
+                <p><strong>Desarrollo:</strong></p>
+                <ol>
+                    <li>Pensar en algo que se da bien (deporte, arte, estudio...)</li>
+                    <li>Representarlo (recibir aplausos y ánimos)</li>
+                    <li>Identificar cualidades demostradas</li>
+                    <li>Escribir carta a uno mismo destacando cualidades</li>
+                    <li>Guardar carta para leerla en momentos difíciles</li>
+                </ol>
+            </div>
+
+            <div class="success-box">
+                <h4>🎯 Enfoque del Programa</h4>
+                <p>El programa sigue una progresión lógica:</p>
+                <p><strong>Conciencia</strong> → <strong>Regulación</strong> → <strong>Autonomía</strong></p>
+                <p>Primero se aprende a reconocer emociones, luego a controlarlas, y finalmente a desarrollar independencia emocional y automotivación.</p>
+            </div>
+        </div>
+
+        <!-- Sección: Resultados -->
+        <div id="resultados" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>📊 Resultados del Estudio</h2>
+            
+            <div class="stat-card">
+                <h3>🏆 Tasa de Éxito Global</h3>
+                <div class="stat-value">84.6%</div>
+                <p>11 de 13 variables mejoraron significativamente</p>
+            </div>
+
+            <h3>📈 Mejoras Principales</h3>
+            
+            <div class="chart-container">
+                <h4>Comparación ANTES vs DESPUÉS</h4>
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Antes</th>
+                            <th>Después</th>
+                            <th>Cambio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>💪 Autoeficacia</strong></td>
+                            <td>2.70</td>
+                            <td>3.50</td>
+                            <td class="improvement">+30% ⬆️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🤝 Calidad Relaciones</strong></td>
+                            <td>3.83</td>
+                            <td>4.75</td>
+                            <td class="improvement">+24% ⬆️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>😰 Ansiedad</strong></td>
+                            <td>3.00</td>
+                            <td>1.89</td>
+                            <td class="improvement">-37% ⬇️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>😢 Depresión</strong></td>
+                            <td>2.78</td>
+                            <td>1.78</td>
+                            <td class="improvement">-36% ⬇️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>❤️ Autoestima</strong></td>
+                            <td>2.40</td>
+                            <td>2.80</td>
+                            <td class="improvement">+17% ⬆️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🧘 Mindfulness</strong></td>
+                            <td>3.40</td>
+                            <td>2.07</td>
+                            <td class="improvement">-39% ⬇️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🎯 Tolerancia Frustración</strong></td>
+                            <td>1.88</td>
+                            <td>1.38</td>
+                            <td class="improvement">-27% ⬇️</td>
+                        </tr>
+                        <tr>
+                            <td><strong>🧠 IE Global</strong></td>
+                            <td>3.33</td>
+                            <td>4.04</td>
+                            <td class="improvement">+21% ⬆️</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><strong>⚠️ Quejas Somáticas</strong></td>
+                            <td>1.28</td>
+                            <td>1.55</td>
+                            <td class="decline">-21% ⬇️</td>
+                        </tr>
+                        <tr style="background: #ffebee;">
+                            <td><strong>⚠️ Bienestar Psicológico</strong></td>
+                            <td>2.42</td>
+                            <td>2.08</td>
+                            <td class="decline">-14% ⬇️</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>🧠 Dimensiones de Inteligencia Emocional (TMMS-24)</h3>
+            
+            <div class="chart-container">
+                <div class="bar-chart">
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 65%;">26</div>
+                        <div class="bar-label">Atención<br>ANTES</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 75%;">30</div>
+                        <div class="bar-label">Atención<br>DESPUÉS</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 62.5%;">25</div>
+                        <div class="bar-label">Claridad<br>ANTES</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 82.5%;">33</div>
+                        <div class="bar-label">Claridad<br>DESPUÉS</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 72.5%;">29</div>
+                        <div class="bar-label">Reparación<br>ANTES</div>
+                    </div>
+                    <div class="bar">
+                        <div class="bar-fill" style="height: 85%;">34</div>
+                        <div class="bar-label">Reparación<br>DESPUÉS</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>📊 Interpretación de Resultados</h4>
+                <p><strong>Atención Emocional:</strong> +15% - Mayor capacidad para identificar emociones</p>
+                <p><strong>Claridad Emocional:</strong> +32% - Mejor comprensión de las propias emociones (¡mayor mejora!)</p>
+                <p><strong>Reparación Emocional:</strong> +17% - Mayor habilidad para regular estados emocionales</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Variables sin mejora</h4>
+                <p><strong>Quejas Somáticas</strong> y <strong>Bienestar Psicológico</strong> empeoraron levemente.</p>
+                <p><strong>Posibles causas:</strong></p>
+                <ul>
+                    <li>Intervención demasiado breve (4 sesiones)</li>
+                    <li>Mayor conciencia corporal tras trabajar emociones</li>
+                    <li>Factores externos no controlados (adolescencia)</li>
+                    <li>Necesidad de intervención más prolongada</li>
+                </ul>
+            </div>
+
+            <div class="success-box">
+                <h4>✅ Conclusión General</h4>
+                <p>El programa de inteligencia emocional mostró <strong>efectividad significativa</strong> en la mayoría de dimensiones evaluadas, con mejoras especialmente notables en:</p>
+                <ul>
+                    <li>Reducción de ansiedad y depresión</li>
+                    <li>Aumento de autoeficacia y autoestima</li>
+                    <li>Mejora en claridad y regulación emocional</li>
+                    <li>Mayor mindfulness y tolerancia a la frustración</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sección: Test de IE -->
+        <div id="test" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>✍️ Test de Inteligencia Emocional</h2>
+            
+            <div class="info-box">
+                <p><strong>Instrucciones:</strong> Responde con sinceridad del 1 al 5</p>
+                <p>1 = Nunca/Totalmente en desacuerdo | 5 = Siempre/Totalmente de acuerdo</p>
+            </div>
+
+            <div id="testQuestions"></div>
+            
+            <button class="back-btn" onclick="calculateTestScore()" style="margin-top: 20px;">📊 Calcular Resultados</button>
+            
+            <div id="testResults" style="display: none; margin-top: 30px;"></div>
+        </div>
+
+        <!-- Sección: Aplicaciones -->
+        <div id="aplicaciones" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>💡 Aplicaciones Prácticas</h2>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏠 Para Familias con Hijos Adoptados</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>1. Crear Ambiente Emocional Seguro</h4>
+                        <ul>
+                            <li>☀️ Mañana: "¿Cómo amaneciste hoy?"</li>
+                            <li>🌆 Tarde: "¿Qué sentiste en la escuela?"</li>
+                            <li>🌙 Noche: "¿Qué agradecer del día?"</li>
+                        </ul>
+
+                        <h4>2. Validación Emocional</h4>
+                        <p><strong>❌ Evitar:</strong> "No es para tanto", "No llores"</p>
+                        <p><strong>✅ Usar:</strong> "Veo que estás molesto/a, eso es válido"</p>
+
+                        <h4>3. Trabajar Historia de Vida</h4>
+                        <ul>
+                            <li>Crear libro de vida con fotos del país de origen</li>
+                            <li>Normalizar preguntas sobre orígenes</li>
+                            <li>Celebrar fechas importantes (día del encuentro)</li>
+                            <li>Conectar con cultura de origen (comida, música)</li>
+                        </ul>
+
+                        <h4>4. Señales de Alerta</h4>
+                        <div class="warning-box">
+                            <p><strong>⚠️ Requiere atención profesional:</strong></p>
+                            <ul>
+                                <li>Cambios bruscos en comportamiento</li>
+                                <li>Problemas académicos persistentes</li>
+                                <li>Ansiedad ante separaciones</li>
+                                <li>Autolesiones o ideación suicida</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏫 Para Educadores</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Ajustes Recomendados</h4>
+                        <ul>
+                            <li>✓ Tiempo extra en transiciones</li>
+                            <li>✓ Espacio seguro para regulación</li>
+                            <li>✓ Señales privadas de necesidad</li>
+                            <li>✓ Flexibilidad en participación</li>
+                            <li>✓ Apoyo en trabajo grupal</li>
+                            <li>✓ Comunicación frecuente con familia</li>
+                        </ul>
+
+                        <h4>Programa IE en el Aula (15 min/día)</h4>
+                        <ul>
+                            <li><strong>LUNES:</strong> Termómetro Emocional</li>
+                            <li><strong>MARTES:</strong> Pausa de Respiración</li>
+                            <li><strong>MIÉRCOLES:</strong> Círculo de Apreciación</li>
+                            <li><strong>JUEVES:</strong> Role-Playing de Conflictos</li>
+                            <li><strong>VIERNES:</strong> Muro de Logros</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header" onclick="toggleAccordion(this)">
+                        <span>🏡 Ejercicios para Hacer en Casa</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <h4>Actividades Semanales (10-15 min)</h4>
+                        
+                        <p><strong>LUNES:</strong> 📔 Diario Emocional</p>
+                        <p>Escribir: ¿Cómo me sentí hoy? ¿Por qué? ¿Qué fue lo mejor?</p>
+
+                        <p><strong>MARTES:</strong> 🫙 Frasco de la Calma</p>
+                        <p>Crear frasco con agua y purpurina. Agitar cuando estés alterado y observar cómo se asienta.</p>
+
+                        <p><strong>MIÉRCOLES:</strong> 🧘 Rincón de la Calma</p>
+                        <p>Espacio con cojines, música relajante y objetos sensoriales.</p>
+
+                        <p><strong>JUEVES:</strong> 🎲 Juego de Emociones</p>
+                        <p>Tarjetas con emociones. Expresar y adivinar.</p>
+
+                        <p><strong>VIERNES:</strong> ✉️ Carta de Agradecimiento</p>
+                        <p>Escribir y entregar carta agradeciendo a alguien.</p>
+
+                        <p><strong>SÁBADO:</strong> 🏃 Actividad Física-Emocional</p>
+                        <p>Yoga, bailar, paseo. Reflexionar sobre cómo cambió la emoción.</p>
+
+                        <p><strong>DOMINGO:</strong> 👨‍👩‍👧 Proyecto Familiar</p>
+                        <p>Álbum de momentos positivos de la semana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección: Quiz -->
+        <div id="quiz" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>🏆 Quiz Final</h2>
+            
+            <div id="quizContainer"></div>
+            
+            <div id="quizScore" style="display: none; margin-top: 30px;"></div>
+        </div>
+
+        <!-- Sección: Resumen -->
+        <div id="resumen" class="content-section">
+            <button class="back-btn" onclick="showMenu()">← Volver al Menú</button>
+            
+            <h2>📋 Resumen Ejecutivo</h2>
+            
+            <div class="stat-card">
+                <h3>🎯 Objetivo del Estudio</h3>
+                <p>Mejorar el desarrollo emocional mediante un programa de intervención en inteligencia emocional en una adolescente de 13 años, adoptada internacionalmente, de familia monoparental.</p>
+            </div>
+
+            <h3>👧 Participante</h3>
+            <ul>
+                <li>13 años, adoptada a los 8 años</li>
+                <li>8 años institucionalizada en India</li>
+                <li>Familia monoparental (madre soltera)</li>
+                <li>Barrera idiomática superada progresivamente</li>
+            </ul>
+
+            <h3>🎯 Intervención</h3>
+            <ul>
+                <li><strong>Programa:</strong> INTEMO (Orientación Andújar, 2015)</li>
+                <li><strong>Duración:</strong> 4 sesiones</li>
+                <li><strong>Fases:</strong> Conciencia → Regulación → Autonomía emocional</li>
+            </ul>
+
+            <h3>📊 Resultados Clave</h3>
+            <div class="success-box">
+                <h4>✅ Mejoras Significativas (84.6% de variables)</h4>
+                <ul>
+                    <li>Ansiedad: -37%</li>
+                    <li>Depresión: -36%</li>
+                    <li>Autoeficacia: +30%</li>
+                    <li>Calidad de relaciones: +24%</li>
+                    <li>IE Global: +21%</li>
+                    <li>Claridad emocional: +32%</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <h4>❌ Sin mejora (15.4% de variables)</h4>
+                <ul>
+                    <li>Quejas somáticas (empeoró levemente)</li>
+                    <li>Bienestar psicológico general (empeoró levemente)</li>
+                </ul>
+            </div>
+
+            <h3>💡 Conclusiones</h3>
+            <div class="info-box">
+                <p>✅ El programa de IE mostró <strong>efectividad significativa</strong> en múltiples dimensiones</p>
+                <p>✅ Especialmente efectivo en regulación emocional y reducción de síntomas de ansiedad/depresión</p>
+                <p>⚠️ Limitación principal: estudio de caso único (dificulta generalización)</p>
+                <p>⚠️ Intervención breve - necesidad de seguimiento a largo plazo</p>
+            </div>
+
+            <h3>🎓 Implicaciones</h3>
+            <ul>
+                <li><strong>Centros educativos:</strong> Implementar programas de IE, especialmente con menores adoptados</li>
+                <li><strong>Familias adoptivas:</strong> Trabajar IE desde edad temprana</li>
+                <li><strong>Profesionales:</strong> Considerar programas más prolongados para resultados estables</li>
+            </ul>
+
+            <div class="success-box" style="text-align: center; margin-top: 30px;">
+                <h3>🎉 Mensaje Final</h3>
+                <p>Este trabajo demuestra que un programa breve de inteligencia emocional puede tener efectos positivos significativos en adolescentes adoptadas con circunstancias complejas.</p>
+                <p><strong>La IE es entrenable y mejora el bienestar emocional.</strong></p>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <section>
-    <h2>Módulo 2: Herramientas de Análisis</h2>
-    <div class="modulo">
-      <p>✔ Análisis fundamental</p>
-      <p>✔ Análisis técnico: RSI, MACD, medias móviles</p>
-    </div>
-  </section>
+    <script>
+        // Navegación
+        function showSection(sectionId) {
+            document.getElementById('menu').style.display = 'none';
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
 
-  <section>
-    <h2>Módulo 3: Estrategias de Inversión</h2>
-    <div class="modulo">
-      <p>✔ Largo plazo vs corto plazo</p>
-      <p>✔ Diversificación</p>
-      <p>✔ Gestión de riesgos</p>
-    </div>
-  </section>
+        function showMenu() {
+            document.getElementById('menu').style.display = 'grid';
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            window.scrollTo(0, 0);
+        }
 
-  <section>
-    <h2>Módulo 4: Práctica y Simulación</h2>
-    <div class="modulo">
-      <p>✔ Cómo leer gráficos</p>
-      <p>✔ Ejemplo de compra/venta simulada</p>
-      <p>✔ Recursos para seguir aprendiendo</p>
-    </div>
-    <a href="#" class="btn">Iniciar Simulación</a>
-  </section>
+        // Acordeón
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('open');
+                arrow.textContent = '▲';
+            }
+        }
 
-  <footer>
-    <p>© 2026 Curso de Bolsa | Desarrollado para estudiantes de economía</p>
-  </footer>
+        // Test de IE
+        const testQuestions = [
+            { section: "Conciencia Emocional", questions: [
+                "Puedo identificar qué emoción estoy sintiendo en cada momento",
+                "Presto atención a cómo me siento durante el día",
+                "Puedo distinguir entre estar triste, enfadado o frustrado"
+            ]},
+            { section: "Regulación Emocional", questions: [
+                "Cuando estoy enfadado/a, puedo calmarme antes de actuar",
+                "Uso técnicas (respirar, contar, hablar) para controlarme",
+                "No dejo que las emociones negativas dominen mi día"
+            ]},
+            { section: "Empatía", questions: [
+                "Noto cuando alguien está triste aunque no lo diga",
+                "Me pongo en el lugar de los demás fácilmente",
+                "Entiendo por qué otras personas actúan como actúan"
+            ]},
+            { section: "Habilidades Sociales", questions: [
+                "Me resulta fácil hacer amigos/as",
+                "Resuelvo conflictos de manera efectiva",
+                "Mantengo buenas relaciones con mi entorno"
+            ]},
+            { section: "Automotivación", questions: [
+                "Me animo a mí mismo/a cuando las cosas se ponen difíciles",
+                "Persisto incluso cuando fracaso",
+                "Tengo claridad sobre mis metas y las persigo"
+            ]}
+        ];
+
+        function loadTest() {
+            const container = document.getElementById('testQuestions');
+            let html = '';
+            let questionNumber = 1;
+
+            testQuestions.forEach((section, sectionIndex) => {
+                html += `<h3>${section.section}</h3>`;
+                section.questions.forEach((question, qIndex) => {
+                    html += `
+                        <div class="quiz-container">
+                            <p><strong>${questionNumber}.</strong> ${question}</p>
+                            <div style="display: flex; justify-content: space-between; margin-top: 15px;">
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="q${questionNumber}" value="1"> 1
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="q${questionNumber}" value="2"> 2
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="q${questionNumber}" value="3"> 3
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="q${questionNumber}" value="4"> 4
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 5px;">
+                                    <input type="radio" name="q${questionNumber}" value="5"> 5
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                    questionNumber++;
+                });
+            });
+
+            container.innerHTML = html;
+        }
+
+        function calculateTestScore() {
+            let total = 0;
+            let answered = 0;
+            
+            for (let i = 1; i <= 15; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (answer) {
+                    total += parseInt(answer.value);
+                    answered++;
+                }
+            }
+
+            if (answered < 15) {
+                alert('Por favor responde todas las preguntas');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('testResults');
+            let interpretation = '';
+            let color = '';
+
+            if (total >= 60) {
+                interpretation = '⭐⭐⭐⭐⭐ IE ALTA - ¡Excelente! Tienes una inteligencia emocional muy desarrollada.';
+                color = '#4CAF50';
+            } else if (total >= 45) {
+                interpretation = '⭐⭐⭐⭐ IE MEDIA-ALTA - ¡Bien! Tienes buenas habilidades con áreas de mejora.';
+                color = '#8BC34A';
+            } else if (total >= 30) {
+                interpretation = '⭐⭐⭐ IE MEDIA - En desarrollo. Hay margen de crecimiento.';
+                color = '#FFC107';
+            } else {
+                interpretation = '⭐⭐ IE A DESARROLLAR - ¡Oportunidad de crecimiento! La IE se entrena.';
+                color = '#FF9800';
+            }
+
+            resultsDiv.innerHTML = `
+                <div class="stat-card" style="background: ${color};">
+                    <h3>Tu Puntuación</h3>
+                    <div class="stat-value">${total} / 75</div>
+                    <p style="font-size: 1.2em; margin-top: 20px;">${interpretation}</p>
+                </div>
+            `;
+            resultsDiv.style.display = 'block';
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Quiz Final
+        const quizData = [
+            {
+                question: "¿Quién acuñó por primera vez el término 'Inteligencia Emocional'?",
+                options: ["Daniel Goleman", "Salovey y Mayer", "Gardner", "Bar-On"],
+                correct: 1,
+                explanation: "Salovey y Mayer acuñaron el término en 1990. Goleman lo popularizó en 1995."
+            },
+            {
+                question: "¿Cuántos años tenía la adolescente cuando fue adoptada?",
+                options: ["5 años", "8 años", "10 años", "12 años"],
+                correct: 1,
+                explanation: "Fue adoptada a los 8 años tras vivir en un orfanato en India."
+            },
+            {
+                question: "¿Cuántas sesiones tuvo el programa de intervención?",
+                options: ["2 sesiones", "4 sesiones", "8 sesiones", "12 sesiones"],
+                correct: 1,
+                explanation: "El programa INTEMO consistió en 4 sesiones individuales."
+            },
+            {
+                question: "¿Cuál dimensión del TMMS-24 mejoró MÁS?",
+                options: ["Atención Emocional (+15%)", "Claridad Emocional (+32%)", "Reparación Emocional (+17%)"],
+                correct: 1,
+                explanation: "La Claridad Emocional fue la que más mejoró, pasando de 25 a 33 puntos."
+            },
+            {
+                question: "¿Qué factor facilita MEJOR la integración en familias adoptivas?",
+                options: ["Adopción antes de los 8 años", "Familia con muchos hijos", "Progenitores mayores de 50"],
+                correct: 0,
+                explanation: "Cuanto menor es la edad de adopción, mejor es la adaptación del menor."
+            },
+            {
+                question: "¿Qué técnica se usó en la Sesión 2?",
+                options: ["Diario emocional", "Visualización (Monte al Mar)", "Role-playing", "Árbol de la vida"],
+                correct: 1,
+                explanation: "La Sesión 2 utilizó una visualización guiada del monte al mar para trabajar regulación emocional."
+            },
+            {
+                question: "¿Cuál variable NO mejoró tras la intervención?",
+                options: ["Autoestima", "Quejas somáticas", "Ansiedad", "Mindfulness"],
+                correct: 1,
+                explanation: "Las quejas somáticas empeoraron levemente (de 1.28 a 1.55)."
+            },
+            {
+                question: "Según Goleman, ¿cuántas competencias básicas tiene la IE?",
+                options: ["3", "5", "7", "10"],
+                correct: 1,
+                explanation: "Goleman propone 5: Autoconciencia, Autorregulación, Automotivación, Empatía y Habilidades sociales."
+            },
+            {
+                question: "¿Qué porcentaje de variables evaluadas mejoró?",
+                options: ["100%", "84.6%", "75%", "50%"],
+                correct: 1,
+                explanation: "11 de 13 variables mejoraron, lo que representa un 84.6% de éxito."
+            },
+            {
+                question: "¿Cuál fue la principal limitación del estudio?",
+                options: ["Falta de instrumentos", "Estudio de caso único", "Intervención muy larga", "Sin evaluación"],
+                correct: 1,
+                explanation: "Al ser un estudio de caso único, es difícil generalizar los resultados a toda la población."
+            }
+        ];
+
+        function loadQuiz() {
+            const container = document.getElementById('quizContainer');
+            let html = '';
+
+            quizData.forEach((q, index) => {
+                html += `
+                    <div class="quiz-container" id="quiz${index}">
+                        <h3>Pregunta ${index + 1}</h3>
+                        <p><strong>${q.question}</strong></p>
+                        ${q.options.map((opt, optIndex) => `
+                            <div class="quiz-option" onclick="selectQuizAnswer(${index}, ${optIndex})">
+                                ${String.fromCharCode(65 + optIndex)}) ${opt}
+                            </div>
+                        `).join('')}
+                        <div id="explanation${index}" style="display: none; margin-top: 15px;" class="info-box"></div>
+                    </div>
+                `;
+            });
+
+            html += `<button class="back-btn" onclick="calculateQuizScore()" style="margin-top: 20px;">🏆 Ver Puntuación Final</button>`;
+
+            container.innerHTML = html;
+        }
+
+        let quizAnswers = new Array(quizData.length).fill(-1);
+
+        function selectQuizAnswer(questionIndex, answerIndex) {
+            quizAnswers[questionIndex] = answerIndex;
+            
+            const options = document.querySelectorAll(`#quiz${questionIndex} .quiz-option`);
+            options.forEach((opt, idx) => {
+                opt.classList.remove('correct', 'incorrect');
+                if (idx === answerIndex) {
+                    if (idx === quizData[questionIndex].correct) {
+                        opt.classList.add('correct');
+                    } else {
+                        opt.classList.add('incorrect');
+                    }
+                }
+                if (idx === quizData[questionIndex].correct && idx !== answerIndex) {
+                    opt.classList.add('correct');
+                }
+            });
+
+            const explanation = document.getElementById(`explanation${questionIndex}`);
+            explanation.innerHTML = `<strong>Explicación:</strong> ${quizData[questionIndex].explanation}`;
+            explanation.style.display = 'block';
+        }
+
+        function calculateQuizScore() {
+            let correct = 0;
+            quizAnswers.forEach((answer, index) => {
+                if (answer === quizData[index].correct) {
+                    correct++;
+                }
+            });
+
+            const scoreDiv = document.getElementById('quizScore');
+            let interpretation = '';
+            let stars = '';
+
+            if (correct >= 9) {
+                interpretation = 'EXPERTO/A';
+                stars = '⭐⭐⭐⭐⭐';
+            } else if (correct >= 7) {
+                interpretation = 'MUY BIEN';
+                stars = '⭐⭐⭐⭐';
+            } else if (correct >= 5) {
+                interpretation = 'BIEN';
+                stars = '⭐⭐⭐';
+            } else if (correct >= 3) {
+                interpretation = 'REVISAR';
+                stars = '⭐⭐';
+            } else {
+                interpretation = 'REPASAR';
+                stars = '⭐';
+            }
+
+            scoreDiv.innerHTML = `
+                <div class="stat-card">
+                    <h3>🏆 Puntuación Final</h3>
+                    <div class="stat-value">${correct} / 10</div>
+                    <p style="font-size: 1.5em; margin-top: 20px;">${stars}</p>
+                    <p style="font-size: 1.2em;">${interpretation}</p>
+                </div>
+            `;
+            scoreDiv.style.display = 'block';
+            scoreDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicializar
+        window.onload = function() {
+            loadTest();
+            loadQuiz();
+        };
+    </script>
 </body>
 </html>

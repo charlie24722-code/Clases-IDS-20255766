@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regulación Emocional - Análisis del Paper</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+            overflow-x: auto;
+        }
+
+        .tab {
+            padding: 20px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1em;
+            transition: all 0.3s;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .tab.active {
+            background: white;
+            border-top: 3px solid #667eea;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .quote-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 5px;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-size: 4em;
+            color: #2196F3;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+        }
+
+        .quote-source {
+            text-align: right;
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: normal;
+        }
+
+        .model-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .model-card h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .dimension-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .dimension-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .dimension-card h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 18px;
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        .comparison-table td {
+            padding: 18px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background: #e3f2fd;
+        }
+
+        .session-detail {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+        }
+
+        .session-detail h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .step-list {
+            counter-reset: step-counter;
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 20px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            position: relative;
+            padding-left: 70px;
+        }
+
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .results-box {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .results-box h3 {
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .info-banner {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .info-banner h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 80px;
+            margin-bottom: 30px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 15px;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .accordion {
+            margin: 20px 0;
+        }
+
+        .accordion-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #f8f9fa;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .accordion-header:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .accordion-content.open {
+            max-height: 3000px;
+            padding: 20px;
+        }
+
+        .visual-diagram {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .flow-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .flow-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-weight: bold;
+            position: relative;
+            min-width: 250px;
+            text-align: center;
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: #667eea;
+        }
+
+        .key-concept {
+            background: #e8eaf6;
+            border-left: 5px solid #5c6bc0;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .key-concept strong {
+            color: #5c6bc0;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .dimension-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab {
+                padding: 15px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎛️ Regulación Emocional</h1>
+            <p>Análisis Exclusivo del Paper</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Saavedra García, M. (2018)</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab active" onclick="showTab(0)">📚 Conceptualización</button>
+            <button class="tab" onclick="showTab(1)">🏛️ En los Modelos</button>
+            <button class="tab" onclick="showTab(2)">🧪 En el Estudio</button>
+            <button class="tab" onclick="showTab(3)">🎯 Sesión 2</button>
+            <button class="tab" onclick="showTab(4)">📊 Resultados</button>
+            <button class="tab" onclick="showTab(5)">🔬 Análisis Completo</button>
+        </div>
+
+        <div class="content">
+            <!-- TAB 1: Conceptualización -->
+            <div class="tab-content active" id="tab0">
+                <h2>📚 ¿Cómo Conceptualiza el Paper la Regulación Emocional?</h2>
+
+                <div class="quote-box">
+                    El paper NO proporciona una definición explícita propia de "regulación emocional" como concepto aislado. Sin embargo, la menciona dentro de los modelos teóricos de IE.
+                </div>
+
+                <h3>🔍 Menciones Textuales en el Paper</h3>
+
+                <div class="model-card">
+                    <h3>📖 Contexto de las Emociones</h3>
+                    <div class="quote-box">
+                        "Las emociones se generan habitualmente como respuesta a un acontecimiento externo o interno. Se producen a raíz de un acontecimiento externo que es valorado, de forma positiva o negativa, para el sujeto."
+                        <div class="quote-source">- Paper, p. 8</div>
+                    </div>
+                    <p><strong>Implicación:</strong> La regulación emocional actuaría sobre estas respuestas generadas por acontecimientos.</p>
+                </div>
+
+                <div class="model-card">
+                    <h3>🎯 Claridad Emocional</h3>
+                    <div class="quote-box">
+                        "Claridad emocional que evalúa la percepción que se tiene sobre la comprensión de los propios estados emocionales"
+                        <div class="quote-source">- Paper, p. 39 (TMMS-24)</div>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <h3>🔧 Reparación Emocional</h3>
+                    <div class="quote-box">
+                        "Reparación emocional que mide la capacidad percibida para regular los propios estados emocionales de forma correcta"
+                        <div class="quote-source">- Paper, p. 39 (TMMS-24)</div>
+                    </div>
+                    <p><strong>Esta es la mención MÁS CERCANA a una definición de regulación emocional en el paper.</strong></p>
+                </div>
+
+                <div class="highlight">
+                    <h3>💡 Conclusión sobre Conceptualización</h3>
+                    <p>El paper entiende la regulación emocional como:</p>
+                    <ul style="margin-top: 15px; line-height: 1.8;">
+                        <li><strong>Capacidad de regular los propios estados emocionales</strong></li>
+                        <li><strong>Hacerlo de forma correcta</strong> (implica un criterio adaptativo)</li>
+                        <li><strong>Es una capacidad percibida</strong> (autoevaluada por la persona)</li>
+                        <li>Forma parte del constructo más amplio de <strong>Inteligencia Emocional</strong></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAB 2: En los Modelos -->
+            <div class="tab-content" id="tab1">
+                <h2>🏛️ La Regulación Emocional en los Modelos Teóricos</h2>
+
+                <div class="info-banner">
+                    <h4>⚠️ Importante</h4>
+                    <p>El paper presenta tres modelos principales de IE. La regulación emocional aparece en todos ellos con diferentes énfasis.</p>
+                </div>
+
+                <h3>Modelo de Habilidad (Salovey y Mayer, 1990)</h3>
+                
+                <div class="model-card">
+                    <h3>🎯 Las 5 Dimensiones Originales</h3>
+                    
+                    <div class="quote-box">
+                        "Salovey y Mayer (1990) recogen las inteligencias personales de Gardner (1983) en su definición básica de IE expandiéndolas en cinco dominios principales"
+                        <div class="quote-source">- Paper, p. 5</div>
+                    </div>
+
+                    <div class="dimension-grid">
+                        <div class="dimension-card">
+                            <h4>1. Conocer las propias emociones</h4>
+                            <p>Conocimiento de uno mismo, de nuestros propios sentimientos</p>
+                        </div>
+
+                        <div class="dimension-card" style="border-left-color: #4CAF50; background: #e8f5e9;">
+                            <h4>2. El manejo de las emociones ✓</h4>
+                            <p><strong>AQUÍ ESTÁ LA REGULACIÓN:</strong></p>
+                            <div class="quote-box">
+                                "La IE no se fundamenta sólo sobre el autoconocimiento de nuestras emociones, ya que es importante también <strong>la capacidad de manejarlas de forma apropiada evitando los sentimientos prolongados de ansiedad, irritabilidad, etc.</strong>"
+                                <div class="quote-source">- Paper, p. 5</div>
+                            </div>
+                        </div>
+
+                        <div class="dimension-card">
+                            <h4>3. El motivarse a uno mismo</h4>
+                            <p>Regular las emociones orientándose hacia una meta</p>
+                        </div>
+
+                        <div class="dimension-card">
+                            <h4>4. Reconocer emociones en los demás</h4>
+                            <p>Empatía - sintonizar con necesidades ajenas</p>
+                        </div>
+
+                        <div class="dimension-card">
+                            <h4>5. Capacidad de relacionarse</h4>
+                            <p>Manejo de las emociones de los sujetos con los que se interactúa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="model-card">
+                    <h3>🔄 Modelo Revisado (Mayer y Salovey, 1997)</h3>
+                    
+                    <div class="quote-box">
+                        "El modelo de habilidad de Mayer y Salovey considera que la IE se conceptualiza a través de cuatro habilidades básicas"
+                        <div class="quote-source">- Paper, p. 6</div>
+                    </div>
+
+                    <div class="visual-diagram">
+                        <div class="flow-chart">
+                            <div class="flow-box">
+                                1. Percibir, valorar y expresar emociones con exactitud
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box">
+                                2. Acceder y/o generar sentimientos que faciliten el pensamiento
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box">
+                                3. Comprender emociones y el conocimiento emocional
+                            </div>
+                            <div class="flow-arrow">↓</div>
+                            <div class="flow-box" style="border: 3px solid #FFD700;">
+                                4. REGULAR las emociones promoviendo un crecimiento emocional e intelectual
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-concept">
+                        <strong>Concepto Clave del Paper:</strong> La regulación emocional es presentada como la <strong>cuarta y última habilidad</strong> del modelo, implicando que es una capacidad más compleja que requiere de las anteriores.
+                    </div>
+                </div>
+
+                <h3>Modelo Mixto de Goleman (1995)</h3>
+
+                <div class="model-card">
+                    <h3>🌟 Las 5 Capacidades Básicas</h3>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Capacidad</th>
+                                <th>Descripción según el Paper</th>
+                                <th>Relación con Regulación</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Autoconciencia</strong></td>
+                                <td>Apreciación y dar nombre a las propias emociones</td>
+                                <td>Pre-requisito</td>
+                            </tr>
+                            <tr style="background: #e8f5e9;">
+                                <td><strong>2. Auto-regulación ✓</strong></td>
+                                <td>
+                                    <div class="quote-box">
+                                        "No podemos elegir nuestras emociones, pero sí <strong>conducir nuestras reacciones emocionales</strong>"
+                                        <div class="quote-source">- Paper, p. 7</div>
+                                    </div>
+                                </td>
+                                <td><strong>ES LA REGULACIÓN</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Auto-motivación</strong></td>
+                                <td>Utilizar el potencial existente, perseverar</td>
+                                <td>Aplicación de regulación</td>
+                            </tr>
+                            <tr>
+                                <td><strong>4. Empatía</strong></td>
+                                <td>Ponerse en el lugar de las demás personas</td>
+                                <td>Regulación interpersonal</td>
+                            </tr>
+                            <tr>
+                                <td><strong>5. Habilidad social</strong></td>
+                                <td>Crear relaciones sociales</td>
+                                <td>Regulación en contexto social</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="highlight">
+                        <h4>💡 Definición Implícita de Goleman (según el paper):</h4>
+                        <p style="font-size: 1.2em; margin-top: 15px;">
+                            Regulación Emocional = <strong>Conducir nuestras reacciones emocionales</strong>
+                        </p>
+                        <p style="margin-top: 10px;">No elegimos qué sentir, pero SÍ cómo responder a ello.</p>
+                    </div>
+                </div>
+
+                <h3>Modelo Clínico de Bar-On (1985)</h3>
+
+                <div class="model-card">
+                    <div class="quote-box">
+                        El paper menciona que Bar-On define la IE como "un conjunto de competencias, herramientas y comportamientos emocionales y sociales, que determinan cómo de bien <strong>percibimos, entendemos y controlamos nuestras emociones</strong>"
+                        <div class="quote-source">- Paper, p. 6</div>
+                    </div>
+
+                    <div class="key-concept">
+                        <strong>Regulación en Bar-On:</strong> Aparece como <strong>"controlar nuestras emociones"</strong>, con un enfoque más clínico orientado a la adaptación y el éxito personal.
+                    </div>
+                </div>
+
+                <div class="results-box">
+                    <h3>🎯 Síntesis: La Regulación en los 3 Modelos</h3>
+                    
+                    <div class="stat-item">
+                        <span><strong>Salovey & Mayer:</strong></span>
+                        <span>"Manejar emociones de forma apropiada"</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span><strong>Goleman:</strong></span>
+                        <span>"Conducir nuestras reacciones emocionales"</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span><strong>Bar-On:</strong></span>
+                        <span>"Controlar nuestras emociones"</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: En el Estudio -->
+            <div class="tab-content" id="tab2">
+                <h2>🧪 La Regulación Emocional en el Diseño del Estudio</h2>
+
+                <div class="info-banner">
+                    <h4>📋 Contexto</h4>
+                    <p>El paper evalúa la regulación emocional de dos formas principales:</p>
+                    <ol style="margin-top: 10px; line-height: 1.8;">
+                        <li><strong>Como dimensión del TMMS-24</strong> (Reparación Emocional)</li>
+                        <li><strong>Como objetivo de la Sesión 2</strong> del programa de intervención</li>
+                    </ol>
+                </div>
+
+                <h3>📊 Instrumento de Medición: TMMS-24</h3>
+
+                <div class="model-card">
+                    <h3>🔧 Reparación Emocional</h3>
+                    
+                    <div class="quote-box">
+                        "Reparación emocional que mide la capacidad percibida para <strong>regular los propios estados emocionales de forma correcta</strong> (ítems del 17 al 24)"
+                        <div class="quote-source">- Paper, p. 39</div>
+                    </div>
+
+                    <h4 style="margin-top: 25px;">Ejemplos de Ítems según el paper:</h4>
+                    <div class="dimension-card">
+                        <p style="font-style: italic;">"Intento tener pensamientos positivos aunque me sienta mal"</p>
+                        <p style="margin-top: 10px; font-size: 0.9em; color: #666;">Este es el ÚNICO ejemplo de ítem de reparación emocional que proporciona el paper</p>
+                    </div>
+
+                    <div class="key-concept">
+                        <strong>Escala de respuesta:</strong> Tipo Likert de 5 anclajes que va de 1 (nada de acuerdo) a 5 (totalmente de acuerdo)
+                    </div>
+                </div>
+
+                <h3>📏 Otras Medidas Relacionadas con Regulación</h3>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>😰 Ansiedad y Depresión (EADG)</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="quote-box">
+                                "Se midieron a través de la escala de ansiedad y depresión de Goldberg- EADG [...] Su finalidad es <strong>evaluar el estado de bienestar general</strong> con el que se percibe el individuo"
+                                <div class="quote-source">- Paper, p. 39-40</div>
+                            </div>
+                            <p><strong>Relación con regulación:</strong> Indicadores indirectos de capacidad de regulación emocional. Una buena regulación debería reducir ansiedad y depresión.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>🧘 Mindfulness (MAAS)</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="quote-box">
+                                "Mide 'la tendencia a ser altamente conscientes de las experiencias internas y externas en el contexto de <strong>una postura de aceptación y de no enjuiciamiento</strong> hacia estas experiencias'"
+                                <div class="quote-source">- Paper, p. 40</div>
+                            </div>
+                            <p><strong>Relación con regulación:</strong> La aceptación no enjuiciativa es una forma de regulación emocional.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>🎯 Tolerancia a la Frustración</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="quote-box">
+                                "Su finalidad es evaluar la percepción de los niños/as y adolescentes sobre <strong>su propia capacidad para el manejo del estrés</strong>-tolerancia al estrés y control impulsivo"
+                                <div class="quote-source">- Paper, p. 40</div>
+                            </div>
+                            <p><strong>Ejemplos de ítems:</strong></p>
+                            <ul style="margin-top: 10px;">
+                                <li>"Me resulta difícil controlar mi ira"</li>
+                                <li>"Tengo mal genio"</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>Relación con regulación:</strong> El control del estrés y de impulsos es regulación emocional en acción.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <div class="accordion-header" onclick="toggleAccordion(this)">
+                            <span>💪 Estrategias de Afrontamiento</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="quote-box">
+                                "Su finalidad es evaluar <strong>las estrategias de afrontamiento</strong> que tiene la adolescente <strong>ante una situación muy estresante</strong>"
+                                <div class="quote-source">- Paper, p. 40-41</div>
+                            </div>
+                            <p><strong>Ejemplos de ítems:</strong></p>
+                            <ul style="margin-top: 10px;">
+                                <li>"Luché para resolver el problema"</li>
+                                <li>"Dejé salir mis sentimientos para reducir el estrés"</li>
+                            </ul>
+                            <p style="margin-top: 15px;"><strong>Relación con regulación:</strong> Las estrategias de afrontamiento SON formas concretas de regulación emocional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3>🔬 Visión del Paper sobre la Evaluación de Regulación</h3>
+                    <p style="line-height: 1.8;">El paper evalúa la regulación emocional de forma <strong>MULTIDIMENSIONAL</strong>:</p>
+                    <ul style="margin-top: 15px; line-height: 1.8;">
+                        <li>✓ Capacidad percibida (TMMS-24: Reparación)</li>
+                        <li>✓ Resultados emocionales (Ansiedad, Depresión)</li>
+                        <li>✓ Procesos atencionales (Mindfulness)</li>
+                        <li>✓ Control de impulsos (Tolerancia frustración)</li>
+                        <li>✓ Estrategias específicas (Afrontamiento)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAB 4: Sesión 2 -->
+            <div class="tab-content" id="tab3">
+                <h2>🎯 Sesión 2: Entrenamiento en Regulación Emocional</h2>
+
+                <div class="session-detail">
+                    <h3>🌊 Actividad: "Voy del Monte al Mar"</h3>
+                    
+                    <div class="quote-box">
+                        "Para trabajar la regulación emocional se le realizará a la adolescente la actividad 'Voy del monte al mar'"
+                        <div class="quote-source">- Paper, p. 87 (Anexo 5)</div>
+                    </div>
+
+                    <h4 style="margin-top: 30px;">🎯 Objetivos Explícitos:</h4>
+                    <div class="dimension-grid">
+                        <div class="dimension-card">
+                            <h4>1. Control de Reacciones</h4>
+                            <div class="quote-box">
+                                "Ser capaces de <strong>controlar nuestras reacciones</strong>"
+                                <div class="quote-source">- Paper, Tabla 2, p. 86</div>
+                            </div>
+                        </div>
+
+                        <div class="dimension-card">
+                            <h4>2. Búsqueda de Calma</h4>
+                            <div class="quote-box">
+                                "Saber <strong>encontrar un momento de tranquilidad</strong>"
+                                <div class="quote-source">- Paper, Tabla 2, p. 86</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>📝 Desarrollo de la Sesión (Paso a Paso según el Paper)</h3>
+
+                <div class="session-detail">
+                    <h4>La actividad se realiza en TRES PARTES:</h4>
+
+                    <ul class="step-list">
+                        <li>
+                            <strong>PARTE 1: Identificación de Situación Conflictiva</strong>
+                            <div class="quote-box" style="margin-top: 15px;">
+                                "Se le planteará a la adolescente hacer un ejercicio de visualización en el que se le pedirá que se tumbe y se hará una descripción de la visualización"
+                                <div class="quote-source">- Paper, p. 87</div>
+                            </div>
+                            <p style="margin-top: 10px;">La adolescente debe elegir y describir una situación donde se sintió enfadada, con ira, etc.</p>
+                        </li>
+
+                        <li>
+                            <strong>PARTE 2: Ejercicio de Visualización</strong>
+                            <p>Esta es la técnica PRINCIPAL de regulación emocional del programa.</p>
+                            
+                            <div class="visual-diagram" style="margin-top: 20px;">
+                                <h4>🏔️ Del Monte al Mar 🌊</h4>
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Preparación Corporal</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Te tumbarás tranquilamente, sentirás tu cuerpo libre, no hay nada que te apriete, ni cinturón, ni pantalones, ni zapatos…"
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Respiración Consciente</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Ahora tienes la boca cerrada y comienzas a respirar por la nariz… despacio, tranquilamente… sientes cómo el aire llega hasta el vientre"
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Visualización del Monte (Verde)</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Estás en el monte, es un precioso día de primavera… un sol radiante… el viento peina tu cuerpo… miras el paisaje… es verde… tiene diferentes tonos verdes… verde claro… verde oscuro… verde hierba…"
+                                            </div>
+                                            <p style="margin-top: 10px;"><strong>Elementos sensoriales:</strong> Vista (colores), tacto (viento), temperatura (sol)</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Actividad en el Monte</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Atraviesas el prado dando saltos… libremente… mientras notas el viento en la cara… estás respirando, estás tranquilo/a, a gusto…"
+                                            </div>
+                                            <p style="margin-top: 10px;"><strong>Función reguladora:</strong> Movimiento libre + respiración + sensaciones agradables</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Transición al Mar (Azul)</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Tus piernas caminan solas por la hierba, miras a lo lejos y ves el mar, el color del mar y es distinto… azul… azul claro… azul oscuro…"
+                                            </div>
+                                            <p style="margin-top: 10px;"><strong>Cambio cromático:</strong> Del verde (tierra) al azul (agua) = cambio de estado emocional</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Inmersión en el Mar</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Poco a poco entras en el mar… sientes la frescura del agua… estás respirando… hueles el mar… el color del mar… la frescura del mar…"
+                                            </div>
+                                            <p style="margin-top: 10px;"><strong>Elementos sensoriales:</strong> Temperatura (frescura), olfato (olor a mar), vista (azul)</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="timeline-item">
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content">
+                                            <strong>Retorno</strong>
+                                            <div class="quote-box" style="margin-top: 10px;">
+                                                "Poco a poco comienzas a mover el cuerpo… las piernas… la cadera… los brazos… las manos… el cuello… las mejillas… vas despertando…"
+                                            </div>
+                                            <p style="margin-top: 10px;"><strong>Reconexión gradual</strong> con el cuerpo y el presente</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <strong>PARTE 3: Recontar en Positivo</strong>
+                            <div class="quote-box" style="margin-top: 15px;">
+                                "Tras esto, se le pedirá a la adolescente que vuelva a contar la situación elegida anteriormente, pero esta vez, <strong>deberá acabar la situación en positivo</strong>"
+                                <div class="quote-source">- Paper, p. 87</div>
+                            </div>
+                            <p style="margin-top: 10px;"><strong>Técnica de reestructuración cognitiva:</strong> Cambiar el desenlace emocional de la situación</p>
+                        </li>
+
+                        <li>
+                            <strong>PARTE 4: Reflexión Metacognitiva</strong>
+                            <div class="quote-box" style="margin-top: 15px;">
+                                "Al final, se le preguntará qué ha hecho para controlar la situación: qué estrategia ha utilizado, qué técnicas de control, etc.; sacando conclusiones"
+                                <div class="quote-source">- Paper, p. 87</div>
+                            </div>
+                            <p style="margin-top: 10px;"><strong>Conciencia de las estrategias:</strong> Identificar QUÉ funcionó para poder replicarlo</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3>🔑 Técnicas de Regulación Emocional Implícitas en la Sesión</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 20px;">
+                        <div class="stat-item">
+                            <span>1. Respiración consciente</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>2. Relajación muscular</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>3. Visualización guiada</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>4. Atención sensorial</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>5. Reestructuración cognitiva</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>6. Reflexión metacognitiva</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="key-concept">
+                    <h4>💡 Fundamento Teórico Implícito (no explicitado en el paper)</h4>
+                    <p>Aunque el paper NO lo explica directamente, la técnica "Del Monte al Mar" combina:</p>
+                    <ul style="margin-top: 10px; line-height: 1.8;">
+                        <li><strong>Mindfulness:</strong> Atención al presente, a la respiración, a sensaciones corporales</li>
+                        <li><strong>Imaginería:</strong> Uso de imágenes mentales para inducir estados emocionales</li>
+                        <li><strong>Cromoterapia implícita:</strong> Verde (calma, naturaleza) → Azul (paz, serenidad)</li>
+                        <li><strong>Grounding:</strong> Conexión con elementos naturales (tierra, agua)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- TAB 5: Resultados -->
+            <div class="tab-content" id="tab4">
+                <h2>📊 Resultados en Regulación Emocional</h2>
+
+                <div class="info-banner">
+                    <h4>🔍 Análisis</h4>
+                    <p>El paper presenta resultados sobre regulación emocional desde múltiples indicadores. Aquí están TODOS los datos específicos mencionados.</p>
+                </div>
+
+                <h3>🧠 Resultados del TMMS-24</h3>
+
+                <div class="results-box">
+                    <h3>🔧 Reparación Emocional (Regulación)</h3>
+                    
+                    <div class="stat-item">
+                        <span><strong>ANTES de la intervención:</strong></span>
+                        <span class="stat-value">29 puntos</span>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <span><strong>DESPUÉS de la intervención:</strong></span>
+                        <span class="stat-value">34 puntos</span>
+                    </div>
+                    
+                    <div class="stat-item" style="background: rgba(255,255,255,0.4);">
+                        <span><strong>MEJORA:</strong></span>
+                        <span class="stat-value">+5 puntos (+17.2%)</span>
+                    </div>
+                </div>
+
+                <div class="quote-box">
+                    "Los niveles de [...] expresión, manejo y reconocimiento de emociones mejoraron tras la intervención"
+                    <div class="quote-source">- Paper, p. 43</div>
+                </div>
+
+                <h3>📈 Resultados en Variables Relacionadas</h3>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Variable</th>
+                            <th>Relación con Regulación</th>
+                            <th>Antes</th>
+                            <th>Después</th>
+                            <th>Cambio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>😰 Ansiedad</strong></td>
+                            <td>Resultado de mala regulación</td>
+                            <td>3.00</td>
+                            <td>1.89</td>
+                            <td style="color: #4CAF50; font-weight: bold;">-37% ✓</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>😢 Depresión</strong></td>
+                            <td>Resultado de mala regulación</td>
+                            <td>2.78</td>
+                            <td>1.78</td>
+                            <td style="color: #4CAF50; font-weight: bold;">-36% ✓</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>🧘 Mindfulness</strong></td>
+                            <td>Estrategia de regulación</td>
+                            <td>3.40</td>
+                            <td>2.07</td>
+                            <td style="color: #4CAF50; font-weight: bold;">-39% ✓</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>🎯 Tolerancia Frustración</strong></td>
+                            <td>Capacidad de regulación</td>
+                            <td>1.88</td>
+                            <td>1.38</td>
+                            <td style="color: #4CAF50; font-weight: bold;">-27% ✓</td>
+                        </tr>
+                        <tr style="background: #e8f5e9;">
+                            <td><strong>💪 Estrategias Afrontamiento</strong></td>
+                            <td>Herramientas de regulación</td>
+                            <td>3.18</td>
+                            <td>3.23</td>
+                            <td style="color: #4CAF50; font-weight: bold;">+1.6% ✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="key-concept">
+                    <strong>Nota sobre Mindfulness y Tolerancia a Frustración:</strong> En estas escalas, puntuaciones MÁS BAJAS indican MEJORA (menos distracciones, menos impulsividad). Por eso la disminución es positiva.
+                </div>
+
+                <div class="highlight">
+                    <h3>🎯 Cita Textual del Paper sobre Resultados</h3>
+                    <div class="quote-box">
+                        "Los resultados mostraron que los niveles de autoeficacia, calidad de las relaciones, propensión al riesgo, <strong>estrategias de afrontamiento</strong>, ansiedad, mindfullness, depresión, autoestima, <strong>tolerancia a la frustración</strong> y expresión, <strong>manejo y reconocimiento de emociones</strong> mejoraron tras la intervención"
+                        <div class="quote-source">- Paper, Resumen, p. 3</div>
+                    </div>
+                </div>
+
+                <h3>📊 Inteligencia Emocional Global</h3>
+
+                <div class="model-card">
+                    <div class="quote-box">
+                        "Expresión, manejo y reconocimiento de emociones (inteligencia global) [Tiempo 1 (M= 3,33); tiempo 2 (M= 4,04)]"
+                        <div class="quote-source">- Paper, p. 43-44</div>
+                    </div>
+
+                    <div class="visual-diagram">
+                        <h4>IE Global: Antes vs Después</h4>
+                        <div style="display: flex; justify-content: space-around; align-items: flex-end; height: 200px; margin: 30px 0;">
+                            <div style="text-align: center;">
+                                <div style="width: 100px; height: 133px; background: linear-gradient(180deg, #667eea, #764ba2); border-radius: 10px 10px 0 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5em;">3.33</div>
+                                <div style="margin-top: 10px; font-weight: bold;">ANTES</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="width: 100px; height: 161px; background: linear-gradient(180deg, #4CAF50, #45a049); border-radius: 10px 10px 0 0; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.5em;">4.04</div>
+                                <div style="margin-top: 10px; font-weight: bold;">DESPUÉS</div>
+                            </div>
+                        </div>
+                        <div style="text-align: center; font-size: 1.3em; color: #4CAF50; font-weight: bold;">
+                            MEJORA: +21.3%
+                        </div>
+                    </div>
+                </div>
+
+                <h3>❌ Variables que NO Mejoraron</h3>
+
+                <div class="info-banner" style="background: #ffebee; border-color: #f44336;">
+                    <h4 style="color: #c62828;">Variables sin mejora en regulación</h4>
+                    <div class="quote-box" style="background: white; border-color: #f44336;">
+                        "Sin embargo, los niveles de quejas somáticas [Tiempo 1 (M= 1,28); tiempo 2 (M=1,55)] y de bienestar psicológico [Tiempo 1 (M= 2,42); tiempo 2 (M=2,08)] <strong>no mejoraron</strong> tras la realización de la intervención"
+                        <div class="quote-source">- Paper, p. 50</div>
+                    </div>
+                    
+                    <p style="margin-top: 15px;"><strong>Implicación:</strong> Aunque la regulación emocional mejoró en múltiples indicadores, NO se tradujo en:</p>
+                    <ul style="margin-top: 10px;">
+                        <li>Reducción de síntomas físicos (quejas somáticas)</li>
+                        <li>Mejora en bienestar psicológico general</li>
+                    </ul>
+                </div>
+
+                <div class="results-box">
+                    <h3>✅ Conclusión sobre Eficacia de la Intervención</h3>
+                    <p style="font-size: 1.2em; line-height: 1.8;">
+                        La intervención en regulación emocional fue <strong>EFECTIVA</strong> en:
+                    </p>
+                    <ul style="margin-top: 15px; line-height: 2;">
+                        <li>✓ Aumentar capacidad de reparación emocional (+17%)</li>
+                        <li>✓ Reducir ansiedad (-37%) y depresión (-36%)</li>
+                        <li>✓ Mejorar mindfulness (-39% de distracción)</li>
+                        <li>✓ Aumentar tolerancia a frustración (-27% de impulsividad)</li>
+                        <li>✓ Mejorar IE global (+21%)</li>
+                    </ul>
+                    <p style="margin-top: 20px; font-size: 1.1em;">
+                        <strong>Tasa de éxito:</strong> 5 de 7 indicadores de regulación mejoraron (71.4%)
+                    </p>
+                </div>
+            </div>
+
+            <!-- TAB 6: Análisis Completo -->
+            <div class="tab-content" id="tab5">
+                <h2>🔬 Análisis Completo: La Regulación Emocional en el Paper</h2>
+
+                <div class="highlight">
+                    <h3>🎯 Síntesis Global</h3>
+                    <p style="font-size: 1.2em;">Este paper aborda la regulación emocional desde una perspectiva <strong>pragmática y aplicada</strong>, más que teórica.</p>
+                </div>
+
+                <h3>1. ¿Qué NO dice el paper sobre regulación emocional?</h3>
+
+                <div class="model-card">
+                    <h4>❌ Ausencias Notables:</h4>
+                    <ul style="line-height: 2;">
+                        <li>No proporciona una <strong>definición propia</strong> de regulación emocional</li>
+                        <li>No explica los <strong>mecanismos neurobiológicos</strong> de la regulación</li>
+                        <li>No distingue entre <strong>estrategias adaptativas vs desadaptativas</strong></li>
+                        <li>No menciona modelos específicos de regulación emocional (ej: Gross, 1998)</li>
+                        <li>No profundiza en <strong>por qué</strong> la técnica "Del Monte al Mar" funciona</li>
+                        <li>No discute la <strong>supresión emocional</strong> como estrategia</li>
+                        <li>No aborda la <strong>regulación interpersonal</strong> (cómo regulamos emociones de otros)</li>
+                    </ul>
+                </div>
+
+                <h3>2. ¿Qué SÍ dice el paper sobre regulación emocional?</h3>
+
+                <div class="model-card">
+                    <h4>✅ Contribuciones del Paper:</h4>
+                    
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📚 1. Contextualización Teórica</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <ul style="line-height: 1.8;">
+                                    <li>Ubica la regulación dentro de los 3 modelos principales de IE</li>
+                                    <li>La presenta como componente ESENCIAL de la IE</li>
+                                    <li>La relaciona con conceptos de "manejo", "control" y "conducción" de emociones</li>
+                                    <li>Enfatiza que NO podemos elegir qué sentir, pero SÍ cómo responder</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>🛠️ 2. Operacionalización (Cómo se Mide)</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <ul style="line-height: 1.8;">
+                                    <li><strong>Directa:</strong> TMMS-24, dimensión "Reparación Emocional"</li>
+                                    <li><strong>Indirecta:</strong> Ansiedad, depresión, mindfulness, tolerancia a frustración, estrategias de afrontamiento</li>
+                                    <li>Enfoque multimétodo: Auto-reporte en todos los casos</li>
+                                    <li>Evaluación pre-post: Permite ver cambios</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>🎯 3. Intervención Práctica</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <ul style="line-height: 1.8;">
+                                    <li>Propone una técnica concreta: "Del Monte al Mar"</li>
+                                    <li>Combina visualización + respiración + reestructuración cognitiva</li>
+                                    <li>Duración: 1 sesión (de 4 totales)</li>
+                                    <li>Aplicable en contexto individual con adolescentes</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>📊 4. Evidencia Empírica</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <ul style="line-height: 1.8;">
+                                    <li>Demuestra mejora en regulación tras intervención breve</li>
+                                    <li>Efectos positivos en 71.4% de indicadores</li>
+                                    <li>Mayor impacto en ansiedad (-37%) que en la propia regulación (+17%)</li>
+                                    <li>Limitación: Solo 1 participante, no hay grupo control</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span>👧 5. Contexto Específico: Adopción</span>
+                                <span>▼</span>
+                            </div>
+                            <div class="accordion-content">
+                                <ul style="line-height: 1.8;">
+                                    <li>Aborda regulación en adolescente adoptada (población vulnerable)</li>
+                                    <li>Considera barreras idiomáticas y culturales</li>
+                                    <li>Destaca importancia de regulación en contexto de institucionalización previa</li>
+                                    <li>Relaciona regulación con adaptación escolar y familiar</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>3. Modelo Implícito de Regulación en el Paper</h3>
+
+                <div class="visual-diagram">
+                    <h4>Proceso de Regulación Emocional (Inferido del paper)</h4>
+                    <div class="flow-chart">
+                        <div class="flow-box" style="background: #f44336;">
+                            SITUACIÓN EMOCIONAL<br>(Enfado, ira, frustración)
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box" style="background: #FF9800;">
+                            RECONOCIMIENTO<br>(Conciencia emocional)
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box" style="background: #2196F3;">
+                            ESTRATEGIA DE REGULACIÓN<br>(Visualización, respiración, etc.)
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box" style="background: #4CAF50;">
+                            REINTERPRETACIÓN<br>(Terminar en positivo)
+                        </div>
+                        <div class="flow-arrow">↓</div>
+                        <div class="flow-box" style="background: #9C27B0;">
+                            METACOGNICIÓN<br>(Reflexionar sobre qué funcionó)
+                        </div>
+                    </div>
+                </div>
+
+                <h3>4. Fortalezas y Limitaciones del Abordaje</h3>
+
+                <div class="dimension-grid">
+                    <div class="dimension-card" style="border-left-color: #4CAF50; background: #e8f5e9;">
+                        <h4>✅ Fortalezas</h4>
+                        <ul style="line-height: 1.8;">
+                            <li>Evaluación multidimensional</li>
+                            <li>Intervención estructurada y replicable</li>
+                            <li>Enfoque práctico y aplicado</li>
+                            <li>Contexto real (adolescente adoptada)</li>
+                            <li>Medidas pre-post</li>
+                            <li>Resultados positivos en múltiples indicadores</li>
+                        </ul>
+                    </div>
+
+                    <div class="dimension-card" style="border-left-color: #f44336; background: #ffebee;">
+                        <h4>❌ Limitaciones</h4>
+                        <ul style="line-height: 1.8;">
+                            <li>Sin definición propia de regulación</li>
+                            <li>Sin marco teórico de regulación específico</li>
+                            <li>N=1 (un solo caso)</li>
+                            <li>Sin grupo control</li>
+                            <li>Sin seguimiento a largo plazo</li>
+                            <li>Solo auto-reporte (sesgo de deseabilidad social)</li>
+                            <li>No explica mecanismos de cambio</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>5. Contribución Original del Paper</h3>
+
+                <div class="results-box">
+                    <h3>🎓 Aportación Principal</h3>
+                    <p style="font-size: 1.2em; line-height: 1.8;">
+                        El paper NO busca desarrollar teoría sobre regulación emocional, sino <strong>demostrar que un programa breve de IE puede mejorar la regulación emocional en una población específica y vulnerable</strong> (adolescente adoptada, familia monoparental).
+                    </p>
+                    <p style="margin-top: 20px; font-size: 1.1em;">
+                        Su valor está en la <strong>aplicabilidad práctica</strong>, no en la innovación teórica.
+                    </p>
+                </div>
+
+                <h3>6. Preguntas que el Paper NO Responde</h3>
+
+                <div class="model-card">
+                    <h4>🤔 Interrogantes Pendientes:</h4>
+                    <ul style="line-height: 2;">
+                        <li>¿Por qué la técnica "Del Monte al Mar" funciona específicamente?</li>
+                        <li>¿Los efectos se mantendrían a los 6 meses? ¿Y al año?</li>
+                        <li>¿Funcionaría igual con otros adolescentes adoptados?</li>
+                        <li>¿Qué componente de la intervención es el más efectivo? (¿La visualización? ¿La respiración? ¿La reestructuración?)</li>
+                        <li>¿Cómo se compara con otras técnicas de regulación (ej: mindfulness puro, TCC)?</li>
+                        <li>¿Por qué no mejoró el bienestar psicológico general si mejoró la regulación?</li>
+                    </ul>
+                </div>
+
+                <div class="highlight">
+                    <h3>🎯 Conclusión Final</h3>
+                    <p style="font-size: 1.3em; line-height: 1.8;">
+                        El paper aborda la regulación emocional desde una perspectiva <strong>pragmática y educativa</strong>, integrándola en el marco más amplio de la Inteligencia Emocional. No profundiza en su conceptualización teórica, pero proporciona evidencia preliminar de que <strong>es entrenable y mejorable en contextos vulnerables con intervenciones breves</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(index) {
+            // Ocultar todos los tabs
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Mostrar el tab seleccionado
+            tabs[index].classList.add('active');
+            contents[index].classList.add('active');
+            
+            // Scroll al top
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const arrow = header.querySelector('span:last-child');
+            
+            if (content.classList.contains('open')) {
+                content.classList.remove('open');
+                arrow.textContent = '▼';
+            } else {
+                content.classList.add('open');
+                arrow.textContent = '▲';
+            }
+        }
+    </script>
+</body>
+</html>
